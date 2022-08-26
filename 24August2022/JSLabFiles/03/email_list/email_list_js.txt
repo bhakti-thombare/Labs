@@ -1,0 +1,13 @@
+var $ = function (id) {
+    return document.getElementById(id);
+}
+var stateCodeLookup = function (stateCode) {
+	/* TODO */
+}
+var joinList = function () {
+	/* TODO */
+}
+window.onload = function () {
+    $("join_list").onclick = joinList;
+    $("email_address1").focus();
+}

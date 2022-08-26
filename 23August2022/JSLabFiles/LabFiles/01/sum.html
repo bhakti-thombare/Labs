@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sum the Numbers</title>
+    <style>
+         h1{
+                text-align: center;
+                margin-top: 10px;
+                color: navy;
+                text-transform: capitalize;
+                font-family: sans-serif;
+                font-size: 30px;
+            }
+            #form{
+                text-align: center;
+            }
+            #natural,#btn{
+                padding: 12px;
+            }
+            #result{
+                text-align: center;
+                color: palevioletred;
+                font-family: sans-serif;
+                font-size: 20px;
+            }
+    </style>
+   	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> 	
+    
+</head>
+<body>
+    <section>
+        <h1>This page is displayed after the JavaScript is executed</h1>
+    </section>
+    <h1>Sum of numbers from 1 to 5</h1>
+    <form  id="form">
+        <input type="text" name="" placeholder="type any number" id="num" max="100">
+        <input type="submit" value="check">
+    </form>
+    <p id="result"></p>
+    <script>
+        var frm = document.getElementById("form");
+        frm.onsubmit= function(){
+            var num = document.getElementById("num").value;
+            var result = document.getElementById("result");
+            var i, sum=0;
+         
+           do{ 
+            if(num<=100){
+                for(i=1;i<=num;i++)
+                {
+                    sum = sum+i;
+                }
+                alert( "Sum Of Numbers From 1 to 5 is  = " +sum);
+                result.innerHTML = "Sum Of Numbers From 1 to 5 is  = " +sum;
+                return false;
+            }
+           }while(i>100)
+        
+                alert("Number should not be greater than 100")
+            }   
+        
+    </script>
+</body>
+</html>
