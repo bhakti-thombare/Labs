@@ -1,0 +1,2 @@
+insert into MY_EMPLOYEE values(5,'Ropeburn','Audry','aropeburn',1550);
+insert into MY_EMPLOYEE values(6,'Bhakti','Thombare','bhaktit',1050);

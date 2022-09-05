@@ -1,0 +1,744 @@
+-- 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cafenodejs         |
+| information_schema |
+| mysql              |
+| performance_schema |
+| pubs               |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.04 sec)
+
+mysql> use pubs;
+Database changed
+
+-- 2
+mysql>  SELECT t.title, p.pub_name FROM titles t JOIN publishers p ON p.pub_id = t.pub_id;
++-----------------------------------------------------------------+----------------------+
+| title                                                           | pub_name             |
++-----------------------------------------------------------------+----------------------+
+| The Busy Executive's Database Guide                             | Algodata Infosystems |
+| Cooking with Computers: Surreptitious Balance Sheets            | Algodata Infosystems |
+| You Can Combat Computer Stress!                                 | New Moon Books       |
+| Straight Talk About Computers                                   | Algodata Infosystems |
+| Silicon Valley Gastronomic Treats                               | Binnet & Hardley     |
+| The Gourmet Microwave                                           | Binnet & Hardley     |
+| The Psychology of Computer Cooking                              | Binnet & Hardley     |
+| But Is It User Friendly?                                        | Algodata Infosystems |
+| Secrets of Silicon Valley                                       | Algodata Infosystems |
+| Net Etiquette                                                   | Algodata Infosystems |
+| Computer Phobic AND Non-Phobic Individuals: Behavior Variations | Binnet & Hardley     |
+| Is Anger the Enemy?                                             | New Moon Books       |
+| Life Without Fear                                               | New Moon Books       |
+| Prolonged Data Deprivation: Four Case Studies                   | New Moon Books       |
+| Emotional Security: A New Algorithm                             | New Moon Books       |
+| Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | Binnet & Hardley     |
+| Fifty Years in Buckingham Palace Kitchens                       | Binnet & Hardley     |
+| Sushi, Anyone?                                                  | Binnet & Hardley     |
++-----------------------------------------------------------------+----------------------+
+18 rows in set (1.41 sec)
+
+mysql> -- 3
+mysql> SELECT titles.title_id, titles.ytd_sales, titles.title, SUM(titles.ytd_sales) "Total Sales", publishers.pub_id, publishers.pub_name FROM titles, publishers WHERE titles.pub_id = publishers.pub_id group by publishers.pub_name;
++----------+-----------+-------------------------------------+-------------+--------+----------------------+
+| title_id | ytd_sales | title                               | Total Sales | pub_id | pub_name             |
++----------+-----------+-------------------------------------+-------------+--------+----------------------+
+| BU1032   |      4095 | The Busy Executive's Database Guide |       24941 | 1389   | Algodata Infosystems |
+| BU2075   |     18722 | You Can Combat Computer Stress!     |       28286 | 0736   | New Moon Books       |
+| MC2222   |      2032 | Silicon Valley Gastronomic Treats   |       44219 | 0877   | Binnet & Hardley     |
++----------+-----------+-------------------------------------+-------------+--------+----------------------+
+3 rows in set (0.05 sec)
+
+mysql> SELECT t.ytd_sales, p.pub_name FROM titles t JOIN publishers p ON p.pub_id = t.pub_id GROUP BY p.pub_name;
++-----------+----------------------+
+| ytd_sales | pub_name             |
++-----------+----------------------+
+|      4095 | Algodata Infosystems |
+|     18722 | New Moon Books       |
+|      2032 | Binnet & Hardley     |
++-----------+----------------------+
+3 rows in set (0.00 sec)
+
+mysql> -- 4
+mysql> SELECT p.pub_name, p.city, a.au_fname, a.au_lname, a.city FROM publishers p, authors a where p.city = a.city;
++----------------------+----------+----------+----------+----------+
+| pub_name             | city     | au_fname | au_lname | city     |
++----------------------+----------+----------+----------+----------+
+| Algodata Infosystems | Berkeley | Cheryl   | Carson   | Berkeley |
+| Algodata Infosystems | Berkeley | Abraham  | Bennet   | Berkeley |
++----------------------+----------+----------+----------+----------+
+2 rows in set (0.03 sec)
+
+mysql> -- 5
+mysql> SELECT a.au_lname, a.city, p.pub_name, p.city FROM publishers p LEFT JOIN authors a ON p.city = a.city;
++----------+----------+-----------------------+------------+
+| au_lname | city     | pub_name              | city       |
++----------+----------+-----------------------+------------+
+| NULL     | NULL     | New Moon Books        | Boston     |
+| NULL     | NULL     | Binnet & Hardley      | Washington |
+| Bennet   | Berkeley | Algodata Infosystems  | Berkeley   |
+| Carson   | Berkeley | Algodata Infosystems  | Berkeley   |
+| NULL     | NULL     | Five Lakes Publishing | Chicago    |
+| NULL     | NULL     | Ramona Publishers     | Dallas     |
+| NULL     | NULL     | GGG&G                 | MGnchen    |
+| NULL     | NULL     | Scootney Books        | New York   |
+| NULL     | NULL     | Lucerne Publishing    | Paris      |
++----------+----------+-----------------------+------------+
+9 rows in set (0.00 sec)
+
+mysql> -- 6
+mysql> SELECT DISTINCT t.pub_id, p.pub_name FROM publishers p JOIN titles t ON t.pub_id = p.pub_id WHERE type = 'business';
++--------+----------------------+
+| pub_id | pub_name             |
++--------+----------------------+
+| 1389   | Algodata Infosystems |
+| 0736   | New Moon Books       |
++--------+----------------------+
+2 rows in set (0.01 sec)
+
+mysql> select  * from titles;
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| title_id | title                                                           | type         | pub_id | price   | advance    | royalty | ytd_sales | notes                                                                                                                                                                               | pubdate    |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| BU1032   | The Busy Executive's Database Guide                             | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | An overview of available database systems with emphasis on common business applications. Illustrated.                                                                               | 1991-06-12 |
+| BU1111   | Cooking with Computers: Surreptitious Balance Sheets            | business     | 1389   | 11.9500 |  5000.0000 |      10 |      3876 | Helpful hints on how to use your electronic resources to the best advantage.                                                                                                        | 1991-06-09 |
+| BU2075   | You Can Combat Computer Stress!                                 | business     | 0736   |  2.9900 | 10125.0000 |      24 |     18722 | The latest medical and psychological techniques for living with the electronic office. Easy-to-understand explanations.                                                             | 1991-06-30 |
+| BU7832   | Straight Talk About Computers                                   | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | Annotated analysis of what computers can do for you: a no-hype guide for the critical user.                                                                                         | 1991-06-22 |
+| MC2222   | Silicon Valley Gastronomic Treats                               | mod_cook     | 0877   | 19.9900 |     0.0000 |      12 |      2032 | Favorite recipes for quick, easy, and elegant meals.                                                                                                                                | 1991-06-09 |
+| MC3021   | The Gourmet Microwave                                           | mod_cook     | 0877   |  2.9900 | 15000.0000 |      24 |     22246 | Traditional French gourmet recipes adapted for modern microwave cooking.                                                                                                            | 1991-06-18 |
+| MC3026   | The Psychology of Computer Cooking                              | UNDECIDED    | 0877   |    NULL |       NULL |    NULL |      NULL | NULL                                                                                                                                                                                | NULL       |
+| PC1035   | But Is It User Friendly?                                        | popular_comp | 1389   | 22.9500 |  7000.0000 |      16 |      8780 | A survey of software for the naive user, focusing on the 'friendliness' of each.                                                                                                    | 1991-06-30 |
+| PC8888   | Secrets of Silicon Valley                                       | popular_comp | 1389   | 20.0000 |  8000.0000 |      10 |      4095 | Muckraking reporting on the world's largest computer hardware and software manufacturers.                                                                                           | 1994-06-12 |
+| PC9999   | Net Etiquette                                                   | popular_comp | 1389   |    NULL |       NULL |    NULL |      NULL | A must-read for computer conferencing.                                                                                                                                              | NULL       |
+| PS1372   | Computer Phobic AND Non-Phobic Individuals: Behavior Variations | psychology   | 0877   | 21.5900 |  7000.0000 |      10 |       375 | A must for the specialist, this book examines the difference between those who hate and fear computers and those who don't.                                                         | 1991-10-21 |
+| PS2091   | Is Anger the Enemy?                                             | psychology   | 0736   | 10.9500 |  2275.0000 |      12 |      2045 | Carefully researched study of the effects of strong emotions on the body. Metabolic charts included.                                                                                | 1991-06-15 |
+| PS2106   | Life Without Fear                                               | psychology   | 0736   |  7.0000 |  6000.0000 |      10 |       111 | New exercise, meditation, and nutritional techniques that can reduce the shock of daily interactions. Popular audience. Sample menus included, exercise video available separately. | 1991-10-05 |
+| PS3333   | Prolonged Data Deprivation: Four Case Studies                   | psychology   | 0736   | 19.9900 |  2000.0000 |      10 |      4072 | What happens when the data runs dry?  Searching evaluations of information-shortage effects.                                                                                        | 1991-06-12 |
+| PS7777   | Emotional Security: A New Algorithm                             | psychology   | 0736   |  7.9900 |  4000.0000 |      10 |      3336 | Protecting yourself and your loved ones from undue emotional stress in the modern world. Use of computer and nutritional aids emphasized.                                           | 1991-06-12 |
+| TC3218   | Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | trad_cook    | 0877   | 20.9500 |  7000.0000 |      10 |       375 | Profusely illustrated in color, this makes a wonderful gift book for a cuisine-oriented friend.                                                                                     | 1991-10-21 |
+| TC4203   | Fifty Years in Buckingham Palace Kitchens                       | trad_cook    | 0877   | 11.9500 |  4000.0000 |      14 |     15096 | More anecdotes from the Queen's favorite cook describing life among English royalty. Recipes, techniques, tender vignettes.                                                         | 1991-06-12 |
+| TC7777   | Sushi, Anyone?                                                  | trad_cook    | 0877   | 14.9900 |  8000.0000 |      10 |      4095 | Detailed instructions on how to make authentic Japanese sushi in your spare time.                                                                                                   | 1991-06-12 |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+18 rows in set (0.00 sec)
+
+mysql> -- 7
+mysql> SELECT t.title, CONCAT(a.au_fname, ' ', a.au_lname) "Author's Name"     FROM titles t     JOIN titleauthor ta ON ta.title_id = t.title_id JOIN authors a ON a.au_id  = ta.au_id;
++-----------------------------------------------------------------+-------------------------+
+| title                                                           | Author's Name           |
++-----------------------------------------------------------------+-------------------------+
+| The Busy Executive's Database Guide                             | Abraham Bennet          |
+| Emotional Security: A New Algorithm                             | Charlene Locksley       |
+| Net Etiquette                                                   | Charlene Locksley       |
+| Silicon Valley Gastronomic Treats                               | Innes del Castillo      |
+| Prolonged Data Deprivation: Four Case Studies                   | Johnson White           |
+| The Busy Executive's Database Guide                             | Marjorie Green          |
+| But Is It User Friendly?                                        | Cheryl Carson           |
+| You Can Combat Computer Stress!                                 | Marjorie Green          |
+| Is Anger the Enemy?                                             | Albert Ringer           |
+| Is Anger the Enemy?                                             | Anne Ringer             |
+| Life Without Fear                                               | Albert Ringer           |
+| The Gourmet Microwave                                           | Michel DeFrance         |
+| The Gourmet Microwave                                           | Anne Ringer             |
+| Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | Sylvia Panteley         |
+| Straight Talk About Computers                                   | Dean Straight           |
+| Secrets of Silicon Valley                                       | Ann Dull                |
+| Secrets of Silicon Valley                                       | Sheryl Hunter           |
+| Computer Phobic AND Non-Phobic Individuals: Behavior Variations | Livia Karsen            |
+| Computer Phobic AND Non-Phobic Individuals: Behavior Variations | Stearns MacFeather      |
+| Cooking with Computers: Surreptitious Balance Sheets            | Stearns MacFeather      |
+| Cooking with Computers: Surreptitious Balance Sheets            | Michael O'Leary         |
+| Sushi, Anyone?                                                  | Akiko Yokomoto          |
+| Sushi, Anyone?                                                  | Michael O'Leary         |
+| Sushi, Anyone?                                                  | Burt Gringlesby         |
+| Fifty Years in Buckingham Palace Kitchens                       | Reginald Blotchet-Halls |
++-----------------------------------------------------------------+-------------------------+
+25 rows in set (0.04 sec)
+
+mysql> -- 8.a -create emp table
+mysql> create table Employees(emp_id varchar(10), ename varchar(40), dept_id varchar(20),job varchar(35), mgr_id varchar(20), bsal decimal(10,4));
+ERROR 1050 (42S01): Table 'employees' already exists
+mysql> create table Employee(emp_id varchar(10), ename varchar(40), dept_id varchar(20),job varchar(35), mgr_id varchar(20), bsal decimal(10,4));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_pubs |
++----------------+
+| authors        |
+| departments    |
+| employee       |
+| employees      |
+| publishers     |
+| salgrades      |
+| titleauthor    |
+| titles         |
++----------------+
+8 rows in set (0.01 sec)
+
+mysql> desc Employee;
++---------+---------------+------+-----+---------+-------+
+| Field   | Type          | Null | Key | Default | Extra |
++---------+---------------+------+-----+---------+-------+
+| emp_id  | varchar(10)   | YES  |     | NULL    |       |
+| ename   | varchar(40)   | YES  |     | NULL    |       |
+| dept_id | varchar(20)   | YES  |     | NULL    |       |
+| job     | varchar(35)   | YES  |     | NULL    |       |
+| mgr_id  | varchar(20)   | YES  |     | NULL    |       |
+| bsal    | decimal(10,4) | YES  |     | NULL    |       |
++---------+---------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> 	insert into Employee values(101,'Sameer',10,'President',NULL,50000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Employee;
++--------+--------+---------+-----------+--------+------------+
+| emp_id | ename  | dept_id | job       | mgr_id | bsal       |
++--------+--------+---------+-----------+--------+------------+
+| 101    | Sameer | 10      | President | NULL   | 50000.0000 |
++--------+--------+---------+-----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into Employee values(102,'Srinivas',10,'VP',101,40000);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into Employee values(103,'Nanda',20,'VP',101,40000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Employee values(104,'Ram',30,'DGM',102,35000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Employee values(105,'Vivek',20,'PM',103,30000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Employee values(106,'Venkat',20,'Tech Lead',105,25000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from employee;
++--------+----------+---------+-----------+--------+------------+
+| emp_id | ename    | dept_id | job       | mgr_id | bsal       |
++--------+----------+---------+-----------+--------+------------+
+| 101    | Sameer   | 10      | President | NULL   | 50000.0000 |
+| 102    | Srinivas | 10      | VP        | 101    | 40000.0000 |
+| 103    | Nanda    | 20      | VP        | 101    | 40000.0000 |
+| 104    | Ram      | 30      | DGM       | 102    | 35000.0000 |
+| 105    | Vivek    | 20      | PM        | 103    | 30000.0000 |
+| 106    | Venkat   | 20      | Tech Lead | 105    | 25000.0000 |
++--------+----------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> -- 8.b create departments
+mysql> create table Department(dept_id varchar(20), dname varchar(40),
+    -> location varchar(40));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from department;
+Empty set (0.01 sec)
+
+mysql> insert into Department values(10,'Crop','Dallas');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Department values(20,'PW','Bangalore');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into Department values(30,'SP','Pune');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Department values(40,'MS','Hyderabad');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from department;
++---------+-------+-----------+
+| dept_id | dname | location  |
++---------+-------+-----------+
+| 10      | Crop  | Dallas    |
+| 20      | PW    | Bangalore |
+| 30      | SP    | Pune      |
+| 40      | MS    | Hyderabad |
++---------+-------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> -- 8.c create salgrade function
+mysql> create table salgrades1(grade varchar(20), min_sal decimal(10,4), max_sal decimal(10,4));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from salgrades1;
+Empty set (0.00 sec)
+
+mysql> desc salgrades1;
++---------+---------------+------+-----+---------+-------+
+| Field   | Type          | Null | Key | Default | Extra |
++---------+---------------+------+-----+---------+-------+
+| grade   | varchar(20)   | YES  |     | NULL    |       |
+| min_sal | decimal(10,4) | YES  |     | NULL    |       |
+| max_sal | decimal(10,4) | YES  |     | NULL    |       |
++---------+---------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into salgrades1 values('A',40001,50000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into salgrades1 values('B',30001,40000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into salgrades1 values('C',20001,30000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from salgrades1;
++-------+------------+------------+
+| grade | min_sal    | max_sal    |
++-------+------------+------------+
+| A     | 40001.0000 | 50000.0000 |
+| B     | 30001.0000 | 40000.0000 |
+| C     | 20001.0000 | 30000.0000 |
++-------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> -- 9
+mysql> SELECT e.ename, e.dept_id, d.dname    FROM employees e     JOIN departments d ON d.dept_id = e.dept_id;
++----------+---------+-------+
+| ename    | dept_id | dname |
++----------+---------+-------+
+| Sameer   | 10      | Crop  |
+| Srinivas | 10      | Crop  |
+| Nanda    | 20      | PW    |
+| Ram      | 30      | SP    |
+| Vivek    | 20      | PW    |
+| Venkat   | 20      | PW    |
++----------+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> -- 10
+mysql> SELECT DISTINCT e.job, e.dept_id, d.location FROM  employees e,  departments d WHERE e.dept_id = d.dept_id AND e.dept_id = 30;
++------+---------+----------+
+| job  | dept_id | location |
++------+---------+----------+
+| DGM  | 30      | Pune     |
++------+---------+----------+
+1 row in set (0.00 sec)
+
+mysql> -- 11
+mysql> SELECT e.ename, d.dname, d.location, e.bsal FROM employees e, departments d WHERE e.dept_id = d.dept_id;
++----------+-------+-----------+------------+
+| ename    | dname | location  | bsal       |
++----------+-------+-----------+------------+
+| Sameer   | Crop  | Dallas    | 50000.0000 |
+| Srinivas | Crop  | Dallas    | 40000.0000 |
+| Nanda    | PW    | Bangalore | 40000.0000 |
+| Ram      | SP    | Pune      | 35000.0000 |
+| Vivek    | PW    | Bangalore | 30000.0000 |
+| Venkat   | PW    | Bangalore | 25000.0000 |
++----------+-------+-----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> -- 12
+mysql> SELECT e.ename, d.dname FROM employees e, departments d WHERE e.dept_id = d.dept_id AND e.ename LIKE '%A%';
++----------+-------+
+| ename    | dname |
++----------+-------+
+| Srinivas | Crop  |
+| Sameer   | Crop  |
+| Venkat   | PW    |
+| Nanda    | PW    |
+| Ram      | SP    |
++----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT e.ename, d.dname FROM employees e, departments d WHERE e.dept_id = d.dept_id AND e.ename LIKE '%S%';
++----------+-------+
+| ename    | dname |
++----------+-------+
+| Srinivas | Crop  |
+| Sameer   | Crop  |
++----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT e.ename, d.dname    FROM employees e     JOIN departments d on d.dept_id = e.dept_id    WHERE e.ename regexp '[S]';
++----------+-------+
+| ename    | dname |
++----------+-------+
+| Sameer   | Crop  |
+| Srinivas | Crop  |
++----------+-------+
+2 rows in set (0.01 sec)
+
+mysql> -- 13
+mysql> SELECT e.ename, e.job, e.dept_id,d.dname, d.location FROM employees e JOIN departments d ON (e.dept_id = d.dept_id) WHERE LOWER(d.location) = 'Dallas';
++----------+-----------+---------+-------+----------+
+| ename    | job       | dept_id | dname | location |
++----------+-----------+---------+-------+----------+
+| Sameer   | President | 10      | Crop  | Dallas   |
+| Srinivas | VP        | 10      | Crop  | Dallas   |
++----------+-----------+---------+-------+----------+
+2 rows in set (0.00 sec)
+
+mysql> -- 14
+mysql> SELECT e.ename "Employee", e.emp_id "Emp No", m.ename "Manager", m.emp_id "Manager No." FROM employees e JOIN employees m ON m.emp_id = e.mgr_id;
++----------+--------+----------+-------------+
+| Employee | Emp No | Manager  | Manager No. |
++----------+--------+----------+-------------+
+| Nanda    | 103    | Sameer   | 101         |
+| Srinivas | 102    | Sameer   | 101         |
+| Ram      | 104    | Srinivas | 102         |
+| Vivek    | 105    | Nanda    | 103         |
+| Venkat   | 106    | Vivek    | 105         |
++----------+--------+----------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> -- 15
+mysql> SELECT e.ename "Employee", e.emp_id "Emp No",e.mgr_id  FROM employees e where e.mgr_id IS NULL ;
++----------+--------+--------+
+| Employee | Emp No | mgr_id |
++----------+--------+--------+
+| Sameer   | 101    | NULL   |
++----------+--------+--------+
+1 row in set (0.00 sec)
+
+mysql> desc salgrades1
+    -> ;
++---------+---------------+------+-----+---------+-------+
+| Field   | Type          | Null | Key | Default | Extra |
++---------+---------------+------+-----+---------+-------+
+| grade   | varchar(20)   | YES  |     | NULL    |       |
+| min_sal | decimal(10,4) | YES  |     | NULL    |       |
+| max_sal | decimal(10,4) | YES  |     | NULL    |       |
++---------+---------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> -- 16
+mysql> SELECT e.ename "Employee", e.job "Job", d.dname "Department", e.bsal "Salary", (SELECT s.grade FROM salgrades s WHERE e.bsal > s.min_sal AND e.bsal <= s.max_sal) "Grade" FROM employees e JOIN departments d ON e.dept_id = d.dept_id;
++----------+-----------+------------+------------+-------+
+| Employee | Job       | Department | Salary     | Grade |
++----------+-----------+------------+------------+-------+
+| Sameer   | President | Crop       | 50000.0000 | A     |
+| Srinivas | VP        | Crop       | 40000.0000 | B     |
+| Nanda    | VP        | PW         | 40000.0000 | B     |
+| Ram      | DGM       | SP         | 35000.0000 | B     |
+| Vivek    | PM        | PW         | 30000.0000 | C     |
+| Venkat   | Tech Lead | PW         | 25000.0000 | C     |
++----------+-----------+------------+------------+-------+
+6 rows in set (0.03 sec)
+
+mysql> SELECT e.ename, e.job, d.dname,e.bsal, s.grade FROM employees e, departments d, salgrades s WHERE e.dept_id = d.dept_id AND e.bsal BETWEEN s.min_sal AND s.max_sal;
++----------+-----------+-------+------------+-------+
+| ename    | job       | dname | bsal       | grade |
++----------+-----------+-------+------------+-------+
+| Srinivas | VP        | Crop  | 40000.0000 | B     |
+| Sameer   | President | Crop  | 50000.0000 | A     |
+| Venkat   | Tech Lead | PW    | 25000.0000 | C     |
+| Vivek    | PM        | PW    | 30000.0000 | C     |
+| Nanda    | VP        | PW    | 40000.0000 | B     |
+| Ram      | DGM       | SP    | 35000.0000 | B     |
++----------+-----------+-------+------------+-------+
+6 rows in set (0.00 sec)
+
+mysql> -- 17
+mysql> select pub_name  from publishers  where exists (select * from titles where pub_id = publishers.pub_id and type = "business"); 
++----------------------+
+| pub_name             |
++----------------------+
+| Algodata Infosystems |
+| New Moon Books       |
++----------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT p.pub_id, p.pub_name FROM publishers p JOIN titles t ON p.pub_id = t.pub_id WHERE t.type = 'business';
++--------+----------------------+
+| pub_id | pub_name             |
++--------+----------------------+
+| 1389   | Algodata Infosystems |
+| 1389   | Algodata Infosystems |
+| 0736   | New Moon Books       |
+| 1389   | Algodata Infosystems |
++--------+----------------------+
+4 rows in set (0.00 sec)
+
+mysql> -- 17
+mysql> SELECT p.pub_id, p.pub_name    FROM publishers p     WHERE EXISTS (SELECT 1 FROM titles t    WHERE t.type = 'business' AND t.pub_id = p.pub_id);
++--------+----------------------+
+| pub_id | pub_name             |
++--------+----------------------+
+| 1389   | Algodata Infosystems |
+| 0736   | New Moon Books       |
++--------+----------------------+
+2 rows in set (0.00 sec)
+
+mysql> -- 18
+mysql> SELECT p.pub_id, p.pub_name FROM publishers p JOIN titles t ON p.pub_id = t.pub_id WHERE t.type != 'mod_cook';
++--------+----------------------+
+| pub_id | pub_name             |
++--------+----------------------+
+| 1389   | Algodata Infosystems |
+| 1389   | Algodata Infosystems |
+| 0736   | New Moon Books       |
+| 1389   | Algodata Infosystems |
+| 0877   | Binnet & Hardley     |
+| 1389   | Algodata Infosystems |
+| 1389   | Algodata Infosystems |
+| 1389   | Algodata Infosystems |
+| 0877   | Binnet & Hardley     |
+| 0736   | New Moon Books       |
+| 0736   | New Moon Books       |
+| 0736   | New Moon Books       |
+| 0736   | New Moon Books       |
+| 0877   | Binnet & Hardley     |
+| 0877   | Binnet & Hardley     |
+| 0877   | Binnet & Hardley     |
++--------+----------------------+
+16 rows in set (0.00 sec)
+
+mysql> SELECT pub_name FROM publishers  WHERE EXISTS (SELECT * FROM titles WHERE pub_id = publishers.pub_id and type != "mod_cook"); 
++----------------------+
+| pub_name             |
++----------------------+
+| New Moon Books       |
+| Binnet & Hardley     |
+| Algodata Infosystems |
++----------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT p.pub_id, p.pub_name     FROM publishers p     WHERE EXISTS (SELECT 1 FROM titles t    WHERE t.type != 'mod_cook' AND t.pub_id = p.pub_id);
++--------+----------------------+
+| pub_id | pub_name             |
++--------+----------------------+
+| 0736   | New Moon Books       |
+| 0877   | Binnet & Hardley     |
+| 1389   | Algodata Infosystems |
++--------+----------------------+
+3 rows in set (0.00 sec)
+
+mysql> -- 19 
+mysql> SELECT t.type, AVG(t.ytd_sales) FROM titles t WHERE t.type = ANY(SELECT t1.type FROM titles t1
+    -> WHERE t1.title = 'The Busy Executive\'s Database Guide'OR t1.title = 'Is Anger the Enemy?')
+    -> GROUP BY t.type;
++------------+------------------+
+| type       | AVG(t.ytd_sales) |
++------------+------------------+
+| business   |        7697.0000 |
+| psychology |        1987.8000 |
++------------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT t.type, AVG(t.ytd_sales) FROM titles t WHERE t.type = ANY(SELECT t1.type FROM titles t1
+    -> WHERE t1.title = 'The Busy Executive\'s Database Guide'OR t1.title = 'Is Anger the Enemy?')
+    -> ;
++----------+------------------+
+| type     | AVG(t.ytd_sales) |
++----------+------------------+
+| business |        4525.2222 |
++----------+------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT t.type, AVG(t.ytd_sales) FROM titles t WHERE t.type = ANY(SELECT t1.type FROM titles t1
+    -> WHERE t1.title = 'The Busy Executive\'s Database Guide')
+    -> GROUP BY t.type;
++----------+------------------+
+| type     | AVG(t.ytd_sales) |
++----------+------------------+
+| business |        7697.0000 |
++----------+------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT t.type, AVG(t.ytd_sales) FROM titles t WHERE t.type = ANY(SELECT t1.type FROM titles t1
+    -> WHERE t1.title = t1.title = 'Is Anger the Enemy?')
+    -> GROUP BY t.type;
+Empty set, 1 warning (0.00 sec)
+
+mysql> SELECT t.type, AVG(t.ytd_sales) FROM titles t WHERE t.type = ANY(SELECT t1.type FROM titles t1
+    -> WHERE t1.title = 'Is Anger the Enemy?')
+    -> GROUP BY t.type;
++------------+------------------+
+| type       | AVG(t.ytd_sales) |
++------------+------------------+
+| psychology |        1987.8000 |
++------------+------------------+
+1 row in set (0.00 sec)
+
+mysql> -- 20
+mysql> SELECT  t.title, t.type, p.pub_name, p.pub_id  FROM titles t JOIN publishers p ON (t.pub_id = p.pub_id) WHERE t.type= 'business';
++------------------------------------------------------+----------+----------------------+--------+
+| title                                                | type     | pub_name             | pub_id |
++------------------------------------------------------+----------+----------------------+--------+
+| The Busy Executive's Database Guide                  | business | Algodata Infosystems | 1389   |
+| Cooking with Computers: Surreptitious Balance Sheets | business | Algodata Infosystems | 1389   |
+| You Can Combat Computer Stress!                      | business | New Moon Books       | 0736   |
+| Straight Talk About Computers                        | business | Algodata Infosystems | 1389   |
++------------------------------------------------------+----------+----------------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT p.pub_name FROM publishers p WHERE EXISTS (SELECT 1 FROM titles t WHERE t.type = 'business' AND t.pub_id = p.pub_id);
++----------------------+
+| pub_name             |
++----------------------+
+| Algodata Infosystems |
+| New Moon Books       |
++----------------------+
+2 rows in set (0.00 sec)
+
+mysql> -- 21
+mysql> SELECT  * from publishers where city="Paris";
++--------+--------------------+-------+-------+---------+
+| pub_id | pub_name           | city  | state | country |
++--------+--------------------+-------+-------+---------+
+| 9999   | Lucerne Publishing | Paris | NULL  | France  |
++--------+--------------------+-------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT p.pub_id, p.pub_name FROM publishers p WHERE p.city = 'Paris';
++--------+--------------------+
+| pub_id | pub_name           |
++--------+--------------------+
+| 9999   | Lucerne Publishing |
++--------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> -- 22
+mysql> SELECT t.title, t.advance FROM titles t WHERE t.advance > (SELECT AVG(t1.advance) FROM titles t1 WHERE t1.type = 'business');
++-----------------------------------------------------------------+------------+
+| title                                                           | advance    |
++-----------------------------------------------------------------+------------+
+| You Can Combat Computer Stress!                                 | 10125.0000 |
+| The Gourmet Microwave                                           | 15000.0000 |
+| But Is It User Friendly?                                        |  7000.0000 |
+| Secrets of Silicon Valley                                       |  8000.0000 |
+| Computer Phobic AND Non-Phobic Individuals: Behavior Variations |  7000.0000 |
+| Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean |  7000.0000 |
+| Sushi, Anyone?                                                  |  8000.0000 |
++-----------------------------------------------------------------+------------+
+7 rows in set (0.00 sec)
+
+mysql> -- 23
+mysql> SELECT CONCAT(a.au_fname, ' ', a.au_lname) "Author Name" FROM authors a
+    -> JOIN titleauthor ta ON ta.au_id = a.au_id JOIN titles t ON t.title_id = ta.title_id
+    -> WHERE t.title = 'Net Etiquette';
++-------------------+
+| Author Name       |
++-------------------+
+| Charlene Locksley |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONCAT(a.au_fname, ' ', a.au_lname) "Author Name" FROM authors a JOIN titleauthor ta ON ta.au_id = a.au_id JOIN titles t ON t.title_id = ta.title_id WHERE t.type = 'business';
++--------------------+
+| Author Name        |
++--------------------+
+| Abraham Bennet     |
+| Marjorie Green     |
+| Stearns MacFeather |
+| Michael O'Leary    |
+| Marjorie Green     |
+| Dean Straight      |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> -- 25
+mysql> select title, title_id, price, MIN(price), MAX(price), AVG(price) from titles where exists(select price > MAX(price) from titles where pub_id = 0736);
++-------------------------------------+----------+---------+------------+------------+-------------+
+| title                               | title_id | price   | MIN(price) | MAX(price) | AVG(price)  |
++-------------------------------------+----------+---------+------------+------------+-------------+
+| The Busy Executive's Database Guide | BU1032   | 19.9900 |     2.9900 |    22.9500 | 14.76625000 |
++-------------------------------------+----------+---------+------------+------------+-------------+
+1 row in set (0.03 sec)
+
+mysql> SELECT t.title, t.title_id FROM titles t WHERE t.price > (SELECT MAX(t1.price) FROM titles t1 JOIN publishers p ON p.pub_id = t1.pub_id WHERE p.pub_id = 0736);
++-----------------------------------------------------------------+----------+
+| title                                                           | title_id |
++-----------------------------------------------------------------+----------+
+| But Is It User Friendly?                                        | PC1035   |
+| Secrets of Silicon Valley                                       | PC8888   |
+| Computer Phobic AND Non-Phobic Individuals: Behavior Variations | PS1372   |
+| Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | TC3218   |
++-----------------------------------------------------------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> -- 26a
+mysql> select title, title_id, price, MIN(price), MAX(price), AVG(price) from titles where exists(select price > MAX(price) from titles where pub_id = 0736);
++-------------------------------------+----------+---------+------------+------------+-------------+
+| title                               | title_id | price   | MIN(price) | MAX(price) | AVG(price)  |
++-------------------------------------+----------+---------+------------+------------+-------------+
+| The Busy Executive's Database Guide | BU1032   | 19.9900 |     2.9900 |    22.9500 | 14.76625000 |
++-------------------------------------+----------+---------+------------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> -- 26b
+mysql> select title, title_id, price, MIN(price), MAX(price), AVG(price) from titles where exists(select price > MAX(price) from titles where pub_id = 1389);
++-------------------------------------+----------+---------+------------+------------+-------------+
+| title                               | title_id | price   | MIN(price) | MAX(price) | AVG(price)  |
++-------------------------------------+----------+---------+------------+------------+-------------+
+| The Busy Executive's Database Guide | BU1032   | 19.9900 |     2.9900 |    22.9500 | 14.76625000 |
++-------------------------------------+----------+---------+------------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> -- 26c
+mysql> select title, title_id, price, MIN(price), MAX(price), AVG(price) from titles where exists(select price > MAX(price) from titles where pub_id = 9999);
++-------------------------------------+----------+---------+------------+------------+-------------+
+| title                               | title_id | price   | MIN(price) | MAX(price) | AVG(price)  |
++-------------------------------------+----------+---------+------------+------------+-------------+
+| The Busy Executive's Database Guide | BU1032   | 19.9900 |     2.9900 |    22.9500 | 14.76625000 |
++-------------------------------------+----------+---------+------------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT t.title, t.title_id FROM titles t WHERE t.price > (SELECT MIN(t1.price) FROM titles t1 JOIN publishers p ON p.pub_id = t1.pub_id WHERE p.pub_id = 1389);
++-----------------------------------------------------------------+----------+
+| title                                                           | title_id |
++-----------------------------------------------------------------+----------+
+| The Busy Executive's Database Guide                             | BU1032   |
+| Straight Talk About Computers                                   | BU7832   |
+| Silicon Valley Gastronomic Treats                               | MC2222   |
+| But Is It User Friendly?                                        | PC1035   |
+| Secrets of Silicon Valley                                       | PC8888   |
+| Computer Phobic AND Non-Phobic Individuals: Behavior Variations | PS1372   |
+| Prolonged Data Deprivation: Four Case Studies                   | PS3333   |
+| Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | TC3218   |
+| Sushi, Anyone?                                                  | TC7777   |
++-----------------------------------------------------------------+----------+
+9 rows in set (0.00 sec)
+
+mysql>  SELECT t.title, t.title_id FROM titles t  WHERE t.price > (SELECT MIN(t1.price) FROM titles t1 JOIN publishers p ON p.pub_id = t1.pub_id WHERE p.pub_id = 0736);
++-----------------------------------------------------------------+----------+
+| title                                                           | title_id |
++-----------------------------------------------------------------+----------+
+| The Busy Executive's Database Guide                             | BU1032   |
+| Cooking with Computers: Surreptitious Balance Sheets            | BU1111   |
+| Straight Talk About Computers                                   | BU7832   |
+| Silicon Valley Gastronomic Treats                               | MC2222   |
+| But Is It User Friendly?                                        | PC1035   |
+| Secrets of Silicon Valley                                       | PC8888   |
+| Computer Phobic AND Non-Phobic Individuals: Behavior Variations | PS1372   |
+| Is Anger the Enemy?                                             | PS2091   |
+| Life Without Fear                                               | PS2106   |
+| Prolonged Data Deprivation: Four Case Studies                   | PS3333   |
+| Emotional Security: A New Algorithm                             | PS7777   |
+| Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | TC3218   |
+| Fifty Years in Buckingham Palace Kitchens                       | TC4203   |
+| Sushi, Anyone?                                                  | TC7777   |
++-----------------------------------------------------------------+----------+
+14 rows in set (0.00 sec)
+
+mysql> SELECT t.title, t.title_id FROM titles t WHERE t.price > (SELECT MIN(t1.price) FROM titles t1 JOIN publishers p ON p.pub_id = t1.pub_id WHERE p.pub_id = 9999);
+Empty set (0.00 sec)
+
+mysql> -- 27
+mysql> SELECT p.pub_name FROM publishers p WHERE p.city = ANY(SELECT a.city  FROM authors a);
++----------------------+
+| pub_name             |
++----------------------+
+| Algodata Infosystems |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT DISTINCT p.pub_name, p.city, a.au_fname FROM  publishers p,  authors a WHERE p.city = a.city; 
++----------------------+----------+----------+
+| pub_name             | city     | au_fname |
++----------------------+----------+----------+
+| Algodata Infosystems | Berkeley | Cheryl   |
+| Algodata Infosystems | Berkeley | Abraham  |
++----------------------+----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> \t

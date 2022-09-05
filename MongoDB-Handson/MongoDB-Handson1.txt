@@ -1,0 +1,1112 @@
+Mongodb-Handson1
+=====================================================================================================================
+-1
+1a
+exit	-Quit the MongoDB shell with exit/exit()/.exit
+
+1b
+show	-'show databases'/'show dbs': Print a list of all available databases.
+
+1c
+show	-'show collections'/'show tables': Print a list of all collections for current database.
+
+1d
+use Db_name
+=====================================================================================================================
+-2
+C:\>cd temp
+
+C:\temp>mongosh
+
+Current Mongosh Log ID: 63109130417da7c21190f5b8
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.5.4
+Using MongoDB:          6.0.1
+Using Mongosh:          1.5.4
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2022-09-01T10:49:18.172+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+------
+   Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+   metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+   The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+   and anyone you share the URL with. MongoDB may use this information to make product
+   improvements and to suggest MongoDB products and deployment options to you.
+
+   To enable free monitoring, run the following command: db.enableFreeMonitoring()
+   To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+------
+
+test> help
+
+  Shell Help:
+
+    use                                        Set current database
+    show                                       'show databases'/'show dbs': Print a list of all available databases.
+                                               'show collections'/'show tables': Print a list of all collections for current database.
+                                               'show profile': Prints system.profile information.
+                                               'show users': Print a list of all users for current database.
+                                               'show roles': Print a list of all roles for current database.
+                                               'show log <type>': log for current connection, if type is not set uses 'global'
+                                               'show logs': Print all logs.
+
+    exit                                       Quit the MongoDB shell with exit/exit()/.exit
+    quit                                       Quit the MongoDB shell with quit/quit()
+    Mongo                                      Create a new connection and return the Mongo object. Usage: new Mongo(URI, options [optional])
+    connect                                    Create a new connection and return the Database object. Usage: connect(URI, username [optional], password [optional])
+    it                                         result of the last line evaluated; use to further iterate
+    version                                    Shell version
+    load                                       Loads and runs a JavaScript file into the current shell environment
+    enableTelemetry                            Enables collection of anonymous usage data to improve the mongosh CLI
+    disableTelemetry                           Disables collection of anonymous usage data to improve the mongosh CLI
+    passwordPrompt                             Prompts the user for a password
+    sleep                                      Sleep for the specified number of milliseconds
+    print                                      Prints the contents of an object to the output
+    printjson                                  Alias for print()
+    cls                                        Clears the screen like console.clear()
+    isInteractive                              Returns whether the shell will enter or has entered interactive mode
+
+  For more information on usage: https://docs.mongodb.com/manual/reference/method
+test> show databases
+admin    40.00 KiB
+config  108.00 KiB
+local    72.00 KiB
+
+test> use blazeclan
+switched to db blazeclan
+=====================================================================================================================
+-2
+
+blazeclan> db.staff.insert( { "staffName": "Test", "gender": "Male", "age": 30, "email": "test@gmail.com", "salary": 30000, "married": true })
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("631097923e14550d28fede3a") }
+}
+
+blazeclan> db.staff.insertOne({"staffName":"Abhi","gender":"M","age": 25,"email":"abhi@gmail.com","salary":"24000","married":"true"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("6310ca881740b027bbbb4862")
+}
+blazeclan> db.staff.find()
+[
+  {
+    _id: ObjectId("631096f83e14550d28fede39"),
+    staffName: 'Test',
+    gender: 'Male',
+    age: 30,
+    email: 'test@gmail.com',
+    salary: 30000,
+    married: true
+  },
+  {
+    _id: ObjectId("631097923e14550d28fede3a"),
+    staffName: 'Test',
+    gender: 'Male',
+    age: 30,
+    email: 'test@gmail.com',
+    salary: 30000,
+    married: true
+  },
+  {
+    _id: ObjectId("6310ca881740b027bbbb4862"),
+    staffName: 'Abhi',
+    gender: 'M',
+    age: 25,
+    email: 'abhi@gmail.com',
+    salary: '24000',
+    married: 'true'
+  }
+]
+blazeclan> db.staff.insertMany([{"staffName":"Ashutosh","gender":"M","age": 35,"email":"Ashu@gmail.com","salary":"44000","married":"false"},{"staffName":"Yash","gender":"M","age": 55,"email":"null","salary":"39000","married":"false"},{"staffName":"riya","gender":"M","age": 25,"email":"null","salary":"31000","married":"False"},{"staffName":"sai","gender":"F","age": 29,"email":"null","salary":"31000","married":"true"},{"staffName":"Ritu","gender":"F","age": 45,"email":"null","salary":"32000","married":"true"},{"staffName":"Robert","gender":"M","age": 35,"email":"robert@gmail.com","salary":"35000","married":"true"},{"staffName":"Richard","gender":"M","age": 45,"email":"richard@gmail.com","salary":"35000","married":"false"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6310cede1740b027bbbb4863"),
+    '1': ObjectId("6310cede1740b027bbbb4864"),
+    '2': ObjectId("6310cede1740b027bbbb4865"),
+    '3': ObjectId("6310cede1740b027bbbb4866"),
+    '4': ObjectId("6310cede1740b027bbbb4867"),
+    '5': ObjectId("6310cede1740b027bbbb4868"),
+    '6': ObjectId("6310cede1740b027bbbb4869")
+  }
+}
+
+blazeclan> db.staff.find()
+[
+  {
+    _id: ObjectId("631096f83e14550d28fede39"),
+    staffName: 'Test',
+    gender: 'Male',
+    age: 30,
+    email: 'test@gmail.com',
+    salary: 30000,
+    married: true
+  },
+  {
+    _id: ObjectId("631097923e14550d28fede3a"),
+    staffName: 'Test',
+    gender: 'Male',
+    age: 30,
+    email: 'test@gmail.com',
+    salary: 30000,
+    married: true
+  },
+  {
+    _id: ObjectId("6310ca881740b027bbbb4862"),
+    staffName: 'Abhi',
+    gender: 'M',
+    age: 25,
+    email: 'abhi@gmail.com',
+    salary: '24000',
+    married: 'true'
+  },
+  {
+    _id: ObjectId("6310cede1740b027bbbb4863"),
+    staffName: 'Ashutosh',
+    gender: 'M',
+    age: 35,
+    email: 'Ashu@gmail.com',
+    salary: '44000',
+    married: 'false'
+  },
+  {
+    _id: ObjectId("6310cede1740b027bbbb4864"),
+    staffName: 'Yash',
+    gender: 'M',
+    age: 55,
+    email: 'null',
+    salary: '39000',
+    married: 'false'
+  },
+  {
+    _id: ObjectId("6310cede1740b027bbbb4865"),
+    staffName: 'riya',
+    gender: 'M',
+    age: 25,
+    email: 'null',
+    salary: '31000',
+    married: 'False'
+  },
+  {
+    _id: ObjectId("6310cede1740b027bbbb4866"),
+    staffName: 'sai',
+    gender: 'F',
+    age: 29,
+    email: 'null',
+    salary: '31000',
+    married: 'true'
+  },
+  {
+    _id: ObjectId("6310cede1740b027bbbb4867"),
+    staffName: 'Ritu',
+    gender: 'F',
+    age: 45,
+    email: 'null',
+    salary: '32000',
+    married: 'true'
+  },
+  {
+    _id: ObjectId("6310cede1740b027bbbb4868"),
+    staffName: 'Robert',
+    gender: 'M',
+    age: 35,
+    email: 'robert@gmail.com',
+    salary: '35000',
+    married: 'true'
+  },
+  {
+    _id: ObjectId("6310cede1740b027bbbb4869"),
+    staffName: 'Richard',
+    gender: 'M',
+    age: 45,
+    email: 'richard@gmail.com',
+    salary: '35000',
+    married: 'false'
+  }
+]
+blazeclan>
+
+blazeclan> show collections
+potions
+staff
+
+blazeclan> db.staff.find()
+[
+  {
+    _id: ObjectId("631096f83e14550d28fede39"),
+    staffName: 'Test',
+    gender: 'Male',
+    age: 30,
+    email: 'test@gmail.com',
+    salary: 30000,
+    married: true
+  },
+  {
+    _id: ObjectId("631097923e14550d28fede3a"),
+    staffName: 'Test',
+    gender: 'Male',
+    age: 30,
+    email: 'test@gmail.com',
+    salary: 30000,
+    married: true
+  }
+]
+
+=====================================================================================================================
+-3
+	-In C:\Program Files\MongoDB\mongodb-database-tools-windows-x86_64-100.6.0\
+	mongodb-database-tools-windows-x86_64-100.6.0\bin>
+	-do the import
+		-for departments
+			C:\Program Files\MongoDB\mongodb-database-tools-windows-x86_64-100.6.0\mongodb-database-tools-windows-x86_64-100.6.0\bin>mongoimport --db blazeclan --collection departments --drop --file D:\departments.json --jsonArray
+			2022-09-01T17:27:08.189+0530    connected to: mongodb://localhost/
+			2022-09-01T17:27:08.193+0530    dropping: blazeclan.departments
+			2022-09-01T17:27:08.224+0530    27 document(s) imported successfully. 0 document(s) failed to import.
+		
+		-for employees
+			C:\Program Files\MongoDB\mongodb-database-tools-windows-x86_64-100.6.0\mongodb-database-tools-windows-x86_64-100.6.0\bin>mongoimport --db blazeclan --collection employees --drop --file C:\Users\bhakti.thombare\Downloads\LabFiles\LabFiles\employees.json
+			2022-09-01T17:36:50.311+0530    connected to: mongodb://localhost/
+			2022-09-01T17:36:50.314+0530    dropping: blazeclan.employees
+			2022-09-01T17:36:50.349+0530    107 document(s) imported successfully. 0 document(s) failed to import.
+=====================================================================================================================
+-4
+blazeclan> db.employees.find().limit(1)
+[
+  {
+    _id: 100,
+    first_name: 'Steven',
+    last_name: 'King',
+    email: 'SKING',
+    phone_number: '515.123.4567',
+    hire_date: '2003-07-16T18:30:00.000Z',
+    job_id: 'AD_PRES',
+    salary: 24000,
+    commission_pct: null,
+    manager_id: null,
+    department_id: 90
+  }
+]
+=====================================================================================================================
+-5
+blazeclan> db.departments.find().limit(1)
+[
+  {
+    _id: ObjectId("63109e14c30dfab2c1590cf6"),
+    department_id: 10,
+    department_name: 'Administration',
+    manager_id: 200,
+    location_id: 1700
+  }
+]
+=====================================================================================================================
+-6
+blazeclan> db.departments.find().limit(1)
+[
+  {
+    _id: ObjectId("63109e14c30dfab2c1590cf6"),
+    department_id: 10,
+    department_name: 'Administration',
+    manager_id: 200,
+    location_id: 1700
+  }
+]
+=====================================================================================================================
+-7.a
+blazeclan> db.employees.find()
+[
+  {
+    _id: 100,
+    first_name: 'Steven',
+    last_name: 'King',
+    email: 'SKING',
+    phone_number: '515.123.4567',
+    hire_date: '2003-07-16T18:30:00.000Z',
+    job_id: 'AD_PRES',
+    salary: 24000,
+    commission_pct: null,
+    manager_id: null,
+    department_id: 90
+  },
+  {
+    _id: 108,
+    first_name: 'Nancy',
+    last_name: 'Greenberg',
+    email: 'NGREENBE',
+    phone_number: '515.124.4569',
+    hire_date: '2002-09-16T18:30:00.000Z',
+    job_id: 'FI_MGR',
+    salary: 12008,
+    commission_pct: null,
+    manager_id: 101,
+    department_id: 100
+  },
+  {
+    _id: 109,
+    first_name: 'Daniel',
+    last_name: 'Faviet',
+    email: 'DFAVIET',
+    phone_number: '515.124.4169',
+    hire_date: '2002-09-15T18:30:00.000Z',
+    job_id: 'FI_ACCOUNT',
+    salary: 9000,
+    commission_pct: null,
+    manager_id: 108,
+    department_id: 100
+  },
+  {
+    _id: 110,
+    first_name: 'John',
+    last_name: 'Chen',
+    email: 'JCHEN',
+    phone_number: '515.124.4269',
+    hire_date: '2005-10-27T18:30:00.000Z',
+    job_id: 'FI_ACCOUNT',
+    salary: 8200,
+    commission_pct: null,
+    manager_id: 108,
+    department_id: 100
+  },
+  {
+    _id: 111,
+    first_name: 'Ismael',
+    last_name: 'Sciarra',
+    email: 'ISCIARRA',
+    phone_number: '515.124.4369',
+    hire_date: '2005-10-29T18:30:00.000Z',
+    job_id: 'FI_ACCOUNT',
+    salary: 7700,
+    commission_pct: null,
+    manager_id: 108,
+    department_id: 100
+  },
+  {
+    _id: 106,
+    first_name: 'Valli',
+    last_name: 'Pataballa',
+    email: 'VPATABAL',
+    phone_number: '590.423.4560',
+    hire_date: '2006-03-04T18:30:00.000Z',
+    job_id: 'IT_PROG',
+    salary: 4800,
+    commission_pct: null,
+    manager_id: 103,
+    department_id: 60
+  },
+  {
+    _id: 103,
+    first_name: 'Alexander',
+    last_name: 'Hunold',
+    email: 'AHUNOLD',
+    phone_number: '590.423.4567',
+    hire_date: '2006-02-02T18:30:00.000Z',
+    job_id: 'IT_PROG',
+    salary: 9000,
+    commission_pct: null,
+    manager_id: 102,
+    department_id: 60
+  },
+  {
+    _id: 114,
+    first_name: 'Den',
+    last_name: 'Raphaely',
+    email: 'DRAPHEAL',
+    phone_number: '515.127.4561',
+    hire_date: '2003-01-06T18:30:00.000Z',
+    job_id: 'PU_MAN',
+    salary: 11000,
+    commission_pct: null,
+    manager_id: 100,
+    department_id: 30
+  },
+  {
+    _id: 115,
+    first_name: 'Alexander',
+    last_name: 'Khoo',
+    email: 'AKHOO',
+    phone_number: '515.127.4562',
+    hire_date: '2003-06-17T18:30:00.000Z',
+    job_id: 'PU_CLERK',
+    salary: 3100,
+    commission_pct: null,
+    manager_id: 114,
+    department_id: 30
+  },
+  {
+    _id: 116,
+    first_name: 'Shelli',
+    last_name: 'Baida',
+    email: 'SBAIDA',
+    phone_number: '515.127.4563',
+    hire_date: '2006-01-23T18:30:00.000Z',
+    job_id: 'PU_CLERK',
+    salary: 2900,
+    commission_pct: null,
+    manager_id: 114,
+    department_id: 30
+  },
+  {
+    _id: 112,
+    first_name: 'Jose Manuel',
+    last_name: 'Urman',
+    email: 'JMURMAN',
+    phone_number: '515.124.4469',
+    hire_date: '2006-04-06T18:30:00.000Z',
+    job_id: 'FI_ACCOUNT',
+    salary: 7800,
+    commission_pct: null,
+    manager_id: 108,
+    department_id: 100
+  },
+  {
+    _id: 102,
+    first_name: 'Lex',
+    last_name: 'De Haan',
+    email: 'LDEHAAN',
+    phone_number: '515.123.4569',
+    hire_date: '2001-02-12T18:30:00.000Z',
+    job_id: 'AD_VP',
+    salary: 17000,
+    commission_pct: null,
+    manager_id: 100,
+    department_id: 90
+  },
+  {
+    _id: 104,
+    first_name: 'Bruce',
+    last_name: 'Ernst',
+    email: 'BERNST',
+    phone_number: '590.423.4568',
+    hire_date: '2007-06-20T18:30:00.000Z',
+    job_id: 'IT_PROG',
+    salary: 6000,
+    commission_pct: null,
+    manager_id: 103,
+    department_id: 60
+  },
+  {
+    _id: 120,
+    first_name: 'Matthew',
+    last_name: 'Weiss',
+    email: 'MWEISS',
+    phone_number: '650.123.1234',
+    hire_date: '2004-08-17T18:30:00.000Z',
+    job_id: 'ST_MAN',
+    salary: 8000,
+    commission_pct: null,
+    manager_id: 100,
+    department_id: 50
+  },
+  {
+    _id: 121,
+    first_name: 'Adam',
+    last_name: 'Fripp',
+    email: 'AFRIPP',
+    phone_number: '650.123.2234',
+    hire_date: '2005-05-09T18:30:00.000Z',
+    job_id: 'ST_MAN',
+    salary: 8200,
+    commission_pct: null,
+    manager_id: 100,
+    department_id: 50
+  },
+  {
+    _id: 113,
+    first_name: 'Luis',
+    last_name: 'Popp',
+    email: 'LPOPP',
+    phone_number: '515.124.4567',
+    hire_date: '2008-01-06T18:30:00.000Z',
+    job_id: 'FI_ACCOUNT',
+    salary: 6900,
+    commission_pct: null,
+    manager_id: 108,
+    department_id: 100
+  },
+  {
+    _id: 122,
+    first_name: 'Payam',
+    last_name: 'Kaufling',
+    email: 'PKAUFLIN',
+    phone_number: '650.123.3234',
+    hire_date: '2003-05-31T18:30:00.000Z',
+    job_id: 'ST_MAN',
+    salary: 7900,
+    commission_pct: null,
+    manager_id: 100,
+    department_id: 50
+  },
+  {
+    _id: 123,
+    first_name: 'Shanta',
+    last_name: 'Vollman',
+    email: 'SVOLLMAN',
+    phone_number: '650.123.4234',
+    hire_date: '2005-11-09T18:30:00.000Z',
+    job_id: 'ST_MAN',
+    salary: 6500,
+    commission_pct: null,
+    manager_id: 100,
+    department_id: 50
+  },
+  {
+    _id: 124,
+    first_name: 'Kevin',
+    last_name: 'Mourgos',
+    email: 'KMOURGOS',
+    phone_number: '650.123.5234',
+    hire_date: '2007-12-15T18:30:00.000Z',
+    job_id: 'ST_MAN',
+    salary: 5800,
+    commission_pct: null,
+    manager_id: 100,
+    department_id: 50
+  },
+  {
+    _id: 125,
+    first_name: 'Julia',
+    last_name: 'Nayer',
+    email: 'JNAYER',
+    phone_number: '650.124.1214',
+    hire_date: '2005-08-15T18:30:00.000Z',
+    job_id: 'ST_CLERK',
+    salary: 3200,
+    commission_pct: null,
+    manager_id: 120,
+    department_id: 50
+  }
+]
+Type "it" for more
+====================================================
+-7.b
+blazeclan>  db.employees.find({},{_id:1,first_name:1,last_name:1,job_id:1,salary:1})
+[
+  {
+    _id: 100,
+    first_name: 'Steven',
+    last_name: 'King',
+    job_id: 'AD_PRES',
+    salary: 24000
+  },
+  {
+    _id: 108,
+    first_name: 'Nancy',
+    last_name: 'Greenberg',
+    job_id: 'FI_MGR',
+    salary: 12008
+  },
+  {
+    _id: 109,
+    first_name: 'Daniel',
+    last_name: 'Faviet',
+    job_id: 'FI_ACCOUNT',
+    salary: 9000
+  },
+  {
+    _id: 110,
+    first_name: 'John',
+    last_name: 'Chen',
+    job_id: 'FI_ACCOUNT',
+    salary: 8200
+  },
+  {
+    _id: 111,
+    first_name: 'Ismael',
+    last_name: 'Sciarra',
+    job_id: 'FI_ACCOUNT',
+    salary: 7700
+  },
+  {
+    _id: 106,
+    first_name: 'Valli',
+    last_name: 'Pataballa',
+    job_id: 'IT_PROG',
+    salary: 4800
+  },
+  {
+    _id: 103,
+    first_name: 'Alexander',
+    last_name: 'Hunold',
+    job_id: 'IT_PROG',
+    salary: 9000
+  },
+  {
+    _id: 114,
+    first_name: 'Den',
+    last_name: 'Raphaely',
+    job_id: 'PU_MAN',
+    salary: 11000
+  },
+  {
+    _id: 115,
+    first_name: 'Alexander',
+    last_name: 'Khoo',
+    job_id: 'PU_CLERK',
+    salary: 3100
+  },
+  {
+    _id: 116,
+    first_name: 'Shelli',
+    last_name: 'Baida',
+    job_id: 'PU_CLERK',
+    salary: 2900
+  },
+  {
+    _id: 112,
+    first_name: 'Jose Manuel',
+    last_name: 'Urman',
+    job_id: 'FI_ACCOUNT',
+    salary: 7800
+  },
+  {
+    _id: 102,
+    first_name: 'Lex',
+    last_name: 'De Haan',
+    job_id: 'AD_VP',
+    salary: 17000
+  },
+  {
+    _id: 104,
+    first_name: 'Bruce',
+    last_name: 'Ernst',
+    job_id: 'IT_PROG',
+    salary: 6000
+  },
+  {
+    _id: 120,
+    first_name: 'Matthew',
+    last_name: 'Weiss',
+    job_id: 'ST_MAN',
+    salary: 8000
+  },
+  {
+    _id: 121,
+    first_name: 'Adam',
+    last_name: 'Fripp',
+    job_id: 'ST_MAN',
+    salary: 8200
+  },
+  {
+    _id: 113,
+    first_name: 'Luis',
+    last_name: 'Popp',
+    job_id: 'FI_ACCOUNT',
+    salary: 6900
+  },
+  {
+    _id: 122,
+    first_name: 'Payam',
+    last_name: 'Kaufling',
+    job_id: 'ST_MAN',
+    salary: 7900
+  },
+  {
+    _id: 123,
+    first_name: 'Shanta',
+    last_name: 'Vollman',
+    job_id: 'ST_MAN',
+    salary: 6500
+  },
+  {
+    _id: 124,
+    first_name: 'Kevin',
+    last_name: 'Mourgos',
+    job_id: 'ST_MAN',
+    salary: 5800
+  },
+  {
+    _id: 125,
+    first_name: 'Julia',
+    last_name: 'Nayer',
+    job_id: 'ST_CLERK',
+    salary: 3200
+  }
+]
+=====================================================================================================================
+-8
+blazeclan> db.employees.find({"salary":{$gt:12000}},{"last_name":1,"salary":1,"_id":0})
+[
+  { last_name: 'King', salary: 24000 },
+  { last_name: 'Greenberg', salary: 12008 },
+  { last_name: 'De Haan', salary: 17000 },
+  { last_name: 'Kochhar', salary: 17000 },
+  { last_name: 'Russell', salary: 14000 },
+  { last_name: 'Partners', salary: 13500 },
+  { last_name: 'Hartstein', salary: 13000 },
+  { last_name: 'Higgins', salary: 12008 }
+]
+
+
+blazeclan> db.employees.find({salary: {$gt:12000}})
+[
+  {
+    _id: 100,
+    first_name: 'Steven',
+    last_name: 'King',
+    email: 'SKING',
+    phone_number: '515.123.4567',
+    hire_date: '2003-07-16T18:30:00.000Z',
+    job_id: 'AD_PRES',
+    salary: 24000,
+    commission_pct: null,
+    manager_id: null,
+    department_id: 90
+  },
+  {
+    _id: 108,
+    first_name: 'Nancy',
+    last_name: 'Greenberg',
+    email: 'NGREENBE',
+    phone_number: '515.124.4569',
+    hire_date: '2002-09-16T18:30:00.000Z',
+    job_id: 'FI_MGR',
+    salary: 12008,
+    commission_pct: null,
+    manager_id: 101,
+    department_id: 100
+  },
+  {
+    _id: 102,
+    first_name: 'Lex',
+    last_name: 'De Haan',
+    email: 'LDEHAAN',
+    phone_number: '515.123.4569',
+    hire_date: '2001-02-12T18:30:00.000Z',
+    job_id: 'AD_VP',
+    salary: 17000,
+    commission_pct: null,
+    manager_id: 100,
+    department_id: 90
+  },
+  {
+    _id: 101,
+    first_name: 'Neena',
+    last_name: 'Kochhar',
+    email: 'NKOCHHAR',
+    phone_number: '515.123.4568',
+    hire_date: '2005-10-20T18:30:00.000Z',
+    job_id: 'AD_VP',
+    salary: 17000,
+    commission_pct: null,
+    manager_id: 100,
+    department_id: 90
+  },
+  {
+    _id: 145,
+    first_name: 'John',
+    last_name: 'Russell',
+    email: 'JRUSSEL',
+    phone_number: '011.44.1344.429268',
+    hire_date: '2004-10-31T18:30:00.000Z',
+    job_id: 'SA_MAN',
+    salary: 14000,
+    commission_pct: 0.4,
+    manager_id: 100,
+    department_id: 80
+  },
+  {
+    _id: 146,
+    first_name: 'Karen',
+    last_name: 'Partners',
+    email: 'KPARTNER',
+    phone_number: '011.44.1344.467268',
+    hire_date: '2005-02-04T18:30:00.000Z',
+    job_id: 'SA_MAN',
+    salary: 13500,
+    commission_pct: 0.3,
+    manager_id: 100,
+    department_id: 80
+  },
+  {
+    _id: 201,
+    first_name: 'Michael',
+    last_name: 'Hartstein',
+    email: 'MHARTSTE',
+    phone_number: '515.123.5555',
+    hire_date: '2004-03-16T18:30:00.000Z',
+    job_id: 'MK_MAN',
+    salary: 13000,
+    commission_pct: null,
+    manager_id: 100,
+    department_id: 20
+  },
+  {
+    _id: 205,
+    first_name: 'Shelley',
+    last_name: 'Higgins',
+    email: 'SHIGGINS',
+    phone_number: '515.123.8080',
+    hire_date: '2002-07-06T18:30:00.000Z',
+    job_id: 'AC_MGR',
+    salary: 12008,
+    commission_pct: null,
+    manager_id: 101,
+    department_id: 110
+  }
+]
+=====================================================================================================================
+-9
+blazeclan> db.employees.find({"_id":176},{"_id":0,"last_name":1,"department_id":1})
+[ { last_name: 'Taylor', department_id: 80 } ]
+=====================================================================================================================
+-10
+blazeclan> db.employees.find({$or:[{"salary":{$lt:5000}},{"salary":{$gt:12000}}]},{"last_name":1,"salary":1,"_id":0})
+[
+  { last_name: 'King', salary: 24000 },
+  { last_name: 'Greenberg', salary: 12008 },
+  { last_name: 'Pataballa', salary: 4800 },
+  { last_name: 'Khoo', salary: 3100 },
+  { last_name: 'Baida', salary: 2900 },
+  { last_name: 'De Haan', salary: 17000 },
+  { last_name: 'Nayer', salary: 3200 },
+  { last_name: 'Landry', salary: 2400 },
+  { last_name: 'Mikkilineni', salary: 2700 },
+  { last_name: 'Austin', salary: 4800 },
+  { last_name: 'Colmenares', salary: 2500 },
+  { last_name: 'Markle', salary: 2200 },
+  { last_name: 'Tobias', salary: 2800 },
+  { last_name: 'Bissot', salary: 3300 },
+  { last_name: 'Kochhar', salary: 17000 },
+  { last_name: 'Olson', salary: 2100 },
+  { last_name: 'Marlow', salary: 2500 },
+  { last_name: 'Lorentz', salary: 4200 },
+  { last_name: 'Atkinson', salary: 2800 },
+  { last_name: 'Mallin', salary: 3300 }
+]
+Type "it" for more
+=====================================================================================================================
+-11
+blazeclan> db.employees.find({$or:[{"department_id":20},{"department_id":50}]},{"first_name":1,"last_name":1,"department_id":1,"_id":0}).sort({"first_name":1})
+[
+  { first_name: 'Adam', last_name: 'Fripp', department_id: 50 },
+  { first_name: 'Alana', last_name: 'Walsh', department_id: 50 },
+  { first_name: 'Alexis', last_name: 'Bull', department_id: 50 },
+  { first_name: 'Anthony', last_name: 'Cabrio', department_id: 50 },
+  { first_name: 'Britney', last_name: 'Everett', department_id: 50 },
+  { first_name: 'Curtis', last_name: 'Davies', department_id: 50 },
+  { first_name: 'Donald', last_name: 'OConnell', department_id: 50 },
+  { first_name: 'Douglas', last_name: 'Grant', department_id: 50 },
+  { first_name: 'Girard', last_name: 'Geoni', department_id: 50 },
+  { first_name: 'Hazel', last_name: 'Philtanker', department_id: 50 },
+  { first_name: 'Irene', last_name: 'Mikkilineni', department_id: 50 },
+  { first_name: 'James', last_name: 'Landry', department_id: 50 },
+  { first_name: 'James', last_name: 'Marlow', department_id: 50 },
+  { first_name: 'Jason', last_name: 'Mallin', department_id: 50 },
+  { first_name: 'Jean', last_name: 'Fleaur', department_id: 50 },
+  { first_name: 'Jennifer', last_name: 'Dilly', department_id: 50 },
+  { first_name: 'John', last_name: 'Seo', department_id: 50 },
+  { first_name: 'Joshua', last_name: 'Patel', department_id: 50 },
+  { first_name: 'Julia', last_name: 'Nayer', department_id: 50 },
+  { first_name: 'Julia', last_name: 'Dellinger', department_id: 50 }
+]
+Type "it" for more
+=====================================================================================================================
+-12
+
+blazeclan> db.employees.find({$and:[{$or:[{"department_id":20},{"department_id":50}]},{$or:[{"salary":{$lt:5000}},{"salary":{$gt:12000}}]}]},{"last_name":1,"salary":1,"_id":0}).sort({"first_name":1})
+[
+  { last_name: 'Walsh', salary: 3100 },
+  { last_name: 'Bull', salary: 4100 },
+  { last_name: 'Cabrio', salary: 3000 },
+  { last_name: 'Everett', salary: 3900 },
+  { last_name: 'Davies', salary: 3100 },
+  { last_name: 'OConnell', salary: 2600 },
+  { last_name: 'Grant', salary: 2600 },
+  { last_name: 'Geoni', salary: 2800 },
+  { last_name: 'Philtanker', salary: 2200 },
+  { last_name: 'Mikkilineni', salary: 2700 },
+  { last_name: 'Landry', salary: 2400 },
+  { last_name: 'Marlow', salary: 2500 },
+  { last_name: 'Mallin', salary: 3300 },
+  { last_name: 'Fleaur', salary: 3100 },
+  { last_name: 'Dilly', salary: 3600 },
+  { last_name: 'Seo', salary: 2700 },
+  { last_name: 'Patel', salary: 2500 },
+  { last_name: 'Nayer', salary: 3200 },
+  { last_name: 'Dellinger', salary: 3400 },
+  { last_name: 'Chung', salary: 3800 }
+]
+Type "it" for more
+=====================================================================================================================
+-13
+blazeclan> db.employees.find({hire_date:/^1994/},{"last_name":1,"hire_date":1,"_id":0})
+
+blazeclan> db.employees.find({hire_date:/^2003/},{"last_name":1,"hire_date":1,"_id":0})
+[
+  { last_name: 'King', hire_date: '2003-07-16T18:30:00.000Z' },
+  { last_name: 'Raphaely', hire_date: '2003-01-06T18:30:00.000Z' },
+  { last_name: 'Khoo', hire_date: '2003-06-17T18:30:00.000Z' },
+  { last_name: 'Kaufling', hire_date: '2003-05-31T18:30:00.000Z' },
+  { last_name: 'Ladwig', hire_date: '2003-08-13T18:30:00.000Z' },
+  { last_name: 'Rajs', hire_date: '2003-11-16T18:30:00.000Z' },
+  { last_name: 'Whalen', hire_date: '2003-10-16T18:30:00.000Z' }
+]
+=====================================================================================================================
+-14
+blazeclan> db.employees.find({commission_pct:{$ne:null}},{"last_name":1,"salary":1,"_id":0,"commission_pct":1}).sort({"salary":-1})
+[
+  { last_name: 'Russell', salary: 14000, commission_pct: 0.4 },
+  { last_name: 'Partners', salary: 13500, commission_pct: 0.3 },
+  { last_name: 'Errazuriz', salary: 12000, commission_pct: 0.3 },
+  { last_name: 'Ozer', salary: 11500, commission_pct: 0.25 },
+  { last_name: 'Cambrault', salary: 11000, commission_pct: 0.3 },
+  { last_name: 'Abel', salary: 11000, commission_pct: 0.3 },
+  { last_name: 'Zlotkey', salary: 10500, commission_pct: 0.2 },
+  { last_name: 'Vishney', salary: 10500, commission_pct: 0.25 },
+  { last_name: 'Tucker', salary: 10000, commission_pct: 0.3 },
+  { last_name: 'King', salary: 10000, commission_pct: 0.35 },
+  { last_name: 'Bloom', salary: 10000, commission_pct: 0.2 },
+  { last_name: 'Fox', salary: 9600, commission_pct: 0.2 },
+  { last_name: 'Bernstein', salary: 9500, commission_pct: 0.25 },
+  { last_name: 'Sully', salary: 9500, commission_pct: 0.35 },
+  { last_name: 'Greene', salary: 9500, commission_pct: 0.15 },
+  { last_name: 'McEwen', salary: 9000, commission_pct: 0.35 },
+  { last_name: 'Hall', salary: 9000, commission_pct: 0.25 },
+  { last_name: 'Hutton', salary: 8800, commission_pct: 0.25 },
+  { last_name: 'Taylor', salary: 8600, commission_pct: 0.2 },
+  { last_name: 'Livingston', salary: 8400, commission_pct: 0.2 }
+]
+Type "it" for more
+=====================================================================================================================
+-15
+blazeclan> db.employees.find({first_name:{$regex:/^..a/}},{"last_name":1,"_id":0,"first_name":1})
+[
+  { first_name: 'Adam', last_name: 'Fripp' },
+  { first_name: 'Shanta', last_name: 'Vollman' },
+  { first_name: 'Diana', last_name: 'Lorentz' },
+  { first_name: 'Clara', last_name: 'Vishney' },
+  { first_name: 'Charles', last_name: 'Johnson' },
+  { first_name: 'Jean', last_name: 'Fleaur' },
+  { first_name: 'Alana', last_name: 'Walsh' }
+
+=====================================================================================================================
+-16
+blazeclan> db.employees.find({$and:[{last_name:/e/},{last_name:/a/}]},{"last_name":1,"_id":0})
+[
+  { last_name: 'Faviet' },
+  { last_name: 'Raphaely' },
+  { last_name: 'De Haan' },
+  { last_name: 'Nayer' },
+  { last_name: 'Colmenares' },
+  { last_name: 'Markle' },
+  { last_name: 'Philtanker' },
+  { last_name: 'Davies' },
+  { last_name: 'Patel' },
+  { last_name: 'Partners' },
+  { last_name: 'Sewall' },
+  { last_name: 'Fleaur' },
+  { last_name: 'Bates' },
+  { last_name: 'Gates' },
+  { last_name: 'Whalen' },
+  { last_name: 'Hartstein' },
+  { last_name: 'Baer' }
+]
+=====================================================================================================================
+-17
+blazeclan> db.employees.find({first_name:/^p/},{"last_name":1})
+
+
+blazeclan> db.employees.find({last_name:/^P/},{"last_name":1})
+[
+  { _id: 106, last_name: 'Pataballa' },
+  { _id: 113, last_name: 'Popp' },
+  { _id: 136, last_name: 'Philtanker' },
+  { _id: 140, last_name: 'Patel' },
+  { _id: 146, last_name: 'Partners' },
+  { _id: 191, last_name: 'Perkins' }
+]
+=====================================================================================================================
+-18
+blazeclan> db.employees.find({first_name:/ll/},{"first_name":1,"last_name":1,"salary":1,"_id":0})
+[
+  { first_name: 'Valli', last_name: 'Pataballa', salary: 4800 },
+  { first_name: 'Shelli', last_name: 'Baida', salary: 2900 },
+  { first_name: 'Randall', last_name: 'Matos', salary: 2600 },
+  { first_name: 'Allan', last_name: 'McEwen', salary: 9000 },
+  { first_name: 'Danielle', last_name: 'Greene', salary: 9500 },
+  { first_name: 'William', last_name: 'Smith', salary: 7400 },
+  { first_name: 'Ellen', last_name: 'Abel', salary: 11000 },
+  { first_name: 'Randall', last_name: 'Perkins', salary: 2500 },
+  { first_name: 'Kelly', last_name: 'Chung', salary: 3800 },
+  { first_name: 'Shelley', last_name: 'Higgins', salary: 12008 },
+  { first_name: 'William', last_name: 'Gietz', salary: 8300 }
+]
+=====================================================================================================================
+-19
+blazeclan> db.employees.find({ $and: [ {$or:[{"job_id":"SA_REP"},{"job_id":"ST_CLERK"}]} , {"salary":{$ne:2500}}, {"salary":{$ne:3500}}, {"salary":{$ne:7000}} ]}, { "last_name": 1, "job_id": 1, "salary": 1, "_id": 0 })
+[
+  { last_name: 'Nayer', job_id: 'ST_CLERK', salary: 3200 },
+  { last_name: 'Landry', job_id: 'ST_CLERK', salary: 2400 },
+  { last_name: 'Mikkilineni', job_id: 'ST_CLERK', salary: 2700 },
+  { last_name: 'Markle', job_id: 'ST_CLERK', salary: 2200 },
+  { last_name: 'Bissot', job_id: 'ST_CLERK', salary: 3300 },
+  { last_name: 'Olson', job_id: 'ST_CLERK', salary: 2100 },
+  { last_name: 'Atkinson', job_id: 'ST_CLERK', salary: 2800 },
+  { last_name: 'Mallin', job_id: 'ST_CLERK', salary: 3300 },
+  { last_name: 'Stiles', job_id: 'ST_CLERK', salary: 3200 },
+  { last_name: 'Philtanker', job_id: 'ST_CLERK', salary: 2200 },
+  { last_name: 'Ladwig', job_id: 'ST_CLERK', salary: 3600 },
+  { last_name: 'Davies', job_id: 'ST_CLERK', salary: 3100 },
+  { last_name: 'Matos', job_id: 'ST_CLERK', salary: 2600 },
+  { last_name: 'Seo', job_id: 'ST_CLERK', salary: 2700 },
+  { last_name: 'Tucker', job_id: 'SA_REP', salary: 10000 },
+  { last_name: 'Bernstein', job_id: 'SA_REP', salary: 9500 },
+  { last_name: 'Olsen', job_id: 'SA_REP', salary: 8000 },
+  { last_name: 'Sully', job_id: 'SA_REP', salary: 9500 },
+  { last_name: 'Gee', job_id: 'ST_CLERK', salary: 2400 },
+  { last_name: 'McEwen', job_id: 'SA_REP', salary: 9000 }
+]
+Type "it" for more
+=====================================================================================================================
+-20
+blazeclan> db.employees.find({commission_pct:{$eq:.20}},{"first_name":1,"last_name":1,"salary":1,"_id":0,"commission_pct":1})
+[
+  {
+    first_name: 'Eleni',
+    last_name: 'Zlotkey',
+    salary: 10500,
+    commission_pct: 0.2
+  },
+  {
+    first_name: 'Christopher',
+    last_name: 'Olsen',
+    salary: 8000,
+    commission_pct: 0.2
+  },
+  {
+    first_name: 'Tayler',
+    last_name: 'Fox',
+    salary: 9600,
+    commission_pct: 0.2
+  },
+  {
+    first_name: 'Harrison',
+    last_name: 'Bloom',
+    salary: 10000,
+    commission_pct: 0.2
+  },
+  {
+    first_name: 'Jonathon',
+    last_name: 'Taylor',
+    salary: 8600,
+    commission_pct: 0.2
+  },
+  {
+    first_name: 'Jack',
+    last_name: 'Livingston',
+    salary: 8400,
+    commission_pct: 0.2
+  },
+  {
+    first_name: 'Nanette',
+    last_name: 'Cambrault',
+    salary: 7500,
+    commission_pct: 0.2
+  }
+]
+
