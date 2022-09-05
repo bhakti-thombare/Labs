@@ -1,0 +1,1279 @@
+MongoDB-Handson3
+=======================================
+-1
+Microsoft Windows [Version 10.0.19042.985]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Program Files\MongoDB\mongodb-database-tools-windows-x86_64-100.6.0\mongodb-database-tools-windows-x86_64-100.6.0\bin>mongoimport --db blazeclan --collection DEPT --drop --file F:\Module2-MongoDB\Day1-1Sept2022\LabFiles\DEPT.json
+2022-09-05T08:09:48.566+0530    connected to: mongodb://localhost/
+2022-09-05T08:09:48.581+0530    dropping: blazeclan.DEPT
+2022-09-05T08:09:48.701+0530    4 document(s) imported successfully. 0 document(s) failed to import.
+
+C:\Program Files\MongoDB\mongodb-database-tools-windows-x86_64-100.6.0\mongodb-database-tools-windows-x86_64-100.6.0\bin>mongoimport --db blazeclan --collection EMP --drop --file F:\Module2-MongoDB\Day1-1Sept2022\LabFiles\EMP.json
+2022-09-05T08:10:41.538+0530    connected to: mongodb://localhost/
+2022-09-05T08:10:41.553+0530    dropping: blazeclan.EMP
+2022-09-05T08:10:41.612+0530    14 document(s) imported successfully. 0 document(s) failed to import.
+
+test> use blazeclan
+switched to db blazeclan
+
+blazeclan> show collections
+departments
+DEPT
+EMP
+employees
+potions
+restaurants
+staff
+===============================================
+-2
+blazeclan> db.DEPT.find().count()
+4
+
+blazeclan> db.DEPT.find()
+[
+  { _id: 30, deptName: 'Sales', location: 'Chicago' },
+  { _id: 20, deptName: 'Research', location: 'Dallas' },
+  { _id: 40, deptName: 'Operations', location: 'Boston' },
+  { _id: 10, deptName: 'Accounting', location: 'New York' }
+]
+blazeclan> db.DEPT.deleteOne({deptName: 'Operations'})
+{ acknowledged: true, deletedCount: 1 }
+blazeclan> db.DEPT.find()
+[
+  { _id: 30, deptName: 'Sales', location: 'Chicago' },
+  { _id: 20, deptName: 'Research', location: 'Dallas' },
+  { _id: 10, deptName: 'Accounting', location: 'New York' }
+]
+================================================
+-3
+blazeclan> db.EMP.find()
+[
+  {
+    _id: 7499,
+    empName: 'Allen',
+    designation: 'SALESMAN',
+    mgrID: 7698,
+    hireDate: '1981-02-20T00:00:00',
+    salary: 1600,
+    deptID: 30,
+    hasComm: true
+  },
+  {
+    _id: 7839,
+    empName: 'King',
+    designation: 'PRESIDENT',
+    mgrID: null,
+    hireDate: '1981-11-17T00:00:00',
+    salary: 5000,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7654,
+    empName: 'Martin',
+    designation: 'SALESMAN',
+    mgrID: 7698,
+    hireDate: '1981-09-28T00:00:00',
+    salary: 1250,
+    deptID: 30,
+    hasComm: true
+  },
+  {
+    _id: 7844,
+    empName: 'Turner',
+    designation: 'SALESMAN',
+    mgrID: 7698,
+    hireDate: '1981-09-08T00:00:00',
+    salary: 1500,
+    deptID: 30,
+    hasComm: true
+  },
+  {
+    _id: 7876,
+    empName: 'Adams',
+    designation: 'CLERK',
+    mgrID: 7788,
+    hireDate: '1983-01-12T00:00:00',
+    salary: 1100,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7902,
+    empName: 'Ford',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7934,
+    empName: 'Miller',
+    designation: 'CLERK',
+    mgrID: 7782,
+    hireDate: '1982-01-23T00:00:00',
+    salary: 1300,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7698,
+    empName: 'Blake',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-05-01T00:00:00',
+    salary: 2850,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7782,
+    empName: 'Clark',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-06-09T00:00:00',
+    salary: 2450,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7369,
+    empName: 'Smith',
+    designation: 'CLERK',
+    mgrID: 7902,
+    hireDate: '1980-12-17T00:00:00',
+    salary: 800,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7900,
+    empName: 'James',
+    designation: 'CLERK',
+    mgrID: 7698,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 950,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7788,
+    empName: 'Scott',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1982-12-09T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7566,
+    empName: 'Jones',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-04-02T00:00:00',
+    salary: 2975,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7521,
+    empName: 'Ward',
+    designation: 'SALESMAN',
+    mgrID: 7698,
+    hireDate: '1981-02-22T00:00:00',
+    salary: 1250,
+    deptID: 30,
+    hasComm: true
+  }
+]
+
+blazeclan> db.EMP.deleteMany({designation: 'SALESMAN'})
+{ acknowledged: true, deletedCount: 3 }
+
+blazeclan> db.EMP.find()
+[
+  {
+    _id: 7839,
+    empName: 'King',
+    designation: 'PRESIDENT',
+    mgrID: null,
+    hireDate: '1981-11-17T00:00:00',
+    salary: 5000,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7876,
+    empName: 'Adams',
+    designation: 'CLERK',
+    mgrID: 7788,
+    hireDate: '1983-01-12T00:00:00',
+    salary: 1100,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7902,
+    empName: 'Ford',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7934,
+    empName: 'Miller',
+    designation: 'CLERK',
+    mgrID: 7782,
+    hireDate: '1982-01-23T00:00:00',
+    salary: 1300,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7698,
+    empName: 'Blake',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-05-01T00:00:00',
+    salary: 2850,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7782,
+    empName: 'Clark',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-06-09T00:00:00',
+    salary: 2450,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7369,
+    empName: 'Smith',
+    designation: 'CLERK',
+    mgrID: 7902,
+    hireDate: '1980-12-17T00:00:00',
+    salary: 800,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7900,
+    empName: 'James',
+    designation: 'CLERK',
+    mgrID: 7698,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 950,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7788,
+    empName: 'Scott',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1982-12-09T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7566,
+    empName: 'Jones',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-04-02T00:00:00',
+    salary: 2975,
+    deptID: 20,
+    hasComm: false
+  }
+]
+=========================================================
+-4
+blazeclan> db.EMP.update( { _id: 7900 },{ $inc: { salary: 1200 }});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+blazeclan> db.EMP.find()
+[
+  {
+    _id: 7839,
+    empName: 'King',
+    designation: 'PRESIDENT',
+    mgrID: null,
+    hireDate: '1981-11-17T00:00:00',
+    salary: 5000,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7876,
+    empName: 'Adams',
+    designation: 'CLERK',
+    mgrID: 7788,
+    hireDate: '1983-01-12T00:00:00',
+    salary: 1100,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7902,
+    empName: 'Ford',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7934,
+    empName: 'Miller',
+    designation: 'CLERK',
+    mgrID: 7782,
+    hireDate: '1982-01-23T00:00:00',
+    salary: 1300,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7698,
+    empName: 'Blake',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-05-01T00:00:00',
+    salary: 2850,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7782,
+    empName: 'Clark',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-06-09T00:00:00',
+    salary: 2450,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7369,
+    empName: 'Smith',
+    designation: 'CLERK',
+    mgrID: 7902,
+    hireDate: '1980-12-17T00:00:00',
+    salary: 800,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7900,
+    empName: 'James',
+    designation: 'CLERK',
+    mgrID: 7698,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 2150,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7788,
+    empName: 'Scott',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1982-12-09T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7566,
+    empName: 'Jones',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-04-02T00:00:00',
+    salary: 2975,
+    deptID: 20,
+    hasComm: false
+  }
+]
+======================================================
+-5
+Updating without the use of $set,
+	if the replacement object is a document, the matching documents will be replaced (except the _id values if no _id is set)
+
+Whereas we use the $set,
+	To update only selected fields, $set operator needs to be used. Following replacement object replaces author value but leaves everything else intact.
+
+
+blazeclan> db.EMP.update( { _id: 7900 },{ $set: { salary: 1200 }});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+blazeclan> db.EMP.find()
+[
+  {
+    _id: 7839,
+    empName: 'King',
+    designation: 'PRESIDENT',
+    mgrID: null,
+    hireDate: '1981-11-17T00:00:00',
+    salary: 5000,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7876,
+    empName: 'Adams',
+    designation: 'CLERK',
+    mgrID: 7788,
+    hireDate: '1983-01-12T00:00:00',
+    salary: 1100,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7902,
+    empName: 'Ford',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7934,
+    empName: 'Miller',
+    designation: 'CLERK',
+    mgrID: 7782,
+    hireDate: '1982-01-23T00:00:00',
+    salary: 1300,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7698,
+    empName: 'Blake',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-05-01T00:00:00',
+    salary: 2850,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7782,
+    empName: 'Clark',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-06-09T00:00:00',
+    salary: 2450,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7369,
+    empName: 'Smith',
+    designation: 'CLERK',
+    mgrID: 7902,
+    hireDate: '1980-12-17T00:00:00',
+    salary: 800,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7900,
+    empName: 'James',
+    designation: 'CLERK',
+    mgrID: 7698,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 1200,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7788,
+    empName: 'Scott',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1982-12-09T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7566,
+    empName: 'Jones',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-04-02T00:00:00',
+    salary: 2975,
+    deptID: 20,
+    hasComm: false
+  }
+]
+===========================================
+-6.a
+blazeclan>  db.EMP.find({},{empName:1,salary:1})
+[
+blazeclan> db.EMP.find({"designation":"MANAGER"},{empName:1,salary:1})
+[
+  { _id: 7698, empName: 'Blake', salary: 2850 },
+  { _id: 7782, empName: 'Clark', salary: 2450 },
+  { _id: 7566, empName: 'Jones', salary: 2975 }
+]
+
+-6.b
+	-The manager's salary values are not same so,
+blazeclan> db.EMP.updateMany({designation: 'MANAGER'},{ $set: { "salary": 3025 }})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+blazeclan> db.EMP.find()
+[
+  {
+    _id: 7839,
+    empName: 'King',
+    designation: 'PRESIDENT',
+    mgrID: null,
+    hireDate: '1981-11-17T00:00:00',
+    salary: 5000,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7876,
+    empName: 'Adams',
+    designation: 'CLERK',
+    mgrID: 7788,
+    hireDate: '1983-01-12T00:00:00',
+    salary: 1100,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7902,
+    empName: 'Ford',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7934,
+    empName: 'Miller',
+    designation: 'CLERK',
+    mgrID: 7782,
+    hireDate: '1982-01-23T00:00:00',
+    salary: 1300,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7698,
+    empName: 'Blake',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-05-01T00:00:00',
+    salary: 3025,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7782,
+    empName: 'Clark',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-06-09T00:00:00',
+    salary: 3025,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7369,
+    empName: 'Smith',
+    designation: 'CLERK',
+    mgrID: 7902,
+    hireDate: '1980-12-17T00:00:00',
+    salary: 800,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7900,
+    empName: 'James',
+    designation: 'CLERK',
+    mgrID: 7698,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 1200,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7788,
+    empName: 'Scott',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1982-12-09T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7566,
+    empName: 'Jones',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-04-02T00:00:00',
+    salary: 3025,
+    deptID: 20,
+    hasComm: false
+  }
+]
+===================================================
+-7
+blazeclan> db.EMP.update( { _id: 7566 },{ $inc: { salary: 25 }});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+blazeclan> db.EMP.find()
+[
+  {
+    _id: 7839,
+    empName: 'King',
+    designation: 'PRESIDENT',
+    mgrID: null,
+    hireDate: '1981-11-17T00:00:00',
+    salary: 5000,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7876,
+    empName: 'Adams',
+    designation: 'CLERK',
+    mgrID: 7788,
+    hireDate: '1983-01-12T00:00:00',
+    salary: 1100,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7902,
+    empName: 'Ford',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7934,
+    empName: 'Miller',
+    designation: 'CLERK',
+    mgrID: 7782,
+    hireDate: '1982-01-23T00:00:00',
+    salary: 1300,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7698,
+    empName: 'Blake',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-05-01T00:00:00',
+    salary: 3025,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7782,
+    empName: 'Clark',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-06-09T00:00:00',
+    salary: 3025,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7369,
+    empName: 'Smith',
+    designation: 'CLERK',
+    mgrID: 7902,
+    hireDate: '1980-12-17T00:00:00',
+    salary: 800,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7900,
+    empName: 'James',
+    designation: 'CLERK',
+    mgrID: 7698,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 1200,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7788,
+    empName: 'Scott',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1982-12-09T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7566,
+    empName: 'Jones',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-04-02T00:00:00',
+    salary: 3050,
+    deptID: 20,
+    hasComm: false
+  }
+]
+================================================
+-8
+blazeclan> db.EMP.updateMany({designation: 'ANALYST'},{$inc: {count: 1}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+blazeclan> db.EMP.find()
+[
+  {
+    _id: 7839,
+    empName: 'King',
+    designation: 'PRESIDENT',
+    mgrID: null,
+    hireDate: '1981-11-17T00:00:00',
+    salary: 5000,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7876,
+    empName: 'Adams',
+    designation: 'CLERK',
+    mgrID: 7788,
+    hireDate: '1983-01-12T00:00:00',
+    salary: 1100,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7902,
+    empName: 'Ford',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false,
+    count: 1
+  },
+  {
+    _id: 7934,
+    empName: 'Miller',
+    designation: 'CLERK',
+    mgrID: 7782,
+    hireDate: '1982-01-23T00:00:00',
+    salary: 1300,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7698,
+    empName: 'Blake',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-05-01T00:00:00',
+    salary: 3025,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7782,
+    empName: 'Clark',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-06-09T00:00:00',
+    salary: 3025,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7369,
+    empName: 'Smith',
+    designation: 'CLERK',
+    mgrID: 7902,
+    hireDate: '1980-12-17T00:00:00',
+    salary: 800,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7900,
+    empName: 'James',
+    designation: 'CLERK',
+    mgrID: 7698,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 1200,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7788,
+    empName: 'Scott',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1982-12-09T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false,
+    count: 1
+  },
+  {
+    _id: 7566,
+    empName: 'Jones',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-04-02T00:00:00',
+    salary: 3050,
+    deptID: 20,
+    hasComm: false
+  }
+]======================================================================
+-9
+blazeclan> db.EMP.updateMany({designation: 'CLERK'},{$inc: {count: 1}},{"upsert" : true})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+blazeclan> db.EMP.find()
+[
+  {
+    _id: 7839,
+    empName: 'King',
+    designation: 'PRESIDENT',
+    mgrID: null,
+    hireDate: '1981-11-17T00:00:00',
+    salary: 5000,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7876,
+    empName: 'Adams',
+    designation: 'CLERK',
+    mgrID: 7788,
+    hireDate: '1983-01-12T00:00:00',
+    salary: 1100,
+    deptID: 20,
+    hasComm: false,
+    count: 1
+  },
+  {
+    _id: 7902,
+    empName: 'Ford',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false,
+    count: 1
+  },
+  {
+    _id: 7934,
+    empName: 'Miller',
+    designation: 'CLERK',
+    mgrID: 7782,
+    hireDate: '1982-01-23T00:00:00',
+    salary: 1300,
+    deptID: 10,
+    hasComm: false,
+    count: 1
+  },
+  {
+    _id: 7698,
+    empName: 'Blake',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-05-01T00:00:00',
+    salary: 3025,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7782,
+    empName: 'Clark',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-06-09T00:00:00',
+    salary: 3025,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7369,
+    empName: 'Smith',
+    designation: 'CLERK',
+    mgrID: 7902,
+    hireDate: '1980-12-17T00:00:00',
+    salary: 800,
+    deptID: 20,
+    hasComm: false,
+    count: 1
+  },
+  {
+    _id: 7900,
+    empName: 'James',
+    designation: 'CLERK',
+    mgrID: 7698,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 1200,
+    deptID: 30,
+    hasComm: false,
+    count: 1
+  },
+  {
+    _id: 7788,
+    empName: 'Scott',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1982-12-09T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false,
+    count: 1
+  },
+  {
+    _id: 7566,
+    empName: 'Jones',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-04-02T00:00:00',
+    salary: 3050,
+    deptID: 20,
+    hasComm: false
+  }
+]
+======================================================
+-10
+blazeclan> db.EMP.updateMany({}, {$unset: {count:1}}, false, true);
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 10,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+blazeclan> db.EMP.find()
+[
+  {
+    _id: 7839,
+    empName: 'King',
+    designation: 'PRESIDENT',
+    mgrID: null,
+    hireDate: '1981-11-17T00:00:00',
+    salary: 5000,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7876,
+    empName: 'Adams',
+    designation: 'CLERK',
+    mgrID: 7788,
+    hireDate: '1983-01-12T00:00:00',
+    salary: 1100,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7902,
+    empName: 'Ford',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7934,
+    empName: 'Miller',
+    designation: 'CLERK',
+    mgrID: 7782,
+    hireDate: '1982-01-23T00:00:00',
+    salary: 1300,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7698,
+    empName: 'Blake',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-05-01T00:00:00',
+    salary: 3025,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7782,
+    empName: 'Clark',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-06-09T00:00:00',
+    salary: 3025,
+    deptID: 10,
+    hasComm: false
+  },
+  {
+    _id: 7369,
+    empName: 'Smith',
+    designation: 'CLERK',
+    mgrID: 7902,
+    hireDate: '1980-12-17T00:00:00',
+    salary: 800,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7900,
+    empName: 'James',
+    designation: 'CLERK',
+    mgrID: 7698,
+    hireDate: '1981-12-03T00:00:00',
+    salary: 1200,
+    deptID: 30,
+    hasComm: false
+  },
+  {
+    _id: 7788,
+    empName: 'Scott',
+    designation: 'ANALYST',
+    mgrID: 7566,
+    hireDate: '1982-12-09T00:00:00',
+    salary: 3000,
+    deptID: 20,
+    hasComm: false
+  },
+  {
+    _id: 7566,
+    empName: 'Jones',
+    designation: 'MANAGER',
+    mgrID: 7839,
+    hireDate: '1981-04-02T00:00:00',
+    salary: 3050,
+    deptID: 20,
+    hasComm: false
+  }
+]
+==============================================================
+-11
+blazeclan> db.DEPT.find()
+[
+  { _id: 30, deptName: 'Sales', location: 'Chicago' },
+  { _id: 20, deptName: 'Research', location: 'Dallas' },
+  { _id: 10, deptName: 'Accounting', location: 'New York' }
+]
+
+blazeclan> db.DEPT.updateMany({},{ $rename: { 'location': 'city' }})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+blazeclan> db.DEPT.find()
+[
+  { _id: 30, deptName: 'Sales', city: 'Chicago' },
+  { _id: 20, deptName: 'Research', city: 'Dallas' },
+  { _id: 10, deptName: 'Accounting', city: 'New York' }
+]
+=============================================================
+-12
+blazeclan> db.DEPT.aggregate([{$group:{ _id : 10}}])
+[ { _id: 10 } ]
+==================================================================
+-13
+-Count number of employees in each of the departments
+blazeclan> db.EMP.find({deptID: {$eq : 10}}).count()
+3
+blazeclan> db.EMP.find({deptID: {$eq : 20}}).count()
+5
+blazeclan> db.EMP.find({deptID: {$eq : 30}}).count()
+2
+
+-count the number of employees in each designation
+blazeclan> db.EMP.find({designation: {$eq :'MANAGER'}}).count()
+3
+blazeclan> db.EMP.find({designation: {$eq :'ANALYST'}}).count()
+2
+blazeclan> db.EMP.find({designation: {$eq :'CLERK'}}).count()
+4
+blazeclan> db.EMP.find({designation: {$eq :'PRESIDENT'}}).count()
+1
+======================================================================
+-14
+-Department-wise sum of the salaries of employees
+blazeclan> db.EMP.aggregate([{$group : {_id : "$deptID", salary : {$sum : "$salary"}}}])
+[
+  { _id: 10, salary: 9325 },
+  { _id: 30, salary: 4225 },
+  { _id: 20, salary: 10950 }
+]
+
+-Designation-wise sum of the salaries of employees
+ blazeclan> db.EMP.aggregate([{$group : {_id : "$designation", salary : {$sum : "$salary"}}}])
+[
+  { _id: 'PRESIDENT', salary: 5000 },
+  { _id: 'CLERK', salary: 4400 },
+  { _id: 'ANALYST', salary: 6000 },
+  { _id: 'MANAGER', salary: 9100 }
+]
+
+===========================================================================
+-15
+- Department-wise average, minimum and maximum salarie
+blazeclan> db.EMP.aggregate([{$group : {_id : "$deptID", salary : {$avg : "$salary"}}}])
+[
+  { _id: 10, salary: 3108.3333333333335 },
+  { _id: 30, salary: 2112.5 },
+  { _id: 20, salary: 2190 }
+]
+blazeclan> db.EMP.aggregate([{$group : {_id : "$deptID", salary : {$min : "$salary"}}}])
+[
+  { _id: 10, salary: 1300 },
+  { _id: 30, salary: 1200 },
+  { _id: 20, salary: 800 }
+]
+blazeclan> db.EMP.aggregate([{$group : {_id : "$deptID", salary : {$max : "$salary"}}}])
+[
+  { _id: 10, salary: 5000 },
+  { _id: 20, salary: 3050 },
+  { _id: 30, salary: 3025 }
+]
+
+-Designation-wise average, minimum and maximum salaries
+blazeclan> db.EMP.aggregate([{$group : {_id : "$designation", salary : {$avg : "$salary"}}}])
+[
+  { _id: 'ANALYST', salary: 3000 },
+  { _id: 'CLERK', salary: 1100 },
+  { _id: 'MANAGER', salary: 3033.3333333333335 },
+  { _id: 'PRESIDENT', salary: 5000 }
+]
+blazeclan> db.EMP.aggregate([{$group : {_id : "$designation", salary : {$min : "$salary"}}}])
+[
+  { _id: 'ANALYST', salary: 3000 },
+  { _id: 'CLERK', salary: 800 },
+  { _id: 'MANAGER', salary: 3025 },
+  { _id: 'PRESIDENT', salary: 5000 }
+]
+blazeclan> db.EMP.aggregate([{$group : {_id : "$designation", salary : {$max : "$salary"}}}])
+[
+  { _id: 'ANALYST', salary: 3000 },
+  { _id: 'CLERK', salary: 1300 },
+  { _id: 'MANAGER', salary: 3050 },
+  { _id: 'PRESIDENT', salary: 5000 }
+]
+=======================================================================
+-16
+-Department-wise Head Count
+blazeclan> db.EMP.aggregate([{ $group: { _id: '$deptID', myCount: { $sum: 1 }}}])
+[
+  { _id: 10, myCount: 3 },
+  { _id: 20, myCount: 5 },
+  { _id: 30, myCount: 2 }
+]
+
+-Designation-wise Head Count
+blazeclan> db.EMP.aggregate([{ $group: { _id: '$designation', myCount: { $sum: 1 }}}])
+[
+  { _id: 'PRESIDENT', myCount: 1 },
+  { _id: 'CLERK', myCount: 4 },
+  { _id: 'ANALYST', myCount: 2 },
+  { _id: 'MANAGER', myCount: 3 }
+]
+
+=====================================================================
+-17
+-Department wise headcount sort
+	-ascending
+blazeclan> db.EMP.aggregate([{ $group: { _id: '$deptID', myCount: { $sum: 1 }}},{ $sort: { myCount: 1 } }])
+[
+  { _id: 30, myCount: 2 },
+  { _id: 10, myCount: 3 },
+  { _id: 20, myCount: 5 }
+]
+
+	-descending
+blazeclan> db.EMP.aggregate([{ $group: { _id: '$deptID', myCount: { $sum: 1 }}},{ $sort: { myCount: -1 } }])
+[
+  { _id: 20, myCount: 5 },
+  { _id: 10, myCount: 3 },
+  { _id: 30, myCount: 2 }
+]
+
+-Designation wise headcount sort
+	-ascending
+blazeclan> db.EMP.aggregate([{ $group: { _id: '$designation', myCount: { $sum: 1 }}},{ $sort: { myCount: 1 } }])
+[
+  { _id: 'PRESIDENT', myCount: 1 },
+  { _id: 'ANALYST', myCount: 2 },
+  { _id: 'MANAGER', myCount: 3 },
+  { _id: 'CLERK', myCount: 4 }
+
+	-descending
+blazeclan> db.EMP.aggregate([{ $group: { _id: '$designation', myCount: { $sum: 1 }}},{ $sort: { myCount: -1 } }])
+[
+  { _id: 'CLERK', myCount: 4 },
+  { _id: 'MANAGER', myCount: 3 },
+  { _id: 'ANALYST', myCount: 2 },
+  { _id: 'PRESIDENT', myCount: 1 }
+]

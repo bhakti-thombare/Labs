@@ -1,0 +1,567 @@
+mysql> use pubs;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_pubs |
++----------------+
+| authors        |
+| publishers     |
+| titleauthor    |
+| titles         |
++----------------+
+4 rows in set (0.08 sec)
+
+mysql> SELECT * FROM titles;
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| title_id | title                                                           | type         | pub_id | price   | advance    | royalty | ytd_sales | notes                                                                                                                                                                               | pubdate    |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| BU1032   | The Busy Executive's Database Guide                             | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | An overview of available database systems with emphasis on common business applications. Illustrated.                                                                               | 1991-06-12 |
+| BU1111   | Cooking with Computers: Surreptitious Balance Sheets            | business     | 1389   | 11.9500 |  5000.0000 |      10 |      3876 | Helpful hints on how to use your electronic resources to the best advantage.                                                                                                        | 1991-06-09 |
+| BU2075   | You Can Combat Computer Stress!                                 | business     | 0736   |  2.9900 | 10125.0000 |      24 |     18722 | The latest medical and psychological techniques for living with the electronic office. Easy-to-understand explanations.                                                             | 1991-06-30 |
+| BU7832   | Straight Talk About Computers                                   | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | Annotated analysis of what computers can do for you: a no-hype guide for the critical user.                                                                                         | 1991-06-22 |
+| MC2222   | Silicon Valley Gastronomic Treats                               | mod_cook     | 0877   | 19.9900 |     0.0000 |      12 |      2032 | Favorite recipes for quick, easy, and elegant meals.                                                                                                                                | 1991-06-09 |
+| MC3021   | The Gourmet Microwave                                           | mod_cook     | 0877   |  2.9900 | 15000.0000 |      24 |     22246 | Traditional French gourmet recipes adapted for modern microwave cooking.                                                                                                            | 1991-06-18 |
+| MC3026   | The Psychology of Computer Cooking                              | UNDECIDED    | 0877   |    NULL |       NULL |    NULL |      NULL | NULL                                                                                                                                                                                | NULL       |
+| PC1035   | But Is It User Friendly?                                        | popular_comp | 1389   | 22.9500 |  7000.0000 |      16 |      8780 | A survey of software for the naive user, focusing on the 'friendliness' of each.                                                                                                    | 1991-06-30 |
+| PC8888   | Secrets of Silicon Valley                                       | popular_comp | 1389   | 20.0000 |  8000.0000 |      10 |      4095 | Muckraking reporting on the world's largest computer hardware and software manufacturers.                                                                                           | 1994-06-12 |
+| PC9999   | Net Etiquette                                                   | popular_comp | 1389   |    NULL |       NULL |    NULL |      NULL | A must-read for computer conferencing.                                                                                                                                              | NULL       |
+| PS1372   | Computer Phobic AND Non-Phobic Individuals: Behavior Variations | psychology   | 0877   | 21.5900 |  7000.0000 |      10 |       375 | A must for the specialist, this book examines the difference between those who hate and fear computers and those who don't.                                                         | 1991-10-21 |
+| PS2091   | Is Anger the Enemy?                                             | psychology   | 0736   | 10.9500 |  2275.0000 |      12 |      2045 | Carefully researched study of the effects of strong emotions on the body. Metabolic charts included.                                                                                | 1991-06-15 |
+| PS2106   | Life Without Fear                                               | psychology   | 0736   |  7.0000 |  6000.0000 |      10 |       111 | New exercise, meditation, and nutritional techniques that can reduce the shock of daily interactions. Popular audience. Sample menus included, exercise video available separately. | 1991-10-05 |
+| PS3333   | Prolonged Data Deprivation: Four Case Studies                   | psychology   | 0736   | 19.9900 |  2000.0000 |      10 |      4072 | What happens when the data runs dry?  Searching evaluations of information-shortage effects.                                                                                        | 1991-06-12 |
+| PS7777   | Emotional Security: A New Algorithm                             | psychology   | 0736   |  7.9900 |  4000.0000 |      10 |      3336 | Protecting yourself and your loved ones from undue emotional stress in the modern world. Use of computer and nutritional aids emphasized.                                           | 1991-06-12 |
+| TC3218   | Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | trad_cook    | 0877   | 20.9500 |  7000.0000 |      10 |       375 | Profusely illustrated in color, this makes a wonderful gift book for a cuisine-oriented friend.                                                                                     | 1991-10-21 |
+| TC4203   | Fifty Years in Buckingham Palace Kitchens                       | trad_cook    | 0877   | 11.9500 |  4000.0000 |      14 |     15096 | More anecdotes from the Queen's favorite cook describing life among English royalty. Recipes, techniques, tender vignettes.                                                         | 1991-06-12 |
+| TC7777   | Sushi, Anyone?                                                  | trad_cook    | 0877   | 14.9900 |  8000.0000 |      10 |      4095 | Detailed instructions on how to make authentic Japanese sushi in your spare time.                                                                                                   | 1991-06-12 |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+18 rows in set (0.01 sec)
+
+mysql> select MIN(price) as MINIMUM_PRICE , MAX(price) as MAXIMUM_PRICE,  AVG(price) as AVERAGE_PRICE FROM titles;
++---------------+---------------+---------------+
+| MINIMUM_PRICE | MAXIMUM_PRICE | AVERAGE_PRICE |
++---------------+---------------+---------------+
+|        2.9900 |       22.9500 |   14.76625000 |
++---------------+---------------+---------------+
+1 row in set (0.04 sec)
+
+mysql> select MIN(price)  "MINIMUM_PRICE" , MAX(price)  "MAXIMUM_PRICE",  AVG(price) "AVERAGE_PRICE" FROM titles;
++---------------+---------------+---------------+
+| MINIMUM_PRICE | MAXIMUM_PRICE | AVERAGE_PRICE |
++---------------+---------------+---------------+
+|        2.9900 |       22.9500 |   14.76625000 |
++---------------+---------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM titles; 
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| title_id | title                                                           | type         | pub_id | price   | advance    | royalty | ytd_sales | notes                                                                                                                                                                               | pubdate    |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| BU1032   | The Busy Executive's Database Guide                             | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | An overview of available database systems with emphasis on common business applications. Illustrated.                                                                               | 1991-06-12 |
+| BU1111   | Cooking with Computers: Surreptitious Balance Sheets            | business     | 1389   | 11.9500 |  5000.0000 |      10 |      3876 | Helpful hints on how to use your electronic resources to the best advantage.                                                                                                        | 1991-06-09 |
+| BU2075   | You Can Combat Computer Stress!                                 | business     | 0736   |  2.9900 | 10125.0000 |      24 |     18722 | The latest medical and psychological techniques for living with the electronic office. Easy-to-understand explanations.                                                             | 1991-06-30 |
+| BU7832   | Straight Talk About Computers                                   | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | Annotated analysis of what computers can do for you: a no-hype guide for the critical user.                                                                                         | 1991-06-22 |
+| MC2222   | Silicon Valley Gastronomic Treats                               | mod_cook     | 0877   | 19.9900 |     0.0000 |      12 |      2032 | Favorite recipes for quick, easy, and elegant meals.                                                                                                                                | 1991-06-09 |
+| MC3021   | The Gourmet Microwave                                           | mod_cook     | 0877   |  2.9900 | 15000.0000 |      24 |     22246 | Traditional French gourmet recipes adapted for modern microwave cooking.                                                                                                            | 1991-06-18 |
+| MC3026   | The Psychology of Computer Cooking                              | UNDECIDED    | 0877   |    NULL |       NULL |    NULL |      NULL | NULL                                                                                                                                                                                | NULL       |
+| PC1035   | But Is It User Friendly?                                        | popular_comp | 1389   | 22.9500 |  7000.0000 |      16 |      8780 | A survey of software for the naive user, focusing on the 'friendliness' of each.                                                                                                    | 1991-06-30 |
+| PC8888   | Secrets of Silicon Valley                                       | popular_comp | 1389   | 20.0000 |  8000.0000 |      10 |      4095 | Muckraking reporting on the world's largest computer hardware and software manufacturers.                                                                                           | 1994-06-12 |
+| PC9999   | Net Etiquette                                                   | popular_comp | 1389   |    NULL |       NULL |    NULL |      NULL | A must-read for computer conferencing.                                                                                                                                              | NULL       |
+| PS1372   | Computer Phobic AND Non-Phobic Individuals: Behavior Variations | psychology   | 0877   | 21.5900 |  7000.0000 |      10 |       375 | A must for the specialist, this book examines the difference between those who hate and fear computers and those who don't.                                                         | 1991-10-21 |
+| PS2091   | Is Anger the Enemy?                                             | psychology   | 0736   | 10.9500 |  2275.0000 |      12 |      2045 | Carefully researched study of the effects of strong emotions on the body. Metabolic charts included.                                                                                | 1991-06-15 |
+| PS2106   | Life Without Fear                                               | psychology   | 0736   |  7.0000 |  6000.0000 |      10 |       111 | New exercise, meditation, and nutritional techniques that can reduce the shock of daily interactions. Popular audience. Sample menus included, exercise video available separately. | 1991-10-05 |
+| PS3333   | Prolonged Data Deprivation: Four Case Studies                   | psychology   | 0736   | 19.9900 |  2000.0000 |      10 |      4072 | What happens when the data runs dry?  Searching evaluations of information-shortage effects.                                                                                        | 1991-06-12 |
+| PS7777   | Emotional Security: A New Algorithm                             | psychology   | 0736   |  7.9900 |  4000.0000 |      10 |      3336 | Protecting yourself and your loved ones from undue emotional stress in the modern world. Use of computer and nutritional aids emphasized.                                           | 1991-06-12 |
+| TC3218   | Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | trad_cook    | 0877   | 20.9500 |  7000.0000 |      10 |       375 | Profusely illustrated in color, this makes a wonderful gift book for a cuisine-oriented friend.                                                                                     | 1991-10-21 |
+| TC4203   | Fifty Years in Buckingham Palace Kitchens                       | trad_cook    | 0877   | 11.9500 |  4000.0000 |      14 |     15096 | More anecdotes from the Queen's favorite cook describing life among English royalty. Recipes, techniques, tender vignettes.                                                         | 1991-06-12 |
+| TC7777   | Sushi, Anyone?                                                  | trad_cook    | 0877   | 14.9900 |  8000.0000 |      10 |      4095 | Detailed instructions on how to make authentic Japanese sushi in your spare time.                                                                                                   | 1991-06-12 |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+18 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT type FROM titles;
++--------------+
+| type         |
++--------------+
+| business     |
+| mod_cook     |
+| UNDECIDED    |
+| popular_comp |
+| psychology   |
+| trad_cook    |
++--------------+
+6 rows in set (0.03 sec)
+
+mysql> select COUNT(title) "CountByType", type FROM titles GROUP BY type order by CountByType desc;
++-------------+--------------+
+| CountByType | type         |
++-------------+--------------+
+|           5 | psychology   |
+|           4 | business     |
+|           3 | popular_comp |
+|           3 | trad_cook    |
+|           2 | mod_cook     |
+|           1 | UNDECIDED    |
++-------------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM titles;
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| title_id | title                                                           | type         | pub_id | price   | advance    | royalty | ytd_sales | notes                                                                                                                                                                               | pubdate    |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| BU1032   | The Busy Executive's Database Guide                             | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | An overview of available database systems with emphasis on common business applications. Illustrated.                                                                               | 1991-06-12 |
+| BU1111   | Cooking with Computers: Surreptitious Balance Sheets            | business     | 1389   | 11.9500 |  5000.0000 |      10 |      3876 | Helpful hints on how to use your electronic resources to the best advantage.                                                                                                        | 1991-06-09 |
+| BU2075   | You Can Combat Computer Stress!                                 | business     | 0736   |  2.9900 | 10125.0000 |      24 |     18722 | The latest medical and psychological techniques for living with the electronic office. Easy-to-understand explanations.                                                             | 1991-06-30 |
+| BU7832   | Straight Talk About Computers                                   | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | Annotated analysis of what computers can do for you: a no-hype guide for the critical user.                                                                                         | 1991-06-22 |
+| MC2222   | Silicon Valley Gastronomic Treats                               | mod_cook     | 0877   | 19.9900 |     0.0000 |      12 |      2032 | Favorite recipes for quick, easy, and elegant meals.                                                                                                                                | 1991-06-09 |
+| MC3021   | The Gourmet Microwave                                           | mod_cook     | 0877   |  2.9900 | 15000.0000 |      24 |     22246 | Traditional French gourmet recipes adapted for modern microwave cooking.                                                                                                            | 1991-06-18 |
+| MC3026   | The Psychology of Computer Cooking                              | UNDECIDED    | 0877   |    NULL |       NULL |    NULL |      NULL | NULL                                                                                                                                                                                | NULL       |
+| PC1035   | But Is It User Friendly?                                        | popular_comp | 1389   | 22.9500 |  7000.0000 |      16 |      8780 | A survey of software for the naive user, focusing on the 'friendliness' of each.                                                                                                    | 1991-06-30 |
+| PC8888   | Secrets of Silicon Valley                                       | popular_comp | 1389   | 20.0000 |  8000.0000 |      10 |      4095 | Muckraking reporting on the world's largest computer hardware and software manufacturers.                                                                                           | 1994-06-12 |
+| PC9999   | Net Etiquette                                                   | popular_comp | 1389   |    NULL |       NULL |    NULL |      NULL | A must-read for computer conferencing.                                                                                                                                              | NULL       |
+| PS1372   | Computer Phobic AND Non-Phobic Individuals: Behavior Variations | psychology   | 0877   | 21.5900 |  7000.0000 |      10 |       375 | A must for the specialist, this book examines the difference between those who hate and fear computers and those who don't.                                                         | 1991-10-21 |
+| PS2091   | Is Anger the Enemy?                                             | psychology   | 0736   | 10.9500 |  2275.0000 |      12 |      2045 | Carefully researched study of the effects of strong emotions on the body. Metabolic charts included.                                                                                | 1991-06-15 |
+| PS2106   | Life Without Fear                                               | psychology   | 0736   |  7.0000 |  6000.0000 |      10 |       111 | New exercise, meditation, and nutritional techniques that can reduce the shock of daily interactions. Popular audience. Sample menus included, exercise video available separately. | 1991-10-05 |
+| PS3333   | Prolonged Data Deprivation: Four Case Studies                   | psychology   | 0736   | 19.9900 |  2000.0000 |      10 |      4072 | What happens when the data runs dry?  Searching evaluations of information-shortage effects.                                                                                        | 1991-06-12 |
+| PS7777   | Emotional Security: A New Algorithm                             | psychology   | 0736   |  7.9900 |  4000.0000 |      10 |      3336 | Protecting yourself and your loved ones from undue emotional stress in the modern world. Use of computer and nutritional aids emphasized.                                           | 1991-06-12 |
+| TC3218   | Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | trad_cook    | 0877   | 20.9500 |  7000.0000 |      10 |       375 | Profusely illustrated in color, this makes a wonderful gift book for a cuisine-oriented friend.                                                                                     | 1991-10-21 |
+| TC4203   | Fifty Years in Buckingham Palace Kitchens                       | trad_cook    | 0877   | 11.9500 |  4000.0000 |      14 |     15096 | More anecdotes from the Queen's favorite cook describing life among English royalty. Recipes, techniques, tender vignettes.                                                         | 1991-06-12 |
+| TC7777   | Sushi, Anyone?                                                  | trad_cook    | 0877   | 14.9900 |  8000.0000 |      10 |      4095 | Detailed instructions on how to make authentic Japanese sushi in your spare time.                                                                                                   | 1991-06-12 |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+18 rows in set (0.00 sec)
+
+mysql> DESC ATUTHORS
+    -> ;
+ERROR 1146 (42S02): Table 'pubs.atuthors' doesn't exist
+mysql> DESC AUTHORS;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| au_id    | varchar(11) | NO   | PRI | NULL    |       |
+| au_lname | varchar(40) | NO   |     | NULL    |       |
+| au_fname | varchar(20) | NO   |     | NULL    |       |
+| phone    | char(12)    | NO   |     | Unknown |       |
+| address  | varchar(40) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| state    | char(2)     | YES  |     | NULL    |       |
+| zip      | char(5)     | YES  |     | NULL    |       |
+| contract | tinyint     | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+9 rows in set (0.01 sec)
+
+mysql> DESC TITLES;
++-----------+---------------+------+-----+-----------+-------+
+| Field     | Type          | Null | Key | Default   | Extra |
++-----------+---------------+------+-----+-----------+-------+
+| title_id  | varchar(10)   | NO   | PRI | NULL      |       |
+| title     | varchar(80)   | NO   |     | NULL      |       |
+| type      | char(12)      | NO   |     | UNDECIDED |       |
+| pub_id    | char(4)       | YES  | MUL | NULL      |       |
+| price     | decimal(10,4) | YES  |     | NULL      |       |
+| advance   | decimal(10,4) | YES  |     | NULL      |       |
+| royalty   | int           | YES  |     | NULL      |       |
+| ytd_sales | int           | YES  |     | NULL      |       |
+| notes     | text          | YES  |     | NULL      |       |
+| pubdate   | date          | YES  |     | NULL      |       |
++-----------+---------------+------+-----+-----------+-------+
+10 rows in set (0.01 sec)
+
+mysql> SELECT DISTINCT type FROM titles;
++--------------+
+| type         |
++--------------+
+| business     |
+| mod_cook     |
+| UNDECIDED    |
+| popular_comp |
+| psychology   |
+| trad_cook    |
++--------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT type,  COUNT(*) 'CountType' from titles WHERE type = 'business';
++----------+-----------+
+| type     | CountType |
++----------+-----------+
+| business |         4 |
++----------+-----------+
+1 row in set (0.02 sec)
+
+mysql> SELECT type,  COUNT(*) 'CountType' from titles WHERE type = 'business' GROUP BY type;
++----------+-----------+
+| type     | CountType |
++----------+-----------+
+| business |         4 |
++----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> -- 4
+mysql> SELECT type "Book Category", ROUND(AVG(price), 2) "Average Price" FROM titles GROUP BY type;
++---------------+---------------+
+| Book Category | Average Price |
++---------------+---------------+
+| business      |         13.73 |
+| mod_cook      |         11.49 |
+| UNDECIDED     |          NULL |
+| popular_comp  |         21.48 |
+| psychology    |         13.50 |
+| trad_cook     |         15.96 |
++---------------+---------------+
+6 rows in set (0.04 sec)
+
+mysql> -- 5
+mysql> select title, UPPER(type) "Book Category", COUNT(title) "# Books" from titles group by type;
++-----------------------------------------------------------------+---------------+---------+
+| title                                                           | Book Category | # Books |
++-----------------------------------------------------------------+---------------+---------+
+| The Busy Executive's Database Guide                             | BUSINESS      |       4 |
+| Silicon Valley Gastronomic Treats                               | MOD_COOK      |       2 |
+| The Psychology of Computer Cooking                              | UNDECIDED     |       1 |
+| But Is It User Friendly?                                        | POPULAR_COMP  |       3 |
+| Computer Phobic AND Non-Phobic Individuals: Behavior Variations | PSYCHOLOGY    |       5 |
+| Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | TRAD_COOK     |       3 |
++-----------------------------------------------------------------+---------------+---------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT(UPPER(SUBSTRING(type,1,1)),LOWER(SUBSTRING(type,2))) "Book Category", COUNT(type) "# of Books" FROM titles GROUP BY type;
++---------------+------------+
+| Book Category | # of Books |
++---------------+------------+
+| Business      |          4 |
+| Mod_cook      |          2 |
+| Undecided     |          1 |
+| Popular_comp  |          3 |
+| Psychology    |          5 |
+| Trad_cook     |          3 |
++---------------+------------+
+6 rows in set (0.03 sec)
+
+mysql> -- 6
+mysql> SELECT * FROM titles;
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| title_id | title                                                           | type         | pub_id | price   | advance    | royalty | ytd_sales | notes                                                                                                                                                                               | pubdate    |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| BU1032   | The Busy Executive's Database Guide                             | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | An overview of available database systems with emphasis on common business applications. Illustrated.                                                                               | 1991-06-12 |
+| BU1111   | Cooking with Computers: Surreptitious Balance Sheets            | business     | 1389   | 11.9500 |  5000.0000 |      10 |      3876 | Helpful hints on how to use your electronic resources to the best advantage.                                                                                                        | 1991-06-09 |
+| BU2075   | You Can Combat Computer Stress!                                 | business     | 0736   |  2.9900 | 10125.0000 |      24 |     18722 | The latest medical and psychological techniques for living with the electronic office. Easy-to-understand explanations.                                                             | 1991-06-30 |
+| BU7832   | Straight Talk About Computers                                   | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | Annotated analysis of what computers can do for you: a no-hype guide for the critical user.                                                                                         | 1991-06-22 |
+| MC2222   | Silicon Valley Gastronomic Treats                               | mod_cook     | 0877   | 19.9900 |     0.0000 |      12 |      2032 | Favorite recipes for quick, easy, and elegant meals.                                                                                                                                | 1991-06-09 |
+| MC3021   | The Gourmet Microwave                                           | mod_cook     | 0877   |  2.9900 | 15000.0000 |      24 |     22246 | Traditional French gourmet recipes adapted for modern microwave cooking.                                                                                                            | 1991-06-18 |
+| MC3026   | The Psychology of Computer Cooking                              | UNDECIDED    | 0877   |    NULL |       NULL |    NULL |      NULL | NULL                                                                                                                                                                                | NULL       |
+| PC1035   | But Is It User Friendly?                                        | popular_comp | 1389   | 22.9500 |  7000.0000 |      16 |      8780 | A survey of software for the naive user, focusing on the 'friendliness' of each.                                                                                                    | 1991-06-30 |
+| PC8888   | Secrets of Silicon Valley                                       | popular_comp | 1389   | 20.0000 |  8000.0000 |      10 |      4095 | Muckraking reporting on the world's largest computer hardware and software manufacturers.                                                                                           | 1994-06-12 |
+| PC9999   | Net Etiquette                                                   | popular_comp | 1389   |    NULL |       NULL |    NULL |      NULL | A must-read for computer conferencing.                                                                                                                                              | NULL       |
+| PS1372   | Computer Phobic AND Non-Phobic Individuals: Behavior Variations | psychology   | 0877   | 21.5900 |  7000.0000 |      10 |       375 | A must for the specialist, this book examines the difference between those who hate and fear computers and those who don't.                                                         | 1991-10-21 |
+| PS2091   | Is Anger the Enemy?                                             | psychology   | 0736   | 10.9500 |  2275.0000 |      12 |      2045 | Carefully researched study of the effects of strong emotions on the body. Metabolic charts included.                                                                                | 1991-06-15 |
+| PS2106   | Life Without Fear                                               | psychology   | 0736   |  7.0000 |  6000.0000 |      10 |       111 | New exercise, meditation, and nutritional techniques that can reduce the shock of daily interactions. Popular audience. Sample menus included, exercise video available separately. | 1991-10-05 |
+| PS3333   | Prolonged Data Deprivation: Four Case Studies                   | psychology   | 0736   | 19.9900 |  2000.0000 |      10 |      4072 | What happens when the data runs dry?  Searching evaluations of information-shortage effects.                                                                                        | 1991-06-12 |
+| PS7777   | Emotional Security: A New Algorithm                             | psychology   | 0736   |  7.9900 |  4000.0000 |      10 |      3336 | Protecting yourself and your loved ones from undue emotional stress in the modern world. Use of computer and nutritional aids emphasized.                                           | 1991-06-12 |
+| TC3218   | Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | trad_cook    | 0877   | 20.9500 |  7000.0000 |      10 |       375 | Profusely illustrated in color, this makes a wonderful gift book for a cuisine-oriented friend.                                                                                     | 1991-10-21 |
+| TC4203   | Fifty Years in Buckingham Palace Kitchens                       | trad_cook    | 0877   | 11.9500 |  4000.0000 |      14 |     15096 | More anecdotes from the Queen's favorite cook describing life among English royalty. Recipes, techniques, tender vignettes.                                                         | 1991-06-12 |
+| TC7777   | Sushi, Anyone?                                                  | trad_cook    | 0877   | 14.9900 |  8000.0000 |      10 |      4095 | Detailed instructions on how to make authentic Japanese sushi in your spare time.                                                                                                   | 1991-06-12 |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+18 rows in set (0.00 sec)
+
+mysql> select title, UPPER(type) "Book Category", COUNT(title) "BooksCount" from titles group by type order by BooksCount;
++-----------------------------------------------------------------+---------------+------------+
+| title                                                           | Book Category | BooksCount |
++-----------------------------------------------------------------+---------------+------------+
+| The Psychology of Computer Cooking                              | UNDECIDED     |          1 |
+| Silicon Valley Gastronomic Treats                               | MOD_COOK      |          2 |
+| But Is It User Friendly?                                        | POPULAR_COMP  |          3 |
+| Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | TRAD_COOK     |          3 |
+| The Busy Executive's Database Guide                             | BUSINESS      |          4 |
+| Computer Phobic AND Non-Phobic Individuals: Behavior Variations | PSYCHOLOGY    |          5 |
++-----------------------------------------------------------------+---------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT(UPPER(SUBSTRING(type,1,1)),LOWER(SUBSTRING(type,2))) "Book Category", COUNT(type) "# of Books" FROM titles GROUP BY type ORDER BY 2;
++---------------+------------+
+| Book Category | # of Books |
++---------------+------------+
+| Undecided     |          1 |
+| Mod_cook      |          2 |
+| Popular_comp  |          3 |
+| Trad_cook     |          3 |
+| Business      |          4 |
+| Psychology    |          5 |
++---------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT type, AVG(price) FROM titles GROUP BY type WITH ROLLUP;
++--------------+-------------+
+| type         | AVG(price)  |
++--------------+-------------+
+| business     | 13.73000000 |
+| mod_cook     | 11.49000000 |
+| popular_comp | 21.47500000 |
+| psychology   | 13.50400000 |
+| trad_cook    | 15.96333333 |
+| UNDECIDED    |        NULL |
+| NULL         | 14.76625000 |
++--------------+-------------+
+7 rows in set (0.04 sec)
+
+mysql> -- 8
+mysql> select title, type, AVG(Price) "AveragePrice" from titles group by type with rollup limit 2 ;SELECT type, AVG(price) FROM titles GROUP BY type ORDER BY 2 DESC  LIMIT 2;
++-------------------------------------+----------+--------------+
+| title                               | type     | AveragePrice |
++-------------------------------------+----------+--------------+
+| The Busy Executive's Database Guide | business |  13.73000000 |
+| Silicon Valley Gastronomic Treats   | mod_cook |  11.49000000 |
++-------------------------------------+----------+--------------+
+2 rows in set (0.04 sec)
+
++--------------+-------------+
+| type         | AVG(price)  |
++--------------+-------------+
+| popular_comp | 21.47500000 |
+| trad_cook    | 15.96333333 |
++--------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select title, type, AVG(Price) "AveragePrice" from titles group by type with rollup limit 2 ;
++-------------------------------------+----------+--------------+
+| title                               | type     | AveragePrice |
++-------------------------------------+----------+--------------+
+| The Busy Executive's Database Guide | business |  13.73000000 |
+| Silicon Valley Gastronomic Treats   | mod_cook |  11.49000000 |
++-------------------------------------+----------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT type, AVG(price) FROM titles GROUP BY type ORDER BY 2 DESC  LIMIT 2;
++--------------+-------------+
+| type         | AVG(price)  |
++--------------+-------------+
+| popular_comp | 21.47500000 |
+| trad_cook    | 15.96333333 |
++--------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> -- 9
+mysql> select  type, count(type)  from titles group by type HAVING count(type) < 4 order by count(type) DESC;
++--------------+-------------+
+| type         | count(type) |
++--------------+-------------+
+| popular_comp |           3 |
+| trad_cook    |           3 |
+| mod_cook     |           2 |
+| UNDECIDED    |           1 |
++--------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> -- 10
+mysql>  SELECT type, COUNT(type) "count" FROM titles GROUP BY type HAVING count(type) < 4 ORDER BY count(type) DESC;    
++--------------+-------+
+| type         | count |
++--------------+-------+
+| popular_comp |     3 |
+| trad_cook    |     3 |
+| mod_cook     |     2 |
+| UNDECIDED    |     1 |
++--------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from authors;
++-------------+----------------+-------------+--------------+----------------------+----------------+-------+-------+----------+
+| au_id       | au_lname       | au_fname    | phone        | address              | city           | state | zip   | contract |
++-------------+----------------+-------------+--------------+----------------------+----------------+-------+-------+----------+
+| 172-32-1176 | White          | Johnson     | 408 496-7223 | 10932 Bigge Rd.      | Menlo Park     | CA    | 94025 |        1 |
+| 213-46-8915 | Green          | Marjorie    | 415 986-7020 | 309 63rd St. #411    | Oakland        | CA    | 94618 |        1 |
+| 238-95-7766 | Carson         | Cheryl      | 415 548-7723 | 589 Darwin Ln.       | Berkeley       | CA    | 94705 |        1 |
+| 267-41-2394 | O'Leary        | Michael     | 408 286-2428 | 22 Cleveland Av. #14 | San Jose       | CA    | 95128 |        1 |
+| 274-80-9391 | Straight       | Dean        | 415 834-2919 | 5420 College Av.     | Oakland        | CA    | 94609 |        1 |
+| 341-22-1782 | Smith          | Meander     | 913 843-0462 | 10 Mississippi Dr.   | Lawrence       | KS    | 66044 |        0 |
+| 409-56-7008 | Bennet         | Abraham     | 415 658-9932 | 6223 Bateman St.     | Berkeley       | CA    | 94705 |        1 |
+| 427-17-2319 | Dull           | Ann         | 415 836-7128 | 3410 Blonde St.      | Palo Alto      | CA    | 94301 |        1 |
+| 472-27-2349 | Gringlesby     | Burt        | 707 938-6445 | PO Box 792           | Covelo         | CA    | 95428 |        3 |
+| 486-29-1786 | Locksley       | Charlene    | 415 585-4620 | 18 Broadway Av.      | San Francisco  | CA    | 94130 |        1 |
+| 527-72-3246 | Greene         | Morningstar | 615 297-2723 | 22 Graybar House Rd. | Nashville      | TN    | 37215 |        0 |
+| 648-92-1872 | Blotchet-Halls | Reginald    | 503 745-6402 | 55 Hillsdale Bl.     | Corvallis      | OR    | 97330 |        1 |
+| 672-71-3249 | Yokomoto       | Akiko       | 415 935-4228 | 3 Silver Ct.         | Walnut Creek   | CA    | 94595 |        1 |
+| 712-45-1867 | del Castillo   | Innes       | 615 996-8275 | 2286 Cram Pl. #86    | Ann Arbor      | MI    | 48105 |        1 |
+| 722-51-5454 | DeFrance       | Michel      | 219 547-9982 | 3 Balding Pl.        | Gary           | IN    | 46403 |        1 |
+| 724-08-9931 | Stringer       | Dirk        | 415 843-2991 | 5420 Telegraph Av.   | Oakland        | CA    | 94609 |        0 |
+| 724-80-9391 | MacFeather     | Stearns     | 415 354-7128 | 44 Upland Hts.       | Oakland        | CA    | 94612 |        1 |
+| 756-30-7391 | Karsen         | Livia       | 415 534-9219 | 5720 McAuley St.     | Oakland        | CA    | 94609 |        1 |
+| 807-91-6654 | Panteley       | Sylvia      | 301 946-8853 | 1956 Arlington Pl.   | Rockville      | MD    | 20853 |        1 |
+| 846-92-7186 | Hunter         | Sheryl      | 415 836-7128 | 3410 Blonde St.      | Palo Alto      | CA    | 94301 |        1 |
+| 893-72-1158 | McBadden       | Heather     | 707 448-4982 | 301 Putnam           | Vacaville      | CA    | 95688 |        0 |
+| 899-46-2035 | Ringer         | Anne        | 801 826-0752 | 67 Seventh Av.       | Salt Lake City | UT    | 84152 |        1 |
+| 998-72-3567 | Ringer         | Albert      | 801 826-0752 | 67 Seventh Av.       | Salt Lake City | UT    | 84152 |        1 |
++-------------+----------------+-------------+--------------+----------------------+----------------+-------+-------+----------+
+23 rows in set (0.00 sec)
+
+mysql> SELECT au_id, au_fname, au_lname, phone, address, city, state, COUNT(*) Authors_Count FROM authors GROUP BY state;
++-------------+-------------+----------------+--------------+----------------------+----------------+-------+---------------+
+| au_id       | au_fname    | au_lname       | phone        | address              | city           | state | Authors_Count |
++-------------+-------------+----------------+--------------+----------------------+----------------+-------+---------------+
+| 172-32-1176 | Johnson     | White          | 408 496-7223 | 10932 Bigge Rd.      | Menlo Park     | CA    |            15 |
+| 341-22-1782 | Meander     | Smith          | 913 843-0462 | 10 Mississippi Dr.   | Lawrence       | KS    |             1 |
+| 527-72-3246 | Morningstar | Greene         | 615 297-2723 | 22 Graybar House Rd. | Nashville      | TN    |             1 |
+| 648-92-1872 | Reginald    | Blotchet-Halls | 503 745-6402 | 55 Hillsdale Bl.     | Corvallis      | OR    |             1 |
+| 712-45-1867 | Innes       | del Castillo   | 615 996-8275 | 2286 Cram Pl. #86    | Ann Arbor      | MI    |             1 |
+| 722-51-5454 | Michel      | DeFrance       | 219 547-9982 | 3 Balding Pl.        | Gary           | IN    |             1 |
+| 807-91-6654 | Sylvia      | Panteley       | 301 946-8853 | 1956 Arlington Pl.   | Rockville      | MD    |             1 |
+| 899-46-2035 | Anne        | Ringer         | 801 826-0752 | 67 Seventh Av.       | Salt Lake City | UT    |             2 |
++-------------+-------------+----------------+--------------+----------------------+----------------+-------+---------------+
+8 rows in set (0.00 sec)
+
+mysql> select title_id,title, ytd_sales, pub_id "Publisher ID" , SUM(ytd_sales) Quantity_Of_Sales from titles GROUP BY pub_id;
++----------+-------------------------------------+-----------+--------------+-------------------+
+| title_id | title                               | ytd_sales | Publisher ID | Quantity_Of_Sales |
++----------+-------------------------------------+-----------+--------------+-------------------+
+| BU2075   | You Can Combat Computer Stress!     |     18722 | 0736         |             28286 |
+| MC2222   | Silicon Valley Gastronomic Treats   |      2032 | 0877         |             44219 |
+| BU1032   | The Busy Executive's Database Guide |      4095 | 1389         |             24941 |
++----------+-------------------------------------+-----------+--------------+-------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT title, type, SUM(ytd_sales) "Quantity of Sales", pub_id "Publisher ID" FROM titles GROUP BY pub_id ORDER BY 1 DESC;
++-------------------------------------+----------+-------------------+--------------+
+| title                               | type     | Quantity of Sales | Publisher ID |
++-------------------------------------+----------+-------------------+--------------+
+| You Can Combat Computer Stress!     | business |             28286 | 0736         |
+| The Busy Executive's Database Guide | business |             24941 | 1389         |
+| Silicon Valley Gastronomic Treats   | mod_cook |             44219 | 0877         |
++-------------------------------------+----------+-------------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT  IFNULL(type, 'ALL types') "Book Type", SUM(ytd_sales) "Quantity of Sales" FROM titles GROUP BY type WITH ROLLUP;
++--------------+-------------------+
+| Book Type    | Quantity of Sales |
++--------------+-------------------+
+| business     |             30788 |
+| mod_cook     |             24278 |
+| popular_comp |             12875 |
+| psychology   |              9939 |
+| trad_cook    |             19566 |
+| UNDECIDED    |              NULL |
+| ALL types    |             97446 |
++--------------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> -- 13A
+mysql> select * from titles;
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| title_id | title                                                           | type         | pub_id | price   | advance    | royalty | ytd_sales | notes                                                                                                                                                                               | pubdate    |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| BU1032   | The Busy Executive's Database Guide                             | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | An overview of available database systems with emphasis on common business applications. Illustrated.                                                                               | 1991-06-12 |
+| BU1111   | Cooking with Computers: Surreptitious Balance Sheets            | business     | 1389   | 11.9500 |  5000.0000 |      10 |      3876 | Helpful hints on how to use your electronic resources to the best advantage.                                                                                                        | 1991-06-09 |
+| BU2075   | You Can Combat Computer Stress!                                 | business     | 0736   |  2.9900 | 10125.0000 |      24 |     18722 | The latest medical and psychological techniques for living with the electronic office. Easy-to-understand explanations.                                                             | 1991-06-30 |
+| BU7832   | Straight Talk About Computers                                   | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | Annotated analysis of what computers can do for you: a no-hype guide for the critical user.                                                                                         | 1991-06-22 |
+| MC2222   | Silicon Valley Gastronomic Treats                               | mod_cook     | 0877   | 19.9900 |     0.0000 |      12 |      2032 | Favorite recipes for quick, easy, and elegant meals.                                                                                                                                | 1991-06-09 |
+| MC3021   | The Gourmet Microwave                                           | mod_cook     | 0877   |  2.9900 | 15000.0000 |      24 |     22246 | Traditional French gourmet recipes adapted for modern microwave cooking.                                                                                                            | 1991-06-18 |
+| MC3026   | The Psychology of Computer Cooking                              | UNDECIDED    | 0877   |    NULL |       NULL |    NULL |      NULL | NULL                                                                                                                                                                                | NULL       |
+| PC1035   | But Is It User Friendly?                                        | popular_comp | 1389   | 22.9500 |  7000.0000 |      16 |      8780 | A survey of software for the naive user, focusing on the 'friendliness' of each.                                                                                                    | 1991-06-30 |
+| PC8888   | Secrets of Silicon Valley                                       | popular_comp | 1389   | 20.0000 |  8000.0000 |      10 |      4095 | Muckraking reporting on the world's largest computer hardware and software manufacturers.                                                                                           | 1994-06-12 |
+| PC9999   | Net Etiquette                                                   | popular_comp | 1389   |    NULL |       NULL |    NULL |      NULL | A must-read for computer conferencing.                                                                                                                                              | NULL       |
+| PS1372   | Computer Phobic AND Non-Phobic Individuals: Behavior Variations | psychology   | 0877   | 21.5900 |  7000.0000 |      10 |       375 | A must for the specialist, this book examines the difference between those who hate and fear computers and those who don't.                                                         | 1991-10-21 |
+| PS2091   | Is Anger the Enemy?                                             | psychology   | 0736   | 10.9500 |  2275.0000 |      12 |      2045 | Carefully researched study of the effects of strong emotions on the body. Metabolic charts included.                                                                                | 1991-06-15 |
+| PS2106   | Life Without Fear                                               | psychology   | 0736   |  7.0000 |  6000.0000 |      10 |       111 | New exercise, meditation, and nutritional techniques that can reduce the shock of daily interactions. Popular audience. Sample menus included, exercise video available separately. | 1991-10-05 |
+| PS3333   | Prolonged Data Deprivation: Four Case Studies                   | psychology   | 0736   | 19.9900 |  2000.0000 |      10 |      4072 | What happens when the data runs dry?  Searching evaluations of information-shortage effects.                                                                                        | 1991-06-12 |
+| PS7777   | Emotional Security: A New Algorithm                             | psychology   | 0736   |  7.9900 |  4000.0000 |      10 |      3336 | Protecting yourself and your loved ones from undue emotional stress in the modern world. Use of computer and nutritional aids emphasized.                                           | 1991-06-12 |
+| TC3218   | Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | trad_cook    | 0877   | 20.9500 |  7000.0000 |      10 |       375 | Profusely illustrated in color, this makes a wonderful gift book for a cuisine-oriented friend.                                                                                     | 1991-10-21 |
+| TC4203   | Fifty Years in Buckingham Palace Kitchens                       | trad_cook    | 0877   | 11.9500 |  4000.0000 |      14 |     15096 | More anecdotes from the Queen's favorite cook describing life among English royalty. Recipes, techniques, tender vignettes.                                                         | 1991-06-12 |
+| TC7777   | Sushi, Anyone?                                                  | trad_cook    | 0877   | 14.9900 |  8000.0000 |      10 |      4095 | Detailed instructions on how to make authentic Japanese sushi in your spare time.                                                                                                   | 1991-06-12 |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+18 rows in set (0.00 sec)
+
+mysql> SELECT title, type, ytd_sales, SUM(ytd_sales) "TotalQuantitySales" FROM titles GROUP BY type    HAVING totalQuantitySales < 10000;
++-----------------------------------------------------------------+------------+-----------+--------------------+
+| title                                                           | type       | ytd_sales | TotalQuantitySales |
++-----------------------------------------------------------------+------------+-----------+--------------------+
+| Computer Phobic AND Non-Phobic Individuals: Behavior Variations | psychology |       375 |               9939 |
++-----------------------------------------------------------------+------------+-----------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT title, type, ytd_sales, SUM(ytd_sales) "TotalQuantitySales" FROM titles GROUP BY type HAVING totalQuantitySales >= 10000 AND totalQuantitySales < 25000;
++-----------------------------------------------------------------+--------------+-----------+--------------------+
+| title                                                           | type         | ytd_sales | TotalQuantitySales |
++-----------------------------------------------------------------+--------------+-----------+--------------------+
+| Silicon Valley Gastronomic Treats                               | mod_cook     |      2032 |              24278 |
+| But Is It User Friendly?                                        | popular_comp |      8780 |              12875 |
+| Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | trad_cook    |       375 |              19566 |
++-----------------------------------------------------------------+--------------+-----------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT title, type, ytd_sales, SUM(ytd_sales) "TotalQuantitySales" FROM titles GROUP BY type    HAVING totalQuantitySales >= 25000;
++-------------------------------------+----------+-----------+--------------------+
+| title                               | type     | ytd_sales | TotalQuantitySales |
++-------------------------------------+----------+-----------+--------------------+
+| The Busy Executive's Database Guide | business |      4095 |              30788 |
++-------------------------------------+----------+-----------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> -- 14
+mysql> SELECT title, type, pub_id,ytd_sales, SUM(ytd_sales) "TotalQuantitySales" FROM titles GROUP BY pub_id    HAVING totalQuantitySales > 25000;
++-----------------------------------+----------+--------+-----------+--------------------+
+| title                             | type     | pub_id | ytd_sales | TotalQuantitySales |
++-----------------------------------+----------+--------+-----------+--------------------+
+| You Can Combat Computer Stress!   | business | 0736   |     18722 |              28286 |
+| Silicon Valley Gastronomic Treats | mod_cook | 0877   |      2032 |              44219 |
++-----------------------------------+----------+--------+-----------+--------------------+
+2 rows in set (0.00 sec)
+
+mysql> -- 15
+mysql> SELECT type, pub_id, AVG(price), SUM(ytd_sales) "totalQuantitySales" FROM titles GROUP BY type, pub_id;
++--------------+--------+-------------+--------------------+
+| type         | pub_id | AVG(price)  | totalQuantitySales |
++--------------+--------+-------------+--------------------+
+| business     | 1389   | 17.31000000 |              12066 |
+| business     | 0736   |  2.99000000 |              18722 |
+| mod_cook     | 0877   | 11.49000000 |              24278 |
+| UNDECIDED    | 0877   |        NULL |               NULL |
+| popular_comp | 1389   | 21.47500000 |              12875 |
+| psychology   | 0877   | 21.59000000 |                375 |
+| psychology   | 0736   | 11.48250000 |               9564 |
+| trad_cook    | 0877   | 15.96333333 |              19566 |
++--------------+--------+-------------+--------------------+
+8 rows in set (0.00 sec)
+
+mysql> -- 16
+
+mysql> SELECT IFNULL(type, "AllTypes") "Book Type", IFNULL(pub_id, "====>") "Publisher ID", ROUND(AVG(price), 2) "Average Price", SUM(ytd_sales) "Qty of Sales"FROM titles GROUP BY type, pub_id WITH ROLLUP;
++--------------+--------------+---------------+--------------+
+| Book Type    | Publisher ID | Average Price | Qty of Sales |
++--------------+--------------+---------------+--------------+
+| business     | 0736         |          2.99 |        18722 |
+| business     | 1389         |         17.31 |        12066 |
+| business     | ====>        |         13.73 |        30788 |
+| mod_cook     | 0877         |         11.49 |        24278 |
+| mod_cook     | ====>        |         11.49 |        24278 |
+| popular_comp | 1389         |         21.48 |        12875 |
+| popular_comp | ====>        |         21.48 |        12875 |
+| psychology   | 0736         |         11.48 |         9564 |
+| psychology   | 0877         |         21.59 |          375 |
+| psychology   | ====>        |         13.50 |         9939 |
+| trad_cook    | 0877         |         15.96 |        19566 |
+| trad_cook    | ====>        |         15.96 |        19566 |
+| UNDECIDED    | 0877         |          NULL |         NULL |
+| UNDECIDED    | ====>        |          NULL |         NULL |
+| AllTypes     | ====>        |         14.77 |        97446 |
++--------------+--------------+---------------+--------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT * FROM titles WHERE title IS NOT NULL AND title_id IS NOT NULL AND type IS NOT NULL AND pub_id IS NOT NULL AND price IS NOT NULL AND advance IS NOT NULL AND royalty IS NOT NULL AND ytd_sales IS NOT NULL AND notes IS NOT NULL AND pubdate IS NOT NULL;
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| title_id | title                                                           | type         | pub_id | price   | advance    | royalty | ytd_sales | notes                                                                                                                                                                               | pubdate    |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| BU1032   | The Busy Executive's Database Guide                             | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | An overview of available database systems with emphasis on common business applications. Illustrated.                                                                               | 1991-06-12 |
+| BU1111   | Cooking with Computers: Surreptitious Balance Sheets            | business     | 1389   | 11.9500 |  5000.0000 |      10 |      3876 | Helpful hints on how to use your electronic resources to the best advantage.                                                                                                        | 1991-06-09 |
+| BU2075   | You Can Combat Computer Stress!                                 | business     | 0736   |  2.9900 | 10125.0000 |      24 |     18722 | The latest medical and psychological techniques for living with the electronic office. Easy-to-understand explanations.                                                             | 1991-06-30 |
+| BU7832   | Straight Talk About Computers                                   | business     | 1389   | 19.9900 |  5000.0000 |      10 |      4095 | Annotated analysis of what computers can do for you: a no-hype guide for the critical user.                                                                                         | 1991-06-22 |
+| MC2222   | Silicon Valley Gastronomic Treats                               | mod_cook     | 0877   | 19.9900 |     0.0000 |      12 |      2032 | Favorite recipes for quick, easy, and elegant meals.                                                                                                                                | 1991-06-09 |
+| MC3021   | The Gourmet Microwave                                           | mod_cook     | 0877   |  2.9900 | 15000.0000 |      24 |     22246 | Traditional French gourmet recipes adapted for modern microwave cooking.                                                                                                            | 1991-06-18 |
+| PC1035   | But Is It User Friendly?                                        | popular_comp | 1389   | 22.9500 |  7000.0000 |      16 |      8780 | A survey of software for the naive user, focusing on the 'friendliness' of each.                                                                                                    | 1991-06-30 |
+| PC8888   | Secrets of Silicon Valley                                       | popular_comp | 1389   | 20.0000 |  8000.0000 |      10 |      4095 | Muckraking reporting on the world's largest computer hardware and software manufacturers.                                                                                           | 1994-06-12 |
+| PS1372   | Computer Phobic AND Non-Phobic Individuals: Behavior Variations | psychology   | 0877   | 21.5900 |  7000.0000 |      10 |       375 | A must for the specialist, this book examines the difference between those who hate and fear computers and those who don't.                                                         | 1991-10-21 |
+| PS2091   | Is Anger the Enemy?                                             | psychology   | 0736   | 10.9500 |  2275.0000 |      12 |      2045 | Carefully researched study of the effects of strong emotions on the body. Metabolic charts included.                                                                                | 1991-06-15 |
+| PS2106   | Life Without Fear                                               | psychology   | 0736   |  7.0000 |  6000.0000 |      10 |       111 | New exercise, meditation, and nutritional techniques that can reduce the shock of daily interactions. Popular audience. Sample menus included, exercise video available separately. | 1991-10-05 |
+| PS3333   | Prolonged Data Deprivation: Four Case Studies                   | psychology   | 0736   | 19.9900 |  2000.0000 |      10 |      4072 | What happens when the data runs dry?  Searching evaluations of information-shortage effects.                                                                                        | 1991-06-12 |
+| PS7777   | Emotional Security: A New Algorithm                             | psychology   | 0736   |  7.9900 |  4000.0000 |      10 |      3336 | Protecting yourself and your loved ones from undue emotional stress in the modern world. Use of computer and nutritional aids emphasized.                                           | 1991-06-12 |
+| TC3218   | Onions, Leeks, and Garlic: Cooking Secrets of the Mediterranean | trad_cook    | 0877   | 20.9500 |  7000.0000 |      10 |       375 | Profusely illustrated in color, this makes a wonderful gift book for a cuisine-oriented friend.                                                                                     | 1991-10-21 |
+| TC4203   | Fifty Years in Buckingham Palace Kitchens                       | trad_cook    | 0877   | 11.9500 |  4000.0000 |      14 |     15096 | More anecdotes from the Queen's favorite cook describing life among English royalty. Recipes, techniques, tender vignettes.                                                         | 1991-06-12 |
+| TC7777   | Sushi, Anyone?                                                  | trad_cook    | 0877   | 14.9900 |  8000.0000 |      10 |      4095 | Detailed instructions on how to make authentic Japanese sushi in your spare time.                                                                                                   | 1991-06-12 |
++----------+-----------------------------------------------------------------+--------------+--------+---------+------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+16 rows in set (0.02 sec)
+
+mysql>\t
