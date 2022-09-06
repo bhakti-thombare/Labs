@@ -1159,6 +1159,14 @@ blazeclan> db.EMP.find({designation: {$eq :'CLERK'}}).count()
 4
 blazeclan> db.EMP.find({designation: {$eq :'PRESIDENT'}}).count()
 1
+
+blazeclan> db.EMP.aggregate([{$group: {_id:"$designation",count:{$count:{}}}}])
+[
+  { _id: 'ANALYST', count: 2 },
+  { _id: 'MANAGER', count: 3 },
+  { _id: 'PRESIDENT', count: 1 },
+  { _id: 'CLERK', count: 4 }
+]
 ======================================================================
 -14
 -Department-wise sum of the salaries of employees
@@ -1178,6 +1186,18 @@ blazeclan> db.EMP.aggregate([{$group : {_id : "$deptID", salary : {$sum : "$sala
   { _id: 'MANAGER', salary: 9100 }
 ]
 
+blazeclan> db.EMP.aggregate([{$group: {_id:"$designation",average:{$avg:"$salary"},maximum:{$max:"$salary"},minimum:{$min:"$salary"}}}])
+[
+  { _id: 'ANALYST', average: 3000, maximum: 3000, minimum: 3000 },
+  { _id: 'CLERK', average: 1100, maximum: 1300, minimum: 800 },
+  {
+    _id: 'MANAGER',
+    average: 3033.3333333333335,
+    maximum: 3050,
+    minimum: 3025
+  },
+  { _id: 'PRESIDENT', average: 5000, maximum: 5000, minimum: 5000 }
+]
 ===========================================================================
 -15
 - Department-wise average, minimum and maximum salarie
@@ -1222,6 +1242,18 @@ blazeclan> db.EMP.aggregate([{$group : {_id : "$designation", salary : {$max : "
   { _id: 'MANAGER', salary: 3050 },
   { _id: 'PRESIDENT', salary: 5000 }
 ]
+
+blazeclan> db.EMP.aggregate([{$group: {_id:"$deptID",average:{$avg:"$salary"},maximum:{$max:"$salary"},minimum:{$min:"$salary"}}}])
+[
+  {
+    _id: 10,
+    average: 3108.3333333333335,
+    maximum: 5000,
+    minimum: 1300
+  },
+  { _id: 30, average: 2112.5, maximum: 3025, minimum: 1200 },
+  { _id: 20, average: 2190, maximum: 3050, minimum: 800 }
+]
 =======================================================================
 -16
 -Department-wise Head Count
@@ -1241,6 +1273,19 @@ blazeclan> db.EMP.aggregate([{ $group: { _id: '$designation', myCount: { $sum: 1
   { _id: 'MANAGER', myCount: 3 }
 ]
 
+blazeclan> db.EMP.aggregate([{$group: {_id:"$deptID",average:{$avg:"$salary"},maximum:{$max:"$salary"},minimum:{$min:"$salary"}}},{$match:{_id:20}}])
+[ { _id: 20, average: 2190, maximum: 3050, minimum: 800 } ]
+blazeclan> db.EMP.aggregate([{$group: {_id:"$deptID",average:{$avg:"$salary"},maximum:{$max:"$salary"},minimum:{$min:"$salary"}}},{$match:{_id:10}}])
+[
+  {
+    _id: 10,
+    average: 3108.3333333333335,
+    maximum: 5000,
+    minimum: 1300
+  }
+]
+blazeclan> db.EMP.aggregate([{$group: {_id:"$deptID",average:{$avg:"$salary"},maximum:{$max:"$salary"},minimum:{$min:"$salary"}}},{$match:{_id:30}}])
+[ { _id: 30, average: 2112.5, maximum: 3025, minimum: 1200 } ]
 =====================================================================
 -17
 -Department wise headcount sort
@@ -1276,4 +1321,22 @@ blazeclan> db.EMP.aggregate([{ $group: { _id: '$designation', myCount: { $sum: 1
   { _id: 'MANAGER', myCount: 3 },
   { _id: 'ANALYST', myCount: 2 },
   { _id: 'PRESIDENT', myCount: 1 }
+]
+
+
+blazeclan> db.EMP.aggregate([{$group: {_id:"$deptID",average:{$avg:"$salary"},maximum:{$max:"$salary"},count:{$count:{}},minimum:{$min:"$salary"}}},{$sort:{count:1}},{$match:{_id:20}}])
+[ { _id: 20, average: 2190, maximum: 3050, count: 5, minimum: 800 } ]
+blazeclan> db.EMP.aggregate([{$group: {_id:"$deptID",average:{$avg:"$salary"},maximum:{$max:"$salary"},count:{$count:{}},minimum:{$min:"$salary"}}},{$sort:{count:1}},{$match:{_id:10}}])
+[
+  {
+    _id: 10,
+    average: 3108.3333333333335,
+    maximum: 5000,
+    count: 3,
+    minimum: 1300
+  }
+]
+blazeclan> db.EMP.aggregate([{$group: {_id:"$deptID",average:{$avg:"$salary"},maximum:{$max:"$salary"},count:{$count:{}},minimum:{$min:"$salary"}}},{$sort:{count:1}},{$match:{_id:30}}])
+[
+  { _id: 30, average: 2112.5, maximum: 3025, count: 2, minimum: 1200 }
 ]
