@@ -1,0 +1,24 @@
+{
+  "name": "day4",
+  "version": "1.0.0",
+  "main": "bigfile.js",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bootstrap": "^5.2.1",
+    "chalk": "^5.0.1",
+    "http": "0.0.1-security",
+    "lodash": "^4.17.21",
+    "log-update": "^5.0.1",
+    "node-fetch": "^3.2.10",
+    "nodemon": "^2.0.19",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

@@ -1,0 +1,27 @@
+Nodejs Handson Lab6
+==========================================================================================================
+-1
+-Initialize the package.json file
+	-F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab2\Express_Demo> npm init
+- Install express module locally
+	-F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab2\Express_Demo> npm install express
+- Install 'nodemon' module as Development Dependency
+	-F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab2\Express_Demo> npm install nodemon -D
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab2\Express_Demo> npm install -g
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab2\Express_Demo> npm install lodash
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab2\Express_Demo> npm install bootstrap
+==========================================================================================================
+-2
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab2\Express_Demo>node app.js
+==========================================================================================================
+-3
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab2\Express_Demo>node exp-webapp.js
+==========================================================================================================
+-4 and 5
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab2\Express_Demo\futureValue-Node.js
+-Copied the Future value calculator program in Public folder 
+==========================================================================================================
+
+
+
+
