@@ -1,0 +1,31 @@
+React HOL-7
+==============================================================================
+Q1
+F:\Module4-ReactJs\Reactjs\day6\HOL7\HOL7\src\App.js
+
+-Backup the ‘src’ and ‘public’ directory and saved it as solution ‘sol-HOL7-Q1’
+==============================================================================
+Q2
+
+F:\Module4-ReactJs\Reactjs\day6\HOL7\HOL7\src\App.js
+
+-Backup the ‘src’ and ‘public’ directory and saved it as solution ‘sol-HOL7-Q2’
+==============================================================================
+Q3
+F:\Module4-ReactJs\Reactjs\day6\HOL7\memegen-Q3\src\components\Meme.js
+F:\Module4-ReactJs\Reactjs\day6\HOL7\memegen-Q3\src\style.css
+==============================================================================
+Q4
+F:\Module4-ReactJs\Reactjs\day6\HOL7\HOL7\src\App.js
+
+-Backup the ‘src’ and ‘public’ directory and saved it as solution ‘sol-HOL7-Q4’
+==============================================================================
+Q5
+F:\Module4-ReactJs\Reactjs\day6\HOL7\HOL7\src\App.js
+
+-Backup the ‘src’ and ‘public’ directory and saved it as solution ‘sol-HOL7-Q5’
+==============================================================================
+Q6
+F:\Module4-ReactJs\Reactjs\day6\HOL7\memegen-Q3\src\components\Meme.js
+F:\Module4-ReactJs\Reactjs\day6\HOL7\memegen-Q3\src\style.css
+imported memesData and run

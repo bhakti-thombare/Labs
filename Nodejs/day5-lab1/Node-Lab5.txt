@@ -1,0 +1,322 @@
+Node-Handson Lab5
+===============================================================
+-1
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1>npm list mysql
+day5@1.0.0F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1
+`-- (empty)
+
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1>npm install mysql
+=================================================================
+-2
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cafenodejs         |
+| information_schema |
+| mysql              |
+| performance_schema |
+| pubs               |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.40 sec)
+
+mysql> CREATE DATABASE HR_DB
+    -> ;
+Query OK, 1 row affected (0.25 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cafenodejs         |
+| hr_db              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| pubs               |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+==============================================================================
+-3
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1\db_ex1.js
+
+-Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1> node db_ex1.js
+Successfully Connected....
+===============================================================================
+-4
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1\db_ex2.js
+
+-Output:-
+mysql> use hr_db
+Database changed
+mysql> use hr_db;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_hr_db |
++-----------------+
+| departments     |
++-----------------+
+1 row in set (0.09 sec)
+
+mysql> desc departments
+    -> ;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| deptID   | int         | NO   | PRI | NULL    | auto_increment |
+| deptName | varchar(15) | NO   |     | NULL    |                |
+| city     | varchar(10) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.03 sec)
+=======================================================================================
+-5.a-By supplying given literals
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1\db_ex3.js
+mysql> select * from Departments
+    -> ;
++--------+------------+----------+
+| deptID | deptName   | city     |
++--------+------------+----------+
+|      1 | ACCOUNTING | NEW YORK |
++--------+------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from Departments;
++--------+------------+----------+
+| deptID | deptName   | city     |
++--------+------------+----------+
+|      1 | ACCOUNTING | NEW YORK |
+|      2 | RESEARCH   | DALLAS   |
+|      3 | SALES      | CHICAGO  |
+|      4 | OPERATIONS | BOSTON   |
+|      5 | R&D        | PUNE     |
++--------+------------+----------+
+5 rows in set (0.00 sec)
+*******************************************************************
+-5.b-Using Placeholders
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1\db_ex3-placeholders.js
+
+mysql> use hr_db2;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_hr_db2 |
++------------------+
+| departments      |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> desc tables;
+ERROR 1146 (42S02): Table 'hr_db2.tables' doesn't exist
+mysql> desc departments;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| deptID   | int         | NO   | PRI | NULL    | auto_increment |
+| deptName | varchar(15) | NO   |     | NULL    |                |
+| city     | varchar(10) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from departments;
++--------+-------------+----------+
+| deptID | deptName    | city     |
++--------+-------------+----------+
+|      1 | ACCOUNTING  | NEW YORK |
++--------+-------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from departments;
++--------+-------------+----------+
+| deptID | deptName    | city     |
++--------+-------------+----------+
+|      1 | ACCOUNTING  | NEW YORK |
+|      2 | RESEARCH    | DALLAS   |
+|      3 | SALES       | CHICAGO  |
+|      4 | OPERATIONS  | BOSTON   |
+|      5 | R&D         | PUNE     |
++--------+-------------+----------+
+5 rows in set (0.00 sec)
+******************************************************************
+-5.c-Using Command line argument
+mysql> use hr_db3
+Database changed
+mysql> CREATE TABLE IF NOT EXISTS Departments(deptID      INT PRIMARY KEY AUTO_INCREMENT, deptName    VARCHAR(15) NOT NULL, city        VARCHAR(10) NOT NULL);
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_hr_db3 |
++------------------+
+| departments      |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> desc departments;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| deptID   | int         | NO   | PRI | NULL    | auto_increment |
+| deptName | varchar(15) | NO   |     | NULL    |                |
+| city     | varchar(10) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into departments values(1,'ACCOUNTING','NEW YORK');
+Query OK, 1 row affected (0.19 sec)
+
+mysql> select * from departments;
++--------+------------+----------+
+| deptID | deptName   | city     |
++--------+------------+----------+
+|      1 | ACCOUNTING | NEW YORK |
++--------+------------+----------+
+1 row in set (0.00 sec)
+
+mysql> insert into departments values(2,'RESEARCH','DALLAS');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into departments values(3,'SALES','CHICAGO');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into departments values(4,'OPERATIONS','BOSTON');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into departments values(5,' R&D','PUNE');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from departments;
++--------+------------+----------+
+| deptID | deptName   | city     |
++--------+------------+----------+
+|      1 | ACCOUNTING | NEW YORK |
+|      2 | RESEARCH   | DALLAS   |
+|      3 | SALES      | CHICAGO  |
+|      4 | OPERATIONS | BOSTON   |
+|      5 |  R&D       | PUNE     |
++--------+------------+----------+
+5 rows in set (0.00 sec)
+======================================================================================================
+-6.a- get all rows
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1\db_ex4a.js
+
+-Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1>node db_ex4a.js
+Departments Data
+[
+  RowDataPacket { deptID: 1, deptName: 'ACCOUNTING', city: 'NEW YORK' },
+  RowDataPacket { deptID: 2, deptName: 'RESEARCH', city: 'DALLAS' },    
+  RowDataPacket { deptID: 3, deptName: 'SALES', city: 'CHICAGO' },      
+  RowDataPacket { deptID: 4, deptName: 'OPERATIONS', city: 'BOSTON' },  
+  RowDataPacket { deptID: 5, deptName: 'R&D', city: 'PUNE' }
+]
+undefined
+
+**********************************************************************
+-6.b - get rows for specific city
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1\db_ex4b-city.js
+
+-Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1>node db_ex4b-city.js
+Departments Data
+RowDataPacket { deptID: 5, deptName: 'R&D', city: 'PUNE' }
+undefined
+***********************************************************************
+-6.c - Get row(s) for a specific department
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1\db_ex4c-depts.js
+
+-Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1>node db_ex4c-depts.js 
+Departments Data
+RowDataPacket { deptID: 2, deptName: 'RESEARCH', city: 'DALLAS' }
+undefined
+=========================================================================================================
+-7 -update data for accounting
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1\db_ex5-update.js
+
+-Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1>node db_ex5-update.js
+
+Departments Data
+OkPacket {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 0,
+  serverStatus: 34,
+  warningCount: 0,
+  message: '(Rows matched: 1  Changed: 0  Warnings: 0',
+  protocol41: true,
+  changedRows: 0
+}
+undefined
+
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1>node db_ex5-update.js
+Departments Data
+[
+  RowDataPacket { deptID: 1, deptName: 'ACCOUNTING', city: 'TEXAS' },
+  RowDataPacket { deptID: 2, deptName: 'RESEARCH', city: 'DALLAS' },
+  RowDataPacket { deptID: 3, deptName: 'SALES', city: 'CHICAGO' },
+  RowDataPacket { deptID: 4, deptName: 'OPERATIONS', city: 'BOSTON' },
+  RowDataPacket { deptID: 5, deptName: 'R&D', city: 'PUNE' }
+]
+
+-on mysql also
+mysql> select * from departments;
++--------+------------+---------+
+| deptID | deptName   | city    |
++--------+------------+---------+
+|      1 | ACCOUNTING | TEXAS   |
+|      2 | RESEARCH   | DALLAS  |
+|      3 | SALES      | CHICAGO |
+|      4 | OPERATIONS | BOSTON  |
+|      5 | R&D        | PUNE    |
++--------+------------+---------+
+5 rows in set (0.00 sec)
+=========================================================================================================
+-8
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1\db_ex6-delete.js
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1>node db_ex6-delete.js  
+
+Departments Data
+OkPacket {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 0,
+  serverStatus: 34,
+  warningCount: 0,
+  message: '',
+  protocol41: true,
+  changedRows: 0
+}
+undefined
+
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day5-lab1>node db_ex6-delete.js
+Departments Data
+[
+  RowDataPacket { deptID: 1, deptName: 'ACCOUNTING', city: 'TEXAS' },
+  RowDataPacket { deptID: 2, deptName: 'RESEARCH', city: 'DALLAS' },
+  RowDataPacket { deptID: 3, deptName: 'SALES', city: 'CHICAGO' },
+  RowDataPacket { deptID: 4, deptName: 'OPERATIONS', city: 'BOSTON' }
+]
+undefined
+
+-On mysql cmd also
+mysql> select * from departments;
++--------+------------+---------+
+| deptID | deptName   | city    |
++--------+------------+---------+
+|      1 | ACCOUNTING | TEXAS   |
+|      2 | RESEARCH   | DALLAS  |
+|      3 | SALES      | CHICAGO |
+|      4 | OPERATIONS | BOSTON  |
++--------+------------+---------+
+4 rows in set (0.00 sec)
+===============================================================================================================

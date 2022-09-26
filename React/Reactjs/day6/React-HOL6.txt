@@ -1,0 +1,17 @@
+React HOL-6
+==============================================================================
+Q1.
+-demo3-Event handling
+F:\Module4-ReactJs\Reactjs\day6\HOL6\demo3-Hol6-Q4\src\App.js
+F:\Module4-ReactJs\Reactjs\day6\HOL6\demo3-Hol6-Q4\src\style.css
+==============================================================================
+Q2
+-meme generation with random image
+F:\Module4-ReactJs\Reactjs\day6\HOL6\memegen-HOL6-Q5\src\components
+F:\Module4-ReactJs\Reactjs\day6\HOL6\memegen-HOL6-Q5\src\App.js
+F:\Module4-ReactJs\Reactjs\day6\HOL6\memegen-HOL6-Q5\src\style.css
+==============================================================================
+Q3
+-Again in demo3
+F:\Module4-ReactJs\Reactjs\day6\HOL6\demo3-Hol6-Q6\src\index.js
+==============================================================================

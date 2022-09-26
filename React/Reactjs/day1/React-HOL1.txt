@@ -1,0 +1,54 @@
+React HOL-1:
+
+Q1 to Q3
+F:\Module4-ReactJs\Reactjs\day2\myapp1\src\index.js
+
+==================================================================================
+Q4
+F:\Module4-ReactJs\Reactjs\day2\LAB-Files-01\Lab02\index.js
+==================================================================================
+Q5
+F:\Module4-ReactJs\Reactjs\day2\LAB-Files-01\Lab03\index.js
+==================================================================================
+Q6
+F:\Module4-ReactJs\Reactjs\day2\LAB-Files-01\Lab04\index.js
+==================================================================================
+Q7
+F:\Module4-ReactJs\Reactjs\day2\LAB-Files-01\Lab05\index.js
+==================================================================================
+Q8
+F:\Module4-ReactJs\Reactjs\day2>npx create-react-app myapp1
+F:\Module4-ReactJs\Reactjs\day2\myapp>npm start
+-F:\Module4-ReactJs\Reactjs\day2\myapp\src\App.js
+==================================================================================
+Q9
+F:\Module4-ReactJs\Reactjs\day2\template\src\index.js
+==================================================================================
+Q10
+F:\Module4-ReactJs\Reactjs\day2\template\src\index.js
+-if we use document.getElementById("root").append(main)
+	Then it wills show [object Object] in browser
+
+-Now we used append with json stringify
+{"type":"div","key":null,"ref":null,
+"props":{"children":[{"type":"h1","key":null,"ref":null,
+"props":{"children":"Welcome to React"},"_owner":null,"_store":{}},
+{"type":"ol","key":null,"ref":null,
+"props":{"children":[{"type":"li","key":null,"ref":null,
+"props":{"children":"React is Composable"},"_owner":null,"_store":{}},
+{"type":"li","key":null,"ref":null,
+"props":{"children":"React is Declarative"},"_owner":null,
+"_store":{}}]},"_owner":null,"_store":{}}]},"_owner":null,"_store":{}}
+==================================================================================
+Q11
+-width of logo changes to 40px
+F:\Module4-ReactJs\Reactjs\day2\myapp\src\App.css
+F:\Module4-ReactJs\Reactjs\day2\section_app\src\index.js
+
+Q.Where are static files stored in React 18
+Our static files are located in the public directory. 
+Files in this directory will retain the same name when deployed to production.
+ Thus, they can be cached at the client-side and improve the overall download times.
+ All of the dynamic components will be located in the
+
+

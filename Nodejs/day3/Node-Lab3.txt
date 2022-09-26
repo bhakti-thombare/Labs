@@ -1,0 +1,615 @@
+Nodejs -HandsonLab3
+point 8 to 12 remaining
+================================================================================================================================================
+1.a-
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\readfilesync.js
+
+	-read the content of a file syncrhonously ->readFileSync()
+		
+		const fs = require('fs');
+		try{
+		// if test.txt is there then it will success and show  file data
+    		const data =  fs.readFileSync('F:/Module3-Nodejs/Nodejs/day3/test.txt', 'utf-8');
+    		
+		// if text.txt is there then it will give error as text.txt is not present
+		// const data =  fs.readFileSync('F:/Module3-Nodejs/Nodejs/day3/test.txt', 'utf-8');
+    		console.log(data);
+		}catch(err){
+		console.error("Some Error!!");
+		// process.exit(121);
+		}
+Output:-
+	-F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node readfilesync.js
+	Hi Welcome to test.txt
+	//If we have use text.txt then it will go in error block
+	//F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node readfilesync.js
+	//Some Error!!
+
+***********************************************************************************
+-1.b
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\readfileasync.js
+-read the content of a file Asyncrhonously ->readFile()
+		
+		const fs = require('fs');
+		fs.readFile('F:/Day1-17August2022 -Git Uploaded/Nodejs/day3/test.txt', 'utf-8', (err, data) => {
+		if(err){	
+	        console.error(err);
+	        return;
+    		}
+    		else{
+    		console.log(data);
+    		}
+		})
+Output:-
+	-F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node readfileasync.js
+	Hi Welcome to test.txt
+================================================================================================================================================
+-2.a
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\writefilesync.js
+	-write the content to a file syncrhonously ->writeFileSync()
+	
+	const fs = require('fs');
+	const content = 'Some content!';
+	try{
+    	fs.writeFileSync('F:/Day1-17August2022 -Git Uploaded/Nodejs/day3/test2.txt/test2.txt',content);
+    	//file written successfully
+	}catch (err){
+    	console.error(err);
+	}	
+	console.log('File written successfully');
+
+Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node writefilesync.js 
+File written successfully
+
+**********************************************************************************
+-2.b	
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\writefileasync.js
+-write the content to a file Asyncrhonously ->writeFile()
+	
+	const fs = require('fs');
+	const content = 'Some content!';
+	fs.writeFile('F:/Day1-17August2022 -Git Uploaded/Nodejs/day3/test1.txt',content,err =>{
+    	if(err){
+        console.error(err);
+    	}
+    	console.log('File written successfully');
+	});
+
+Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node writefileasync.js
+File written successfully
+
+--File test1.txt get created--
+================================================================================================================================================
+-3
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\path-of-file.js
+
+const path = require('path');
+const fileName = "F:\\Day1-17August2022 -Git Uploaded\\Nodejs\\day3\\test.txt";
+
+dname = path.dirname(fileName);
+bname = path.basename(fileName);
+exname = path.extname(fileName);
+
+console.log(`Directory : ${dname}` );
+console.log(`Filename : ${bname}` );
+console.log(`Extension : ${exname}` );
+
+
+Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node path-of-file.js  
+Directory : F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\
+Filename : test.txt
+Extension : .txt
+================================================================================================================================================
+-4
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\os-info.js
+
+	const os = require('os');
+	console.log("The platform on which Node.js is compiled: ",os.platform());
+	console.log("The hostname: ",os.hostname());
+	console.log("The Operating System release number: ",os.release());
+
+Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node os-info.js
+The data
+The platform on which Node.js is compiled:  win32
+The hostname:  BCT-LTP-G707
+The Operating System release number:  10.0.19042
+
+------IN REPL--------- 
+-platform on which nodejs compiled
+> os.platform()
+'win32'
+
+- The hostname 
+> os.hostname()
+'BCT-LTP-G707'
+
+-The Operating System release number.
+> os.release()
+'10.0.19042'
+================================================================================================================================================
+-5
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\mem-cpu-info.js
+	const os = require('os');
+	console.log("The Total Memory in System: ",os.totalmem());
+	console.log("The Free Memory in System: ",os.freemem());
+	console.log("The CPU Information: ",os.cpus());
+
+Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node mem-cpu-info.js 
+The Total Memory in System:  8339005440
+The Free Memory in System:  1357053952
+The CPU Information:  [
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 2732421,
+      nice: 0,
+      sys: 6453687,
+      idle: 20861796,
+      irq: 915328
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 1892750,
+      nice: 0,
+      sys: 3479140,
+      idle: 24675812,
+      irq: 462046
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 3577171,
+      nice: 0,
+      sys: 3832312,
+      idle: 22638218,
+      irq: 62203
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 2692406,
+      nice: 0,
+      sys: 1818515,
+      idle: 25536781,
+      irq: 31187
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 3520937,
+      nice: 0,
+      sys: 2861765,
+      idle: 23665000,
+      irq: 42250
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 2205078,
+      nice: 0,
+      sys: 1716109,
+      idle: 26126515,
+      irq: 29437
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 2989828,
+      nice: 0,
+      sys: 2882281,
+      idle: 24175593,
+      irq: 43218
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 2581250,
+      nice: 0,
+      sys: 1894296,
+      idle: 25572156,
+      irq: 26796
+    }
+  }
+]
+-------IN REPL------
+-The total memory and the amount of free memory available in the system.
+> os.totalmem()
+8339005440
+> os.freemem()
+1423568896
+
+-The number of CPU’s, the model name and speed
+> os.cpus()
+[
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 2719250,
+      nice: 0,
+      sys: 6424515,
+      idle: 20726125,
+      irq: 909546
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 1885140,
+      nice: 0,
+      sys: 3461609,
+      idle: 24522937,
+      irq: 459593
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 3556125,
+      nice: 0,
+      sys: 3814531,
+      idle: 22499031,
+      irq: 62000
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 2679531,
+      nice: 0,
+      sys: 1813171,
+      idle: 25376984,
+      irq: 31078
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 3503875,
+      nice: 0,
+      sys: 2849015,
+      idle: 23516796,
+      irq: 42046
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 2196421,
+      nice: 0,
+      sys: 1709625,
+      idle: 25963640,
+      irq: 29390
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 2976328,
+      nice: 0,
+      sys: 2872312,
+      idle: 24021046,
+      irq: 43000
+    }
+  },
+  {
+    model: 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz',
+    speed: 2112,
+    times: {
+      user: 2569625,
+      nice: 0,
+      sys: 1886828,
+      idle: 25413234,
+      irq: 26625
+    }
+  }
+]
+
+================================================================================================================================================
+-6
+Car example of EventEmitter-How to dive a car step-by-step
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\car-drive.js
+
+const EventEmitter = require("events");
+const myEmitter = new EventEmitter();
+
+function f1() {
+   console.log('Step1: Start a Car!');
+}
+function f2() {
+   console.log('Step2: Select Your Gear');
+}
+function f3() {
+   console.log('Step3: Release the Parking Brake');
+}
+function f4() {
+   console.log('Step4: Set a Car in Motion');
+}
+function f5() {
+   console.log('Step5: Use the Neutral Gear');
+}
+function f6() {
+   console.log('Step6: Using Lower Gears.');
+}
+function f7() {
+   console.log('Step7: Stop a Car');
+}
+function f8() {
+   console.log('Step8: Drive in Reverse Gear');
+   console.log("Happy Driving !!");
+}
+
+myEmitter.on('eventOne', f1); 
+myEmitter.on('eventOne', f2);
+myEmitter.on('eventOne', f3); 
+myEmitter.on('eventOne', f4); 
+myEmitter.on('eventOne', f5); 
+myEmitter.on('eventOne', f6); 
+myEmitter.on('eventOne', f7); 
+myEmitter.on('eventOne', f8); 
+myEmitter.emit('eventOne');
+
+Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node car-drive.js
+Step1: Start a Car!
+Step2: Select Your Gear
+Step3: Release the Parking Brake
+Step4: Set a Car in Motion
+Step5: Use the Neutral Gear
+Step6: Using Lower Gears.
+Step7: Stop a Car
+Step8: Drive in Reverse Gear
+Happy Driving !!
+================================================================================================================================================
+-7
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\stream.js
+
+const fs = require('fs');
+
+var data = '';
+const readerStream = fs.createReadStream('F:\\Day1-17August2022 -Git Uploaded\\Nodejs\\day3\\test.txt');
+readerStream.setEncoding('utf-8');
+
+readerStream.on('data', function(chunk){
+    data += chunk;
+    
+})
+
+readerStream.on('end', () =>{
+    console.log(data);
+    console.log("File Reading End");
+
+})
+
+
+readerStream.on('err', () =>{
+    console.error(err)
+})
+
+
+-Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node stream.js
+Hi Welcome to test.txt
+File Reading End
+================================================================================================================================================
+-8.a
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\stream-chunks.js
+
+const fs = require('fs');
+var data = '';
+var chunk;
+const readerStream = fs.createReadStream('F:\\Day1-17August2022 -Git Uploaded\\Nodejs\\day3\\test.txt');
+readerStream.setEncoding('utf-8');
+
+readerStream.on('readable', function() {
+    while( (chunk = readerStream.read(1)) != null){
+        data += chunk;
+        console.log(chunk);
+    }   
+})
+
+readerStream.on('end', () =>{
+    console.log(data);
+    
+})
+
+readerStream.on('error', () =>{
+    console.error(err)
+})
+
+
+Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node stream-chunks.js 
+H
+i
+ 
+W
+e
+l
+c
+o
+m
+e
+ 
+t
+o
+
+t
+e
+s
+t
+.
+t
+x
+t
+Hi Welcome to test.txt
+
+************************************************************************************************
+-8.b
+-Count the number and percentage of vowels and consonents from the file.
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\char-chunks-count.js
+const fs = require('fs');
+
+const readable = fs.createReadStream('F:\\Day1-17August2022 -Git Uploaded\\Nodejs\\day3\\test.txt');
+var chunk;
+vowel_list="aeiouAEIOU";
+vowel_list=(vowel_list).split('');
+vowel_count=0;
+consonent_count=0;
+
+
+
+readable.on('readable', function() {
+  chunk = " "
+    while(chunk != null){
+        chunk=readable.read(1);
+        var p=`${chunk}`;   
+        if(vowel_list.indexOf(p)!=-1)
+        {      
+          vowel_count++;
+        } 
+        else{
+         
+          consonent_count++;
+      }
+
+}
+});
+
+readable.on('end',function(){
+  console.log("Vowel Count : ",vowel_count);
+  console.log("Consonent Count : ",consonent_count);
+  var percentage=(vowel_count/(consonent_count+vowel_count))*100;
+  console.log(`Percentage of Vowel : %i%`,percentage);
+  percentage=(consonent_count/(consonent_count+vowel_count))*100;
+  console.log(`Percentage of Consonents : %i%`,percentage);
+
+})
+
+-Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node char-chunks-count.js
+Vowel Count :  6
+Consonent Count :  18
+Percentage of Vowel : 25%
+Percentage of Consonents : 75%
+
+
+================================================================================================================================================
+9
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\pipeline.js
+
+const { pipeline } = require('stream');
+const fs = require('fs');
+const zlib = require('zlib');
+
+pipeline(
+    fs.createReadStream('F:\Day1-17August2022 -Git Uploaded\\Nodejs\\day3\\test.txt'),
+    zlib.createGzip(),
+    fs.createWriteStream('F:\\Day1-17August2022 -Git Uploaded\\Nodejs\\day3\\test.gz'),
+    (err) =>{
+        if(err){
+            console.error('Pipeline failed', err);
+        }else{
+            console.log('Pipeline succeeded !');
+        }
+    }
+);
+
+Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node pipeline.js      
+Pipeline succeeded !
+================================================================================================================================================
+-10
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\crypto.js
+
+const fs = require('fs');
+var crypto = require('crypto');
+
+var data = '';
+var dataHash = '';
+const readable=fs.createReadStream('F:\\Day1-17August2022 -Git Uploaded\\Nodejs\\day3\\test.txt');
+readable.setEncoding('UTF8');
+
+readable.on('data',function(chunk){
+    data+=chunk;
+   console.log("File Content : ",data);
+ 
+
+var hash = crypto.createHash('sha512');
+dataHash = hash.update(data, 'utf-8');
+console.log("Hased Data Is : ")
+var generate_hash= dataHash.digest('hex');
+console.log(generate_hash);
+});
+
+
+
+Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node crypto.js
+File Content :  Hi Welcome to test.txt
+Hased Data Is : 
+ed36ef51eb45554ecccbdf431da5f07140e2d80ff1d6634fbde1f2ae2952a85326dd02f61ae97e332aa038b8574f82e31357a7bc5c5f74c177de22e7cb2735ed
+
+================================================================================================================================================
+-11
+-echo command-in REPL session
+C:\Users\bhakti.thombare>echo "Hello !! Welcome to Nodejs. We are learning echo command"
+Output:-
+"Hello !! Welcome to Nodejs. We are learning echo command"
+
+================================================================================================================================================
+-12
+-Compress file using pipeline
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3\file-compress.js
+
+const fs = require('fs');
+const {pipeline} = require('stream');
+const zlib = require('zlib');
+
+pipeline(
+    fs.createReadStream('F:\\Day1-17August2022 -Git Uploaded\\Nodejs\\day3\\file1.txt', ),
+    zlib.createGzip(),
+    fs.createWriteStream('file1.gz'),
+    (err) =>{
+        if(err){
+            console.error('Compression got a issue',err);
+
+        }
+        else{
+            console.log("Compressed Successfully!!");
+
+        }
+    }
+);
+
+
+-Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day3>node file-compress.js
+Compressed Successfully!!

@@ -1,0 +1,22 @@
+React HOL-8
+==============================================================================
+Q1 to Q4
+F:\Module4-ReactJs\Reactjs\day7\template\src\index.js
+F:\Module4-ReactJs\Reactjs\day7\template\src\App.js
+
+F:\Module4-ReactJs\Reactjs\day7\template\public\style.css
+F:\Module4-ReactJs\Reactjs\day7\template\public\index.html
+
+-In the template folder Answers:
+	Q1: lab8-Q1.zip
+	Q2:	lab8-Q2.zip
+	Q3: lab8-Q3.zip
+	Q4: lab8-Q4.zip
+	
+===============================================================================
+Q5
+-Signup applictaion
+F:\Module4-ReactJs\Reactjs\day7\signup\src\components\Signup.js
+F:\Module4-ReactJs\Reactjs\day7\signup\src\style.css
+
+	

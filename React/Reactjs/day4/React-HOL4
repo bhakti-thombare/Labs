@@ -1,0 +1,119 @@
+React HOL-4
+==============================================================================
+Q1.a
+-Square of numbers array
+
+C:\Users\bhakti.thombare>node
+Welcome to Node.js v14.16.1.
+Type ".help" for more information.
+> const nums = [1,2,3,4,5]
+undefined
+> nums2 = nums.map( (x) => {
+... result = x * x;
+... console.log(result);
+... }
+... )
+1
+4
+9
+16
+25
+************************************************
+Q1.b
+-First Letter of Array String Is Capitalize
+> const names = ["alice", "bob", "charlie", "danielle"]
+undefined
+> names2 = names.map( (name) => {
+... capName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+... console.log(capName)
+... return capName;
+... }
+... )
+Alice
+Bob
+Charlie
+Danielle
+[ 'Alice', 'Bob', 'Charlie', 'Danielle' ]
+************************************************
+Q1.c
+-Wraps each of the original strings in an HTMLlike <p></p> tag.
+> const pokemon = ["Bulbasaur", "Charmander", "Squirtle"]
+undefined
+> htmlTags = pokemon.map( (names) => {
+... result = '<p>' + names + '</p>';
+... return result;
+... })
+[ '<p>Bulbasaur</p>', '<p>Charmander</p>', '<p>Squirtle</p>' ]
+>
+
+==================================================================================
+Q2
+-F:\Module4-ReactJs\Reactjs\day5\airbnb\src\data.js
+-F:\Module4-ReactJs\Reactjs\day5\airbnb\src\Cards.js
+	<div className='card'>
+       { 
+	   badgeText &&  <div className="card--badge"> {badgeText} </div> 
+	   }
+		
+-F:\Module4-ReactJs\Reactjs\day5\airbnb\src\App.js
+	import data from './data'
+	<div>
+       <Navbar/>
+       {/* <Hero/> */}
+       <section className='cards-list'>
+       {cards}
+       </section>
+    </div>
+	  
+-F:\Module4-ReactJs\Reactjs\day5\airbnb\src\style.css
+	.cards-list
+	{
+		display: flex;
+		flex-wrap: nowrap;
+		gap:20px;
+		overflow: auto;
+	}
+==================================================================================
+Q3
+-F:\Module4-ReactJs\Reactjs\day5\airbnb\src\data.js
+
+-F:\Module4-ReactJs\Reactjs\day5\airbnb\src\Cards.js
+	function Cards(props) {
+		console.log(props);
+		console.log(props.openSpots);
+		let badgeText
+		if (props.openSpots === 0){
+			badgeText = "SOLD OUT"
+		}
+		else if (props.location === "Online"){
+			badgeText = "ONLINE"
+		} 
+		else if (props.location !== "Online"){
+			badgeText = props.location.toUpperCase()
+		}
+		console.log(badgeText);
+
+-F:\Module4-ReactJs\Reactjs\day5\airbnb\src\App.js
+	<Cards
+		img = {`images/${card.coverImg}`}
+        rating = {card.stats.rating}
+        reviewCount={card.stats.reviewCount}
+        country = {card.location}
+        title = {card.title}
+        price={card.price}
+        openSpots = {card.openSpots}
+        location ={card.location}
+    />
+	  
+-F:\Module4-ReactJs\Reactjs\day5\airbnb\src\style.css
+	.card--badge
+	{
+		position: relative;
+		top: 26px;
+		left: 6px;
+		background-color: white;
+		padding: 5px 7px;
+		border: 2px;
+		font-weight: bold;
+		width: 60%;
+	}

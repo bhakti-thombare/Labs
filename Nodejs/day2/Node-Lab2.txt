@@ -1,0 +1,300 @@
+Nodejs-Handson2
+======================================================================================================================================
+-1
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\call_stack.js
+
+-In call_stack.js files
+const first = () => console.log("First");
+const second = () => console.log("Second");
+
+const third = () => {
+    console.log("Third");
+    first();
+    second();
+    
+}
+third()
+
+**Output:-**
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2>node call_stack.js
+Third
+First
+Second
+======================================================================================================================================
+-2
+-2.a,b->use setTimeout where callback triggered after 5ms
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\setTimeout.js
+
+-In setTimeout.js
+console.log("Start");
+
+setTimeout( function callBack() {
+console.log("Callback");
+}, 5000)
+
+console.log("End")
+**Output:-**
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2>node setTimeout.js
+Start
+End
+------after 5 seconds--------
+Callback
+
+-2.c,d->use setTimeout where callback triggered after 0ms
+console.log("Start");
+
+setTimeout( function callBack() {
+console.log("Callback");
+})
+
+console.log("End")
+**Output:-**
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2>node setTimeout.js 
+Start
+End
+Callback
+
+======================================================================================================================================
+-3
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\click.html and F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\click-script.js
+
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\click.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Callback</title>
+    <script src="./click-script.js">
+    </script>
+</head>
+<body>
+    <button id="callback-btn">Click Me</button>
+</body>
+</html>
+
+-click-script.js
+	-F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\click-script.js
+
+ window.onload = function () {
+   console.log("Start..");
+   document.querySelector("#callback-btn").addEventListener("click", myFunction);
+     console.log("before function....");
+    function myFunction() {
+    console.log("Inside function.....");
+    console.log("End..");
+   }
+   };
+======================================================================================================================================
+-4
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\eCom.js
+
+amz.createNewOrder(a, (b, err) => {
+    if (err) throw new Error(err);
+    amz.proceedToPayment(b, (c, err) => {
+      if (err) throw new Error(err);
+      amz.showOrderSummary(c, (d, err) => {
+        if (err) throw new Error(err);
+        amz.updateWallet(d, (e, err) => {
+          if (err) throw new Error();
+          console.log("Order placed!");
+        });
+      });
+    });
+  });
+
+
+======================================================================================================================================
+-5
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\callback-div\callback-div.html
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\callback-div\callback-div.js
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\callback-div\callback-div.css
+
+-callback-div.html
+	-F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\callback-div\callback-div.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./callback-div.js"></script>
+  <link rel="stylesheet" href="./callback-div.css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="click_div">Click Me!</div>
+</body>
+</html>
+
+-callback-div.js
+	-F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\callback-div\callback-div.js
+
+var $ = function(id){
+    return document.getElementById(id);
+}
+
+ window.onload = function () {
+  $("click_div").addEventListener("click", myFunction);
+ console.log("Start...2..before function....");
+function myFunction() {
+  $("click_div").innerHTML = "Go";
+  setTimeout(() => {
+ $("click_div").style.borderRadius = "100px";
+setTimeout(() => {
+$("click_div").style.background = "red";
+setTimeout(() => {
+ $("click_div").style.borderRadius = "0px";
+setTimeout(() => {
+$("click_div").style.background = "green";
+setTimeout(() => {
+    $("click_div").style.background = "white";
+},500);
+}, 500);
+}, 1000);
+}, 500);
+ }, 1000);
+ }
+};
+
+-callback-div.css
+	-F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\callback-div\callback-div.css
+
+body {
+    background: blue;
+   }
+
+   .go {
+ margin: 25px;
+ background: white;
+ padding: 25px;
+ width: 100px;
+ height: 100px;
+ transition: all 0.2s;
+}
+#click_div {
+    border: 1px solid;
+    margin: 25px;
+    background: white;
+    padding: 25px;
+    width: 100px;
+    height: 100px;
+  }
+======================================================================================================================================
+-6.a on REPL
+> new Promise(() => {})
+Promise { <pending> }
+> __proto__
+{}	
+****************************************************************************************************
+-6.b on REPL
+
+-Resolve
+> new Promise((res,rej) => res("I am getting resolved"))
+Promise { 'I am getting resolved' }
+
+-Reject
+> new Promise((res,rej) => rej("Oops! Rejected"))
+Promise { <rejected> 'Oops! Rejected' }
+****************************************************************************************************
+-6.c
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\then-resolve.js
+
+console.log('Start!');
+setTimeout(()=>{
+    console.log('Timeout!')
+},0)
+
+Promise.resolve('Promise!')
+.then(res =>console.log(res))
+
+console.log('End!');
+
+Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2>node then-resolve.js
+Start!
+End!
+Promise!
+Timeout!
+======================================================================================================================================
+7
+-Microtask
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\micro.js
+
+console.log("Before Queueing Microtask");
+queueMicrotask(() =>{ 
+console.log("The Microtask is Running")});
+console.log("After Queueing Microtask");
+
+Output:-
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day2> node micro.js
+Before Queueing Microtask
+After Queueing Microtask
+The Microtask is Running
+
+-Macrotask
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\macro.js
+
+console.log('Script Is Started');
+setTimeout(function() {
+  console.log('Timeout');
+}, 0);
+Promise.resolve().then(function() {
+  console.log('Promise1');
+}).then(function() {
+  console.log('Promise2');
+});
+console.log('Script Is Ended');
+
+Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2>node macro.js
+Script Is Started
+Script Is Ended
+Promise1
+Promise2
+Timeout
+
+-For the MacroTasks->The Web APIs are set in the setTimeout() or setInterval()
+-For the MicroTasks->The promise callback and  process nextTick is places withing a Event Loop
+======================================================================================================================================
+-8
+	-F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\async-await.js
+const one = () => Promise.resolve('Resolved!')
+async function myFunction(){
+    console.log('In The Function!!');
+    const res = await one()
+    console.log(res);
+}
+console.log('Before Function');
+myFunction();
+console.log('After Function!');
+
+Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2>node async-await.js 
+Before Function
+In The Function!!
+After Function!
+Resolved!
+======================================================================================================================================
+-9
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day2\async-suspend.js
+
+function function1() {
+    console.log('Welcome to Function1');
+}
+
+function function2(ms) {
+    console.log('Welcome to Function2');
+    return new Promise((resolve) => {
+              setTimeout(resolve, ms);
+            });
+}
+
+function1();
+
+setTimeout(function2, 2000);
+
+-Output:-
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day2>node async-suspend.js
+Welcome to Function1
+Welcome to Function2

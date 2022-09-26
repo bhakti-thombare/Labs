@@ -1,0 +1,56 @@
+Nodejs -HandsonLab 4
+====================================================================================================================
+-1
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day4\simple_http.js
+
+const http = require('http');
+const server = http.createServer((req,res) =>{
+    res.statusCode = 200;
+    res.setHeader("Content-Type","text/html");
+    res.end("<h1>Hello HTTP Server</h1>");
+});
+
+server.listen(8000, () =>{
+    console.log("Server Running at port 8000...");
+});
+
+Output:-
+
+F:\Day1-17August2022 -Git Uploaded\Nodejs\day4>node simple_http.js
+Server Running at port 8000...
+=========================================================================================================================
+-2
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day4\webpage.js
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day4\webapp.js
+=========================================================================================================================
+-3
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day4\bigfile.js
+=========================================================================================================================
+-4
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day4\expose1.js
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day4\expose2.js
+=========================================================================================================================
+-5
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day4\chalk_example
+=========================================================================================================================
+-6
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day4\Weather
+=========================================================================================================================
+-7
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day4\sports
+=========================================================================================================================
+-8
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day4\astro
+=========================================================================================================================
+-9 -readline
+-F:\Day1-17August2022 -Git Uploaded\Nodejs\day4\readline.js
+
+
+
+
+
+
+
+
+
+
