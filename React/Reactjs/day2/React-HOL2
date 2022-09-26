@@ -1,0 +1,40 @@
+React HOL-2
+==============================================================================
+Q12
+Part1:
+F:\Module4-ReactJs\Reactjs\day3\day3app\src\function-component.js
+==============================================================================
+Q13
+Part2:
+F:\Module4-ReactJs\Reactjs\day3\day3app\src\All.js
+==============================================================================
+Q14
+All these routed mentioned in Index.js
+<div>
+    {/* <MyFunction/> */}
+    <Header/>
+    <MainContent/>
+    <Footer/>
+</div>
+F:\Module4-ReactJs\Reactjs\day3\day3app\src\components\Header.js
+F:\Module4-ReactJs\Reactjs\day3\day3app\src\components\Footer.js
+F:\Module4-ReactJs\Reactjs\day3\day3app\src\components\MainContent.js
+==============================================================================
+Q15
+F:\Module4-ReactJs\Reactjs\day3\day3app\src\styling.js
+in index.html added <link rel="stylesheet" href="./style.css"/>
+==============================================================================
+Q16
+F:\Module4-ReactJs\Reactjs\day3\day3app\src\components-Q16
+All these routed mentioned in Index.js
+<div>
+    {/* <MyFunction/> */}
+    <Header1/>
+    <MainContent1/>
+    <Footer1/>
+</div>
+F:\Module4-ReactJs\Reactjs\day3\day3app\src\components-Q16\Header1.js
+F:\Module4-ReactJs\Reactjs\day3\day3app\src\components-Q16\Footer1.js
+F:\Module4-ReactJs\Reactjs\day3\day3app\src\components-Q16\MainContent1.js
+==============================================================================
+Q17
