@@ -1,0 +1,104 @@
+Angular-Handson3
+=========================================================================================
+Q1
+-F:\Module5-Angular\Angular\Day3>ng new cust-comps
+-F:\Module5-Angular\Angular\Day3\cust-comps> ng serve
+
+-We can generate component using
+	-ng g c component_name
+-When we create component it creates 4 files
+	-component.html file
+	-component.ts file
+	-component.css file
+	-Unit testing file
+
+-Data is fetched from component.ts file
+=========================================================================================
+Q2
+-F:\Module5-Angular\Angular\Day3\cust-comps\src\app\app.component.html
+=========================================================================================
+Q3
+-F:\Module5-Angular\Angular\Day3\cust-comps>ng g c hello-user
+-F:\Module5-Angular\Angular\Day3\cust-comps\src\app\hello-user\hello-user.component.html
+-F:\Module5-Angular\Angular\Day3\cust-comps\src\app\hello-user\hello-user.component.ts
+
+-F:\Module5-Angular\Angular\Day3\cust-comps\src\app\app.component.html 
+	=>mentioned hello-user component in app.component.html
+=========================================================================================
+Q4
+-F:\Module5-Angular\Angular\Day3\cust-comps>ng g c user-item
+-F:\Module5-Angular\Angular\Day3\cust-comps\src\app\user-item\user-item.component.html
+-F:\Module5-Angular\Angular\Day3\cust-comps\src\app\user-item\user-item.component.ts
+
+-F:\Module5-Angular\Angular\Day3\cust-comps\src\app\app.component.html 
+	=>Commented hello-user component in app.component.html as 
+		=><!-- <app-hello-user></app-hello-user> -->
+			   <app-user-item></app-user-item>
+=========================================================================================
+Q5
+-F:\Module5-Angular\Angular\Day3\cust-comps\src\app\user-item\user-item.component.html
+-F:\Module5-Angular\Angular\Day3\cust-comps\src\app\user-item\user-item.component.ts
+-F:\Module5-Angular\Angular\Day3\cust-comps\src\app\user-item\user-item.component.css
+		-Added  in user-item.component.html
+			<h4>{{title}}</h4>
+			<img [src]="imgUrl">
+			<br/>
+			<button>Click Me !</button>
+			
+		-Added  in user-item.component.css
+			img{
+				border-radius: 20px;
+				width: 400px;
+				}
+				
+		-Added  in user-item.component.ts
+			-  //property binding
+				title: string = "Property Binding"
+				imgUrl : string = 'https://picsum.photos/640/360';
+
+=========================================================================================
+Q6
+-F:\Module5-Angular\Angular\Day3\cust-comps\src\app\user-item\user-item.component.html
+-F:\Module5-Angular\Angular\Day3\cust-comps\src\app\user-item\user-item.component.ts
+
+-In user-item.component.html
+	=><button (click)="clickMe()">Click Me !</button>
+
+-In user-item.component.ts
+	=>  clickMe(){
+    console.log("Event Binding happening...")
+  }
+=========================================================================================
+Q7
+-F:\Module5-Angular\Angular\Day3\airbnb>
+=========================================================================================
+Q8
+-F:\Module5-Angular\Angular\Day3> ng new ecomApp
+-F:\Module5-Angular\Angular\Day3\ecomApp>ng serve
+	-index.html, style.css copied to src
+	-In app.component.html use <h1>EcomApp</h1>
+=========================================================================================
+Q9
+-F:\Module5-Angular\Angular\Day3\ecomApp>
+F:\Module5-Angular\Angular\Day3\ecomApp\src\app\top-bar\top-bar.component.html
+	-ng g c top-bar
+
+
+=========================================================================================
+Q10
+-F:\Module5-Angular\Angular\Day3\ecomApp>
+F:\Module5-Angular\Angular\Day3\ecomApp\src\app\product-list\product-list.component.html
+	-ng g c product-list
+	
+	
+=========================================================================================
+Q11
+-F:\Module5-Angular\Angular\Day3\ecomApp>
+F:\Module5-Angular\Angular\Day3\ecomApp\src\app\product-list\product-list.component.html
+	-ng g c product-details
+	
+=========================================================================================
+Q12
+-F:\Module5-Angular\Angular\Day3\ecomApp>
+-F:\Module5-Angular\Angular\Day3\ecomApp\src\app\product-list\product-list.component.html
+	-Added "Share" button and click function on it

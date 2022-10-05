@@ -1,0 +1,75 @@
+Angular-Handson6
+==========================================================================================
+Q1
+-Created new app
+-F:\Module5-Angular\Angular\Day6\routing-App
+	-created component home,about and contact
+		-ng g c home
+		-ng g c about	
+		-ng g c contact
+	-In app.module.ts we have imported RouterModule
+
+**************************************
+
+-1a
+-F:\Module5-Angular\Angular\Day6\routing-App\src\app\home\home.component.html
+<h1>Welcome Home!</h1>
+<img src="./../../assets/ng.png">
+<h1>The Modern Web Developer's Platform</h1>
+<ul>
+    <li>Developed Across All Platforms</li>
+    <li>Speed & Performace</li>
+    <li>Loved by Millions</li>
+</ul>
+
+**************************************
+
+-1b
+-F:\Module5-Angular\Angular\Day6\routing-App\src\app\about\about.component.html
+<p>About!</p>
+<h1>About Angular</h1>
+<p>
+    Angular is a development platform, built on
+TypeScript. As a platform, Angular includes: <br>
+A component-based framework for building scalable web
+applications
+A collection of well-integrated libraries that cover a
+wide variety of features, including routing, forms
+management, client-server communication
+</p>
+
+**************************************
+
+-1c,d
+-F:\Module5-Angular\Angular\Day6\routing-App\src\app\contact\contact.component.html
+<p>Contact!</p>
+<div>
+    <img src="./../../assets/blaze.png">
+    <h3>Email</h3>
+    <p>blazeclan.com</p>
+    <h3>Phone </h3>
+    <p>020 6761 1100</p>
+    <h3>Address</h3>
+    <p>Godrej Eternia, A-Wing, 8th Floor, C,
+         Old Mumbai Rd, Wakadewadi, Shivajinagar, Pune, Maharashtra 411005</p>
+</div>
+**************************************
+
+-1e-wild card check
+-created new component	
+	-ng g c page-not-found
+-F:\Module5-Angular\Angular\Day6\routing-App\src\app\page-not-found\page-not-found.component.html
+-added route in app.module.ts
+	- { path: '**', component:PageNotFoundComponent}
+	
+==========================================================================================
+
+Q2
+-need to add route to ecomapp
+-Include Routing-https://www.samjulien.com/add-routing-existing-angular-project
+	-It creates app-routing.component.ts
+	
+==========================================================================================
+Q3
+F:\Module5-Angular\Angular\Day6\ecomApp\src\app\product-details\product-details.component.html
+==========================================================================================

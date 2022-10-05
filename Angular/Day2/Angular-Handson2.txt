@@ -1,0 +1,264 @@
+Angular-Handson2
+========================================================================================
+-Q1.
+-C:\Users\bhakti.thombare>npm install -g typescript --save
+-C:\Users\bhakti.thombare>tsc --version
+Version 4.8.3
+
+-F:\Module5-Angular\Angular\scripts\ex_01.ts
+
+-Output on REPL:-
+F:\Module5-Angular\Angular\scripts>tsc ex_01.ts
+F:\Module5-Angular\Angular\scripts>type ex_01.js
+var fullName = 'Bhakti Dadasaheb Thombare';
+var age = 25;
+var married = true;
+console.log("Full Name : " + fullName);    
+console.log("Age : " + age);
+console.log("Status : " + married);        
+
+-F:\Module5-Angular\Angular\scripts>node ex_01   
+Full Name : Bhakti Dadasaheb Thombare
+Age : 25
+Status : true
+**************************************************
+-//trying  to assign different data type
+var fullName = 'Bhakti Dadasaheb Thombare';
+var age = 25;
+var married = true;
+console.log("Full Name : " + fullName);    
+console.log("Age : " + age);
+console.log("Status : " + married);        
+
+age = 'Blazeclan';
+
+-Output:-
+-Getting Error:F:\Module5-Angular\Angular\scripts>tsc ex_01.ts  
+ex_01.ts:9:1 - error TS2322: Type 'string' is not assignable to type 'number'.
+9 age = 'Blazeclan';
+  ~~~
+	
+========================================================================================
+Q2
+-F:\Module5-Angular\Angular\Day2\scripts\ex_02.ts
+
+function sayHello(name: string): string
+{
+    return "Hello " + name.toUpperCase();
+}
+console.log(sayHello('bhakti'));
+
+-Output:-
+-F:\Module5-Angular\Angular\Day2\scripts>tsc ex_02.ts 
+-F:\Module5-Angular\Angular\Day2\scripts>node ex_02   
+ Hello BHAKTI
+***********************************
+
+-Trying function with in-appropriate data type as the parameter. 
+function sayHello(name: string): string
+{
+    return "Hello " + name.toUpperCase();
+}
+console.log(sayHello(123));
+
+-Output:-
+-F:\Module5-Angular\Angular\Day2\scripts>tsc ex_02.ts 
+ex_02.ts:5:22 - error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+
+5 console.log(sayHello(123));
+                       ~~~
+Found 1 error in ex_02.ts:5
+
+========================================================================================
+Q3.a
+-F:\Module5-Angular\Angular\Day2\scripts\ex_03a.ts
+
+function calculateSimpleInterest(p:number, t:number,r:number): number{
+    return p * t * r / 100
+}
+console.log("Simple Interest: "+ 100*5*10/100);
+
+-Output:-
+-F:\Module5-Angular\Angular\Day2\scripts>tsc ex_03a.ts
+-F:\Module5-Angular\Angular\Day2\scripts>node ex_03a   
+ Simple Interest: 50
+*********************************************
+-Invoke the function with only the 'p' and 't'
+
+function calculateSimpleInterest(p:number, t:number,r:number=10): number{
+    return p * t  / 100
+}
+console.log("Simple Interest: "+ 100*5/100);
+
+-Output:-
+F:\Module5-Angular\Angular\scripts>node ex_03a
+Simple Interest: 5
+
+**********************************************************
+Q3.b
+-F:\Module5-Angular\Angular\Day2\scripts\ex_03b.ts
+
+//with start, stop, step variable
+const range = (start, stop, step) =>
+  [...Array(Math.floor((stop - start) / step) + 1)].map((_, i) => start + i * step);
+  console.log(range(1,10,2));
+ 
+-Output:-
+-F:\Module5-Angular\Angular\Day2\scripts>tsc ex_03b.ts
+-F:\Module5-Angular\Angular\Day2\scripts>node ex_03b
+[ 1, 3, 5, 7, 9 ] 
+**************************************
+
+//with start, stop variable
+// const range = (start, stop) =>
+//   [...Array(Math.floor((stop - start)) + 1)].map((_, i) => start + i);
+
+// console.log(range(1,5));
+
+-Output:-
+F:\Module5-Angular\Angular\Day2\scripts>node ex_03b  
+[ 1, 2, 3, 4, 5 ]
+
+
+========================================================================================
+Q3.c
+F:\Module5-Angular\Angular\Day2\scripts\ex_03c.ts
+function adding(a:number, b:number, ...rest:number[]){
+    return a + b + rest.reduce((p,c)=> p + c, 0);
+}
+let result;
+result = adding(1,2,3,4,5);
+console.log("Using the rest type,The Result Is: " + result);
+
+-Output:-
+F:\Module5-Angular\Angular\Day2\scripts>node ex_03c   
+Using the rest type,The Result Is: 15
+
+**************************************************************
+Q3.d
+F:\Module5-Angular\Angular\Day2\scripts\ex_03d.ts
+
+function Name({title,name,msg}:
+    {title: string, name: string, msg: string}){
+        return title + name + "\n" + msg
+    }
+    let result1;
+     result1 =  Name({title: 'Dr.', name: 'John', msg: 'Appointment please'});
+    console.log(result1);
+
+    let result2;
+     result2 =  Name({title: 'Miss', msg: 'Welcome home.', name: 'Suzy'});
+    console.log(result2);
+    
+-Output:-
+F:\Module5-Angular\Angular\Day2\scripts>tsc ex_03d.ts
+
+F:\Module5-Angular\Angular\Day2\scripts>node ex_03d   
+Dr.John
+Appointment please
+MissSuzy
+Welcome home.
+========================================================================================
+Q3.e
+-F:\Module5-Angular\Angular\Day2\scripts\ex_03e.ts
+
+function printStatusCode(code: string | number): void{
+    console.log(`Status code is ${code}`);
+}
+
+printStatusCode('404');
+printStatusCode(404)
+
+-Output:-
+F:\Module5-Angular\Angular\Day2\scripts>tsc ex_03e.ts 
+
+F:\Module5-Angular\Angular\Day2\scripts>node ex_03e   
+Status code is 404
+Status code is 404
+*****************************************************************
+
+- if you pass value other than string or number.
+function printStatusCode(code: string | number): void{
+    console.log(`Status code is ${code}`);
+}
+printStatusCode(true);
+
+-Output:-
+-F:\Module5-Angular\Angular\Day2\scripts>tsc ex_03e.ts
+ex_03e.ts:8:17 - error TS2345: Argument of type 'boolean' is not assignable to parameter of type 'string | number'.
+
+8 printStatusCode(true);
+                  ~~~~
+========================================================================================
+Q4
+-remaining
+========================================================================================
+Q5
+-F:\Module5-Angular\Angular\Day2\scripts\ex_05.ts
+
+class Slopes{
+    x1 : number;
+    y1 : number;
+    x2 : number;
+    y2 : number;
+
+    constructor(x1,y1,x2,y2){
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+    }
+
+    Slope(x1,y1,x2,y2)  {
+        console.log("Value of x1 is : " +this.x1);
+        console.log("Value of y1 is : " +this.y1);
+        console.log("Value of x2 is : " +this.x2);
+        console.log("Value of y2 is : " +this.y2);
+        if (x2 - x1 != 0)
+    {
+        return (y2 - y1) / (x2 - x1);
+    }
+    return Number.MAX_VALUE;
+    }
+}
+
+const sl = new Slopes(4,2,2,5);
+console.log("Slope is " + sl.Slope(4,2,2,5));
+
+-Output:-
+F:\Module5-Angular\Angular\Day2\scripts>tsc ex_05.ts
+
+F:\Module5-Angular\Angular\Day2\scripts>node ex_05   
+Value of x1 is : 4
+Value of y1 is : 2
+Value of x2 is : 2
+Value of y2 is : 5
+Slope is -1.5
+========================================================================================
+Q6
+F:\Module5-Angular\Angular\Day2\scripts\ex_06.ts
+class Slopes_3D{
+    x_cord:number;
+    y_cord:number;
+    z_cord:number;
+    constructor(x:number,y:number,z:number)
+    {
+        this.x_cord=x;
+        this.y_cord=y;
+        this.z_cord=z;
+    }
+    display():void{
+        console.log("X coordinate = "+this.x_cord);
+        console.log("Y coordinate = "+this.y_cord);
+        console.log("Z coordinate = "+this.z_cord);
+    }
+}
+var point= new Slopes_3D(10,20,30);
+console.log(point.display());
+
+
+Output:-
+F:\Module5-Angular\Angular\Day2\HOL2\scripts>node ex_06.js 
+X coordinate = 10
+Y coordinate = 20
+Z coordinate = 30

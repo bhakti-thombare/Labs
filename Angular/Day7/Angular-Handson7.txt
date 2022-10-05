@@ -1,0 +1,40 @@
+Angular-Handson7
+==========================================================================================
+Q1
+-Create Components
+	-ng g c Home
+	-ng g c TemplateForm
+	-ng g c ReactiveForm
+
+-F:\Module5-Angular\Angular\Day7\formApp\src\app\app.component.html
+-F:\Module5-Angular\Angular\Day7\formApp\src\app\app.module.ts - added
+	import { RouterModule, Routes } from '@angular/router';
+	import { AppRoutingModule } from './app-routing.module';
+	import { HomeComponent } from './home/home.component';
+	import { TemplateFormComponent } from './template-form/template-form.component';
+	import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
+	import { FormsModule} from '@angular/forms';
+	import { ReactiveFormsModule} from '@angular/forms';
+	
+	const routes: Routes = [
+		{ path: '', redirectTo: 'home', pathMatch:'full' },
+		{ path: 'home', component:HomeComponent },
+		{ path: 'reactive', component:ReactiveFormComponent },
+		{ path: 'template', component: TemplateFormComponent}
+	]
+***************************************
+	
+-1.a
+-F:\Module5-Angular\Angular\Day7\formApp\src\app\home\home.component.html
+-F:\Module5-Angular\Angular\Day7\formApp\src\app\home\home.component.ts
+-F:\Module5-Angular\Angular\Day7\formApp\src\styles.css
+
+***************************************
+
+-1.b
+-F:\Module5-Angular\Angular\Day7\formApp\src\app\template-form\template-form.component.html
+-F:\Module5-Angular\Angular\Day7\formApp\src\app\template-form\template-form.component.ts
+-F:\Module5-Angular\Angular\Day7\formApp\src\styles.css
+==========================================================================================
+Q2-signup form
+-F:\Module5-Angular\Angular\Day7\signup\src\app\signup
