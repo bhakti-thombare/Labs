@@ -1,0 +1,77 @@
+Angular-Handson5
+==========================================================================================
+Q1
+-F:\Module5-Angular\Angular\Day5\App4\src\app\app.component.html
+-F:\Module5-Angular\Angular\Day5\App4\src\app\app.component.ts
+-ng g c user-details
+-F:\Module5-Angular\Angular\Day5\App4\src\app\user-details\user-details.component.html
+-F:\Module5-Angular\Angular\Day5\App4\src\app\user-details\user-details.component.css
+==========================================================================================
+Q2
+-F:\Module5-Angular\Angular\Day5\App5\src\app\app.component.html
+-F:\Module5-Angular\Angular\Day5\App5\src\app\app.component.ts
+-ng g c item-output
+-F:\Module5-Angular\Angular\Day5\App5\src\app\item-output\item-output.component.html
+-F:\Module5-Angular\Angular\Day5\App5\src\app\item-output\item-output.component.html
+==========================================================================================
+Q3-----------images not displaying properly
+F:\Module5-Angular\Angular\Day5\airbnb>
+-F:\Module5-Angular\Angular\Day5\airbnb\src\app\card\card.component.html
+-F:\Module5-Angular\Angular\Day5\airbnb\src\app\card\card.component.ts
+==========================================================================================
+Q4 utility-sysdate() address()
+-F:\Module5-Angular\Angular\Day5\app7-HOL5-Q4\src\app\app.module.ts
+-F:\Module5-Angular\Angular\Day5\app7-HOL5-Q4\src\app\utilities.service.ts
+-F:\Module5-Angular\Angular\Day5\app7-HOL5-Q4\src\app\app.component.ts
+-F:\Module5-Angular\Angular\Day5\app7-HOL5-Q4\src\app\app.component.html
+==========================================================================================
+Q5
+-ng g c simple-http
+-F:\Module5-Angular\Angular\Day5\App6\src\app\simple-http\simple-http.component.html
+-F:\Module5-Angular\Angular\Day5\App6\src\app\simple-http\simple-http.component.ts
+  makeRequest() : void{
+    this.loading = true;
+    this.http
+    .get('https://jsonplaceholder.typicode.com/posts')
+    //.get('https://jsonplaceholder.typicode.com/posts/1')
+  
+    .subscribe( data =>{
+      this.data = data;
+      this.loading = false;
+    })
+  }
+-F:\Module5-Angular\Angular\Day5\App6\src\app\app.component.html
+-F:\Module5-Angular\Angular\Day5\App6\src\app\app.component.ts
+-F:\Module5-Angular\Angular\Day5\App6\src\app\app.module.ts
+==========================================================================================
+Q6
+-ng g c simple-http
+-F:\Module5-Angular\Angular\Day5\App6\src\app\simple-http\simple-http.component.html
+-F:\Module5-Angular\Angular\Day5\App6\src\app\simple-http\simple-http.component.ts
+  makeRequest() : void{
+    this.loading = true;
+    this.http
+    .get('https://jsonplaceholder.typicode.com/users')
+	//.get('https://jsonplaceholder.typicode.com/users/1')
+    .subscribe( data =>{
+      this.data = data;
+      this.loading = false;
+    })
+  }
+-F:\Module5-Angular\Angular\Day5\App6\src\app\app.component.html
+-F:\Module5-Angular\Angular\Day5\App6\src\app\app.component.ts
+-F:\Module5-Angular\Angular\Day5\App6\src\app\app.module.ts
+==========================================================================================
+Q7
+-created product-alerts component	
+	-ng g c product-alerts
+==========================================================================================
+Q8
+-F:\Module5-Angular\Angular\Day5\ecomApp\src\app\product-alerts\product-alerts.component.html
+-F:\Module5-Angular\Angular\Day5\ecomApp\src\app\product-alerts\product-alerts.component.ts
+==========================================================================================
+Q9
+-F:\Module5-Angular\Angular\Day5\ecomApp\src\app\product-list\product-list.component.ts
+	-onNotify() function
+-F:\Module5-Angular\Angular\Day5\ecomApp\src\app\product-list\product-list.component.html
+	- <app-product-alerts [product]="product" (notify)="onNotify()"></app-product-alerts>
