@@ -1,0 +1,70 @@
+   
+
+---Some of the  Findings and suggestions  on Admin Module---
+
+#For USER DETAIL screen-
+1.on User detail screen in list tab need to add business unit, and add filter with user id and BU
+2.on User detail Screen in the add tab in the user ID textbox space should not be accepted
+3.for first,middle,last name minimumcharacter  limit should be 1 
+4.in phone no. textbox  seperate box for country code should be there
+5.in case of user is not AD then password is mandatory (msg should be display)
+
+#For VENDOR DETAIL screen-
+1.on vendor details screen in add tab IFSC code,account number,bank branch,Pan,GSTN should be mandatory
+2.for TAN number need to change icon
+3.validation needs to provides for all boxes in vendor detail screen
+
+#For LOCATION screen-
+1.validations need to be given for city,state,country in ADD tab
+
+#For ROLE screen-
+1.on list tab status should be active/inactive instead of true/false
+2.validations are required for role name and description in ADD tab
+
+
+#For COMPANY screen-
+1. validations are required for all boxes  in ADD tab
+2.for Bussiness Verticle code it is accepting special caharacters-.><#$%@
+
+#For BUSSINESS VERTICLE screen-
+ 1.for company ,bussiness verticle,clusters,bussiness unit tabs same screens are repeating.
+ 
+#For CLUSTER screen
+1.on list tab business verticle name should be displayed
+2.validations are required for add  tab 
+3.sequence should be as- cluster code-->company code-->BV code-->cluster head
+
+#For BUSINESS UNIT screen-
+1.need validations for BU,BU code,BU head,clusters,TIN number,PAN,TAN number, GSTIN number (accepting all special characters)
+2. for TAN number needs to change logo
+
+#For FUNCTIONS screen-
+1.on list tab BU name shoulde be displayed
+2.need validation for function name,function code, (accepting all special characters)
+
+#ForDEPARTMENTS screen-
+1.on list tab BU name,function name shoulde be displayed
+2..need validation for dept. name,dept. code, (accepting all special characters)
+
+#For SECTIONS screen-
+1.on list tab BU name,Dept.Name,Function name should be given
+2.in add tab function name is missing
+3.need validation for section name, section code, (accepting all special characters)
+
+#For USER BU ASSIGNMENT screen-
+1.BU name should be there
+
+#For BILL APPROVAL screen-
+1.hold amount option is missing
+
+
+
+
+
+
+
+
+
+
+
+

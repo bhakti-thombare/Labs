@@ -1,0 +1,876 @@
+Different Types of CONSTRAINTS
+==============================
+[1] PRIMARY KEY
+	Each and every ROW should be uniqly identified
+	NOT NULL is implicity
+[2] NOT NULL
+	Column cannot be empty. Similar to REQUIRED attr, in HTML form
+[3] UNIQUE
+	Column will have unique values.
+	However, NULL are allowed
+[4] CHECK
+	Check a condition
+	Ex: CHECK gender = 'M' or gender = 'F'
+[5] FOREGIN KEY / Referential 
+	Done when we ASSOCIATE two or more tables.
+    
+    Example:
+	STUDENT				COURSE
+	-------				------
+	ID			    (PK)Course_Code  	C11	C12   C13
+	Name				C_Name		Civil	IT    CSc	
+	DOB				Duration
+	Course_Code (FK)		Fee
+
+101 Shoaib  1999-12-15   C23
+
+
+========================================================================
+	ORDERITEMS
+	==========	      orderID    itemID        customer
+	orderID		    	123	   I222		Mahesh
+	itemID			123	   I333		Mahesh
+	customer		123	   I444		Mahesh	
+	:			:
+				:
+				231	   I333		Shoaib
+				231	   I444		Shoaib
+
+
+CREATE TABLE orderitems
+(
+	orderID		INT,
+	itemID		INT,
+	customer	VARCHAR(20) NOT NULL,   -- Column-Level Const.
+	quantity	INT
+	:
+	:
+	CONSTRAINT ord_item_pk PRIMARY KEY (orderID, itemID),
+	CONSTRAINT qty_ck CHECK (quantity > 0)
+	-- Table-Level Const.
+);
+
+========================================================================
+Regular Expression
+==================
+What is an Arithmetic Expression?
+Combination of ARITHMETIC OPERATORS and NUMERIC OPERANDS (CONSTANTS & VARIABLES)
+
+What is a Regular Expression?
+Combination of LITERALS, META-CHARCTERS, QUANTIFIERS and Sp. Symbols
+used to harness the full power of PATTERN MATCHING.
+
+META-CHARACTERS
+~~~~~~~~~~~~~~~
+   Char.	Description
+-------------------------------------------------------------------
+   .(DOT)	Any single character
+   [ ]		Character class
+    |		Alternate
+   \		Esc. Character
+   ^		Beginning		} Pattern
+   $		End			} Anchors
+--------------------------------------------------------------------
+
+QUANTIFIERS
+~~~~~~~~~~~
+   Char.	Description
+-------------------------------------------------------------------
+    ?		Zero or one
+    +		One or more
+    *		Zero or more
+   {n}		Exactly 'n' times
+   {n,}		At least 'n' times
+   {n,m}	At least 'n' times, at most 'm' times
+-------------------------------------------------------------------
+
+Examples:
+mysql> -- Listing employees who name starts with eith 'A' or 'B' or 'C'
+mysql> SELECT ename "Employee Name", sal "Salary", comm "Commission"
+    -> FROM emp
+    -> WHERE ename REGEXP '^[ABC]';
++---------------+---------+------------+
+| Employee Name | Salary  | Commission |
++---------------+---------+------------+
+| ALLEN         | 1600.00 |     300.00 |
+| BLAKE         | 2850.00 |       NULL |
+| CLARK         | 2450.00 |       NULL |
+| ADAMS         | 1100.00 |       NULL |
++---------------+---------+------------+
+4 rows in set (0.00 sec)
+
+mysql> -- Name which just have FOUR letters
+mysql> SELECT ename "Employee Name", sal "Salary", comm "Commission"
+    -> FROM emp
+    -> WHERE ename REGEXP '^....$';
++---------------+---------+------------+
+| Employee Name | Salary  | Commission |
++---------------+---------+------------+
+| WARD          | 1250.00 |     500.00 |
+| KING          | 5000.00 |       NULL |
+| FORD          | 3000.00 |       NULL |
++---------------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT ename "Employee Name", sal "Salary", comm "Commission"
+    -> FROM emp
+    -> WHERE ename REGEXP '^.{4}$';
++---------------+---------+------------+
+| Employee Name | Salary  | Commission |
++---------------+---------+------------+
+| WARD          | 1250.00 |     500.00 |
+| KING          | 5000.00 |       NULL |
+| FORD          | 3000.00 |       NULL |
++---------------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT ename "Employee Name", sal "Salary", comm "Commission"
+    -> FROM emp
+    -> WHERE ename REGEXP '^.A.{2}$';
++---------------+---------+------------+
+| Employee Name | Salary  | Commission |
++---------------+---------+------------+
+| WARD          | 1250.00 |     500.00 |
++---------------+---------+------------+
+1 row in set (0.00 sec)
+
+=========================================================================
+Group Function
+==============
+Examples:
+mysql> SELECT sum(sal) FROM emp;
++----------+
+| sum(sal) |
++----------+
+| 29025.00 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT job, SUM( sal ) FROM emp
+    -> GROUP BY job;
++-----------+------------+
+| job       | SUM( sal ) |
++-----------+------------+
+| CLERK     |    4150.00 |
+| SALESMAN  |    5600.00 |
+| MANAGER   |    8275.00 |
+| ANALYST   |    6000.00 |
+| PRESIDENT |    5000.00 |
++-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT deptno, SUM( sal ) FROM emp
+    -> GROUP BY deptno;
++--------+------------+
+| deptno | SUM( sal ) |
++--------+------------+
+|     20 |   10875.00 |
+|     30 |    9400.00 |
+|     10 |    8750.00 |
++--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT deptno, SUM( sal ) FROM emp
+    -> GROUP BY deptno
+    -> ORDER BY deptno;
++--------+------------+
+| deptno | SUM( sal ) |
++--------+------------+
+|     10 |    8750.00 |
+|     20 |   10875.00 |
+|     30 |    9400.00 |
++--------+------------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> -- Finding the Number, Total Sal, Avg. Sal, Max. Sal and Min Sal based on different designations
+mysql>
+mysql> SELECT job, COUNT(job), SUM(sal), AVG(sal), MAX(sal), MIN(sal)
+    -> FROM emp
+    -> GROUP BY job
+    -> ORDER BY 1;
++-----------+------------+----------+-------------+----------+----------+
+| job       | COUNT(job) | SUM(sal) | AVG(sal)    | MAX(sal) | MIN(sal) |
++-----------+------------+----------+-------------+----------+----------+
+| ANALYST   |          2 |  6000.00 | 3000.000000 |  3000.00 |  3000.00 |
+| CLERK     |          4 |  4150.00 | 1037.500000 |  1300.00 |   800.00 |
+| MANAGER   |          3 |  8275.00 | 2758.333333 |  2975.00 |  2450.00 |
+| PRESIDENT |          1 |  5000.00 | 5000.000000 |  5000.00 |  5000.00 |
+| SALESMAN  |          4 |  5600.00 | 1400.000000 |  1600.00 |  1250.00 |
++-----------+------------+----------+-------------+----------+----------+
+5 rows in set (0.08 sec)
+
+mysql> SELECT COUNT( comm ) FROM emp;
++---------------+
+| COUNT( comm ) |
++---------------+
+|             4 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT( * ) FROM emp;
++------------+
+| COUNT( * ) |
++------------+
+|         14 |
++------------+
+1 row in set (0.22 sec)
+
+mysql>-- We can use COLUMN Alias in the GROUP BY clause
+
+mysql> SELECT job "Designation", SUM( sal )
+    -> FROM emp
+    -> GROUP BY Designation
+    -> ORDER BY 1;
++-------------+------------+
+| Designation | SUM( sal ) |
++-------------+------------+
+| ANALYST     |    6000.00 |
+| CLERK       |    4150.00 |
+| MANAGER     |    8275.00 |
+| PRESIDENT   |    5000.00 |
+| SALESMAN    |    5600.00 |
++-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT job "Designation", SUM( sal )
+    -> FROM emp
+    -> GROUP BY Designation
+    -> ORDER BY 2;
++-------------+------------+
+| Designation | SUM( sal ) |
++-------------+------------+
+| CLERK       |    4150.00 |
+| PRESIDENT   |    5000.00 |
+| SALESMAN    |    5600.00 |
+| ANALYST     |    6000.00 |
+| MANAGER     |    8275.00 |
++-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT job "Designation", SUM( sal )
+    -> FROM emp
+    -> GROUP BY Designation
+    -> ORDER BY 2 DESC;
++-------------+------------+
+| Designation | SUM( sal ) |
++-------------+------------+
+| MANAGER     |    8275.00 |
+| ANALYST     |    6000.00 |
+| SALESMAN    |    5600.00 |
+| PRESIDENT   |    5000.00 |
+| CLERK       |    4150.00 |
++-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> -- Understanding WITH ROLLUP modifier
+mysql> SELECT job "Designation", SUM( sal )
+    -> FROM emp
+    -> GROUP BY Designation WITH ROLLUP
+    -> ORDER BY 2;
++-------------+------------+
+| Designation | SUM( sal ) |
++-------------+------------+
+| CLERK       |    4150.00 |
+| PRESIDENT   |    5000.00 |
+| SALESMAN    |    5600.00 |
+| ANALYST     |    6000.00 |
+| MANAGER     |    8275.00 |
+| NULL        |   29025.00 |
++-------------+------------+
+6 rows in set (0.03 sec)
+
+
+mysql> -- Understanding the LIMIT modifier
+mysql> SELECT job "Designation", SUM( sal )
+    -> FROM emp
+    -> GROUP BY Designation WITH ROLLUP LIMIT 2;
++-------------+------------+
+| Designation | SUM( sal ) |
++-------------+------------+
+| ANALYST     |    6000.00 |
+| CLERK       |    4150.00 |
++-------------+------------+
+2 rows in set (0.00 sec)
+
+
+mysql> -- Getting department-wise, designation-wise sum of the salaries
+mysql> SELECT deptno, job "Designation", SUM(sal)
+    -> FROM emp
+    -> GROUP BY deptno, job
+    -> ORDER BY 1;
++--------+-------------+----------+
+| deptno | Designation | SUM(sal) |
++--------+-------------+----------+
+|     10 | CLERK       |  1300.00 |
+|     10 | MANAGER     |  2450.00 |
+|     10 | PRESIDENT   |  5000.00 |
+|     20 | ANALYST     |  6000.00 |
+|     20 | CLERK       |  1900.00 |
+|     20 | MANAGER     |  2975.00 |
+|     30 | CLERK       |   950.00 |
+|     30 | MANAGER     |  2850.00 |
+|     30 | SALESMAN    |  5600.00 |
++--------+-------------+----------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT deptno, job "Designation", SUM(sal)
+    -> FROM emp
+    -> GROUP BY deptno, job WITH ROLLUP
+    -> ORDER BY 1;
++--------+-------------+----------+
+| deptno | Designation | SUM(sal) |
++--------+-------------+----------+
+|   NULL | NULL        | 29025.00 |
+|     10 | CLERK       |  1300.00 |
+|     10 | MANAGER     |  2450.00 |
+|     10 | PRESIDENT   |  5000.00 |
+|     10 | NULL        |  8750.00 |
+|     20 | ANALYST     |  6000.00 |
+|     20 | CLERK       |  1900.00 |
+|     20 | MANAGER     |  2975.00 |
+|     20 | NULL        | 10875.00 |
+|     30 | CLERK       |   950.00 |
+|     30 | MANAGER     |  2850.00 |
+|     30 | SALESMAN    |  5600.00 |
+|     30 | NULL        |  9400.00 |
++--------+-------------+----------+
+
+mysql> -- Restricting Groups using HAVING clause
+mysql> SELECT deptno, SUM(sal), AVG(sal)
+    -> FROM emp
+    -> GROUP BY deptno
+    -> HAVING AVG(sal) < 2500;
++--------+----------+-------------+
+| deptno | SUM(sal) | AVG(sal)    |
++--------+----------+-------------+
+|     20 | 10875.00 | 2175.000000 |
+|     30 |  9400.00 | 1566.666667 |
++--------+----------+-------------+
+2 rows in set (0.08 sec)
+
+mysql>
+
+mysql> -- Get a list where the no. of employees in the department is MIN of 5
+
+mysql> SELECT deptno, COUNT( deptno ) "No. of employees"
+    -> FROM emp
+    -> GROUP BY deptno
+    -> HAVING COUNT(deptno) >= 5
+    -> ORDER BY 1;
++--------+------------------+
+| deptno | No. of employees |
++--------+------------------+
+|     20 |                5 |
+|     30 |                6 |
++--------+------------------+
+2 rows in set (0.00 sec)
+
+==========================================================================
+Getting to know the city in which the employee is working.
+
+mysql> SELECT empname, gender, salary, cityName
+    -> FROM employees, city
+    -> WHERE employees.cityID = city.cityID;
++---------+--------+--------+-----------+
+| empname | gender | salary | cityName  |
++---------+--------+--------+-----------+
+| Meet    | M      |  46750 | Pune      |
+| Bhakti  | F      |  46750 | Delhi     |
+| Swati   | F      |   1250 | Bangalore |
++---------+--------+--------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> -- Example on EQUI Join
+mysql> SELECT deptno, ename, dname
+    -> FROM emp, dept
+    -> WHERE emp.deptno = dept.deptno;
+ERROR 1052 (23000): Column 'deptno' in field list is ambiguous
+mysql> SELECT emp.deptno, ename, dname
+    -> FROM emp, dept
+    -> WHERE emp.deptno = dept.deptno;
++--------+--------+------------+
+| deptno | ename  | dname      |
++--------+--------+------------+
+|     20 | SMITH  | RESEARCH   |
+|     30 | ALLEN  | SALES      |
+|     30 | WARD   | SALES      |
+|     20 | JONES  | RESEARCH   |
+|     30 | MARTIN | SALES      |
+|     30 | BLAKE  | SALES      |
+|     10 | CLARK  | ACCOUNTING |
+|     20 | SCOTT  | RESEARCH   |
+|     10 | KING   | ACCOUNTING |
+|     30 | TURNER | SALES      |
+|     20 | ADAMS  | RESEARCH   |
+|     30 | JAMES  | SALES      |
+|     20 | FORD   | RESEARCH   |
+|     10 | MILLER | ACCOUNTING |
++--------+--------+------------+
+14 rows in set (0.00 sec)
+
+mysql> -- Using TABLE Aliases
+mysql> SELECT e.deptno, e.ename, d.dname
+    -> FROM emp e,  dept d
+    -> WHERE e.deptno = d.deptno;
+
+mysql> -- Using the JOIN Syntax and the ON clause
+mysql>
+mysql> SELECT e.deptno, e.ename, d.dname
+    -> FROM emp e JOIN dept d
+    -> ON e.deptno = d.deptno;
+
+mysql> SELECT e.empname, e.gender, e.salary, c.cityname
+    -> FROM employees e JOIN city c
+    -> ON e.cityID = c.cityID;
++---------+--------+--------+-----------+
+| empname | gender | salary | cityname  |
++---------+--------+--------+-----------+
+| Meet    | M      |  46750 | Pune      |
+| Bhakti  | F      |  46750 | Delhi     |
+| Swati   | F      |   1250 | Bangalore |
++---------+--------+--------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT e.empname, e.gender, e.salary, c.cityname
+    -> FROM employees e JOIN city c
+    -> ON e.cityID = c.cityID;
++---------+--------+--------+-----------+
+| empname | gender | salary | cityname  |
++---------+--------+--------+-----------+
+| Meet    | M      |  46750 | Pune      |
+| Bhakti  | F      |  46750 | Delhi     |
+| Swati   | F      |   1250 | Bangalore |
++---------+--------+--------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT e.empname, e.gender, e.salary, c.cityname
+    -> FROM employees e RIGHT OUTER JOIN city c
+    -> ON e.cityID = c.cityID;
++---------+--------+--------+-----------+
+| empname | gender | salary | cityname  |
++---------+--------+--------+-----------+
+| Meet    | M      |  46750 | Pune      |
+| NULL    | NULL   |   NULL | Mumbai    |
+| Bhakti  | F      |  46750 | Delhi     |
+| Swati   | F      |   1250 | Bangalore |
+| NULL    | NULL   |   NULL | Chennai   |
++---------+--------+--------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT e.empname, e.gender, e.salary, c.cityname
+    -> FROM employees e LEFT OUTER JOIN city c
+    -> ON e.cityID = c.cityID;
++---------+--------+--------+-----------+
+| empname | gender | salary | cityname  |
++---------+--------+--------+-----------+
+| Aman    | M      |   2345 | NULL      |
+| Swati   | F      |   1250 | Bangalore |
+| Shoaib  | M      | 125000 | NULL      |
+| Tom     | M      |   1450 | NULL      |
+| Maria   | F      |  45000 | NULL      |
+| Meet    | M      |  46750 | Pune      |
+| Bhakti  | F      |  46750 | Delhi     |
++---------+--------+--------+-----------+
+7 rows in set (0.00 sec)
+
+Example for NON-EQUI join
+mysql> -- Getting the GRADE of the employees based on their SAL
+mysql> SELECT e.ename, e.sal, s.grade
+    -> FROM emp e, salgrade s
+    -> WHERE e.sal >= s.losal AND e.sal <= s.hisal;
++--------+---------+-------+
+| ename  | sal     | grade |
++--------+---------+-------+
+| SMITH  |  800.00 |     1 |
+| ALLEN  | 1600.00 |     3 |
+| WARD   | 1250.00 |     2 |
+| JONES  | 2975.00 |     4 |
+| MARTIN | 1250.00 |     2 |
+| BLAKE  | 2850.00 |     4 |
+| CLARK  | 2450.00 |     4 |
+| SCOTT  | 3000.00 |     4 |
+| KING   | 5000.00 |     5 |
+| TURNER | 1500.00 |     3 |
+| ADAMS  | 1100.00 |     1 |
+| JAMES  |  950.00 |     1 |
+| FORD   | 3000.00 |     4 |
+| MILLER | 1300.00 |     2 |
++--------+---------+-------+
+
+mysql> -- Example on SELF JOIN
+mysql> SELECT worker.ename "Emp. Name", manager.ename "Manager"
+    -> FROM emp worker, emp manager
+    -> WHERE worker.mgr = manager.empno;
++-----------+---------+
+| Emp. Name | Manager |
++-----------+---------+
+| FORD      | JONES   |
+| SCOTT     | JONES   |
+| JAMES     | BLAKE   |
+| TURNER    | BLAKE   |
+| MARTIN    | BLAKE   |
+| WARD      | BLAKE   |
+| ALLEN     | BLAKE   |
+| MILLER    | CLARK   |
+| ADAMS     | SCOTT   |
+| CLARK     | KING    |
+| BLAKE     | KING    |
+| JONES     | KING    |
+| SMITH     | FORD    |
++-----------+---------+
+13 rows in set (0.00 sec)
+
+mysql> -- Example on SELF JOIN
+mysql> SELECT worker.ename "Emp. Name", manager.ename "Manager"
+    -> FROM emp worker JOIN emp manager
+    -> ON ( worker.mgr = manager.empno );
++-----------+---------+
+| Emp. Name | Manager |
++-----------+---------+
+| FORD      | JONES   |
+| SCOTT     | JONES   |
+| JAMES     | BLAKE   |
+| TURNER    | BLAKE   |
+| MARTIN    | BLAKE   |
+| WARD      | BLAKE   |
+| ALLEN     | BLAKE   |
+| MILLER    | CLARK   |
+| ADAMS     | SCOTT   |
+| CLARK     | KING    |
+| BLAKE     | KING    |
+| JONES     | KING    |
+| SMITH     | FORD    |
++-----------+---------+
+13 rows in set (0.00 sec)
+
+==========================================================================
+Subquery
+========
+mysql> -- Get a list of those employee whose salary is more than that of ALLEN
+mysql> SELECT sal FROM emp WHERE ename = 'ALLEN';
++---------+
+| sal     |
++---------+
+| 1600.00 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT ename, sal FROM emp
+    ->  WHERE sal > 1600;
++-------+---------+
+| ename | sal     |
++-------+---------+
+| JONES | 2975.00 |
+| BLAKE | 2850.00 |
+| CLARK | 2450.00 |
+| SCOTT | 3000.00 |
+| KING  | 5000.00 |
+| FORD  | 3000.00 |
++-------+---------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT ename, sal FROM emp
+    ->  WHERE sal > ( SELECT sal FROM emp WHERE ename = 'ALLEN' );
++-------+---------+
+| ename | sal     |
++-------+---------+
+| JONES | 2975.00 |
+| BLAKE | 2850.00 |
+| CLARK | 2450.00 |
+| SCOTT | 3000.00 |
+| KING  | 5000.00 |
+| FORD  | 3000.00 |
++-------+---------+
+6 rows in set (0.00 sec)
+
+NOTE: If the subquery return's no row(s) the main query will be empty
+      Look into the following example below:
+mysql> SELECT ename, sal FROM emp
+    ->  WHERE sal > ( SELECT sal FROM emp WHERE ename = 'SHOAIB' );
+Empty set (0.00 sec)
+
+NOTE: If the subquery returns multiple rows, we need to use MULTI-ROW
+      OPERATORs otherwise we get an ERROR.
+      Look into the following example below:
+mysql> SELECT ename, sal FROM emp
+    ->  WHERE sal > ( SELECT sal FROM emp WHERE ename LIKE 'J%' );
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql>
+
+Example: On Multi-Row subquery
+mysql> SELECT ename, sal FROM emp
+    ->  WHERE sal IN ( SELECT sal FROM emp WHERE ename LIKE 'S%' );
++-------+---------+
+| ename | sal     |
++-------+---------+
+| SMITH |  800.00 |
+| SCOTT | 3000.00 |
+| FORD  | 3000.00 |
++-------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT sal FROM emp WHERE ename LIKE 'S%';
++---------+
+| sal     |
++---------+
+|  800.00 |
+| 3000.00 |
++---------+
+2 rows in set (0.00 sec)
+
+########################################################################
+DML => 	Data Maninpulation Language Statement
+	INSERT
+	UPDATE
+	DELETE
+	TRUNCATE
+
+INSERT	Helps in inserting/adding row(s)
+UPDATE	Helps in making changes to the existing row(s)
+DELETE	Remove row(s)
+TRUNCATE  Remove all rows
+
+Inserting Multiple Rows
+~~~~~~~~~~~~~~~~~~~~~~~
+Example:
+mysql> INSERT INTO city VALUES (7, 'Hyderabad'), (8, 'Mysuru'), (9, 'Kochi');
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+Copy Table Structure from another table
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mysql> CREATE TABLE location AS SELECT * FROM city  WHERE 1 = 5;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC  location;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| cityID   | int         | NO   |     | 0       |       |
+| cityName | varchar(15) | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> -- There are no row, only the structure was created and it is similar to 'city' table.
+
+That is because the condition was set to FALSE (i.e WHERE 1 = 5)
+mysql> SELECT * FROM location;
+Empty set (0.00 sec)
+
+Yet another example:
+mysql> CREATE TABLE managers AS SELECT empno "id", ename "name", sal "salary" FROM emp WHERE 1 = 5;
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> SHOW TABLES;
++--------------+
+| Tables_in_hr |
++--------------+
+| bonus        |
+| dept         |
+| dummy        |
+| emp          |
+| managers     |
+| salgrade     |
++--------------+
+6 rows in set (0.00 sec)
+
+mysql> DESC  managers;
++--------+------------+------+-----+---------+-------+
+| Field  | Type       | Null | Key | Default | Extra |
++--------+------------+------+-----+---------+-------+
+| id     | int        | NO   |     | NULL    |       |
+| name   | char(10)   | YES  |     | NULL    |       |
+| salary | float(7,2) | YES  |     | NULL    |       |
++--------+------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+Copy Row from Another Table
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+To copy rows from another table, we can use the INSERT statement with
+the SELECT subquery as follows:
+
+mysql> INSERT INTO location SELECT * FROM city;
+Query OK, 9 rows affected (0.00 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+Yet another example.
+
+mysql> INSERT INTO managers (id, name, salary)
+    -> SELECT empno, ename, sal FROM emp WHERE job = 'MANAGER';
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM managers;
++------+-------+---------+
+| id   | name  | salary  |
++------+-------+---------+
+| 7566 | JONES | 2975.00 |
+| 7698 | BLAKE | 2850.00 |
+| 7782 | CLARK | 2450.00 |
++------+-------+---------+
+
+Updating Row(s)
+~~~~~~~~~~~~~~~
+Incrmenting the salary of all the managers by $100 (in managers table)
+mysql> SELECT * FROM managers;
++------+-------+---------+
+| id   | name  | salary  |
++------+-------+---------+
+| 7566 | JONES | 2975.00 |
+| 7698 | BLAKE | 2850.00 |
+| 7782 | CLARK | 2450.00 |
++------+-------+---------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE managers
+    -> SET salary = salary + 100;
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> SELECT * FROM managers;
++------+-------+---------+
+| id   | name  | salary  |
++------+-------+---------+
+| 7566 | JONES | 3075.00 |
+| 7698 | BLAKE | 2950.00 |
+| 7782 | CLARK | 2550.00 |
++------+-------+---------+
+
+Updating multiple columns
+~~~~~~~~~~~~~~~~~~~~~~~~~
+mysql> UPDATE employees
+    -> SET email = 'maria@johar.com',  cityID = 3
+    -> WHERE empID = 5;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+User-Defined Variables
+~~~~~~~~~~~~~~~~~~~~~~
+mysql> -- Trying to update 'Maria' salary to that of 'Shoaib' salary
+mysql> UPDATE employees
+    -> SET salary = ( SELECT salary FROM employees WHERE empID = 3 )
+    -> WHERE empID = 5;
+ERROR 1093 (HY000): You can't specify target table 'employees' for update in FROM clause
+mysql>
+mysql> -- To overcome the above error, we use USER-DEFINED Variables.
+mysql> SELECT @sal := (SELECT salary FROM employees WHERE empID = 3);
++--------------------------------------------------------+
+| @sal := (SELECT salary FROM employees WHERE empID = 3) |
++--------------------------------------------------------+
+|                                                 125000 |
++--------------------------------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> UPDATE employees
+    -> SET salary = @sal
+    -> WHERE empID = 5;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM employees WHERE empID = 5;
++-------+---------+--------+-----------------+--------+--------+---------+
+| empID | empName | gender | email           | salary | cityID | address |
++-------+---------+--------+-----------------+--------+--------+---------+
+|     5 | Maria   | F      | maria@johar.com | 125000 |      3 | NULL    |
++-------+---------+--------+-----------------+--------+--------+---------+
+1 row in set (0.00 sec)
+
+Deleting Rows
+~~~~~~~~~~~~~
+mysql> DELETE FROM city
+    -> WHERE cityID > 5;
+Query OK, 3 rows affected (0.01 sec)
+
+If the WHERE clause is ommitted, then ALL the rows will be removed.
+
+mysql> DELETE FROM location;
+Query OK, 9 rows affected (0.00 sec)
+
+mysql> SELECT * FROM location;
+Empty set (0.00 sec)
+
+TRUNCATE TABLE 
+~~~~~~~~~~~~~~
+mysql> SELECT * FROM location;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO location  SELECT * FROM city;
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM location;
++--------+-----------+
+| cityID | cityName  |
++--------+-----------+
+|      1 | Pune      |
+|      2 | Mumbai    |
+|      3 | Delhi     |
+|      4 | Bangalore |
+|      5 | Chennai   |
++--------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> TRUNCATE TABLE location;
+Query OK, 0 rows affected (0.05 sec)  // Observe this
+
+mysql> SELECT * FROM location;
+Empty set (0.00 sec)
+
+MySQL Transactions
+==================
+Disabling AUTOCOMMIT
+
+mysql> SET AUTOCOMMIT = 0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM city;
++--------+-----------+
+| cityID | cityName  |
++--------+-----------+
+|      1 | Pune      |
+|      2 | Mumbai    |
+|      3 | Delhi     |
+|      4 | Bangalore |
+|      5 | Chennai   |
++--------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE city
+    -> SET cityName = 'Mysuru'
+    -> WHERE cityID = 4;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM city;
++--------+----------+
+| cityID | cityName |
++--------+----------+
+|      1 | Pune     |
+|      2 | Mumbai   |
+|      3 | Delhi    |
+|      4 | Mysuru   |
+|      5 | Chennai  |
++--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> -- When AUTOCOMMIT is DISABLED, we have to EXPLICITY ensure that the changes are made
+mysql> -- permanent by issuing the COMMIT command or we can UNDO change by issuing ROLLBACK;
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SELECT * FROM city;
++--------+-----------+
+| cityID | cityName  |
++--------+-----------+
+|      1 | Pune      |
+|      2 | Mumbai    |
+|      3 | Delhi     |
+|      4 | Bangalore |
+|      5 | Chennai   |
++--------+-----------+
+5 rows in set (0.00 sec)
+
