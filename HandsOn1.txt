@@ -1,0 +1,82 @@
+Q1[a]
+C:\Users\mitul.gupta>node --version
+v16.16.0
+[b]
+C:\Users\mitul.gupta>npm --version
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+8.11.0
+Q2[a]
+--|
+> console.log('Hello Node.js!')
+Hello Node.js!
+--|
+> 2+3
+5
+> 2/3
+0.6666666666666666
+> 2%3
+2
+--|
+> 2<=1
+false
+> 2<=9
+true
+> 2==3
+false
+> 1||0
+1
+
+[b]
+> .help
+.break    Sometimes you get stuck, this gets you out
+.clear    Alias for .break
+.editor   Enter editor mode
+.exit     Exit the REPL
+.help     Print this help message
+.load     Load JS from a file into the REPL session
+.save     Save all evaluated commands in this REPL session to a file
+
+Press Ctrl+C to abort current expression, Ctrl+D to exit the REPL
+----
+> .exit
+
+C:\Users\mitul.gupta>
+[c]
+> .editor
+// Entering editor mode (Ctrl+D to finish, Ctrl+C to cancel)
+function hello(name){
+console.log("Hello",name,"\n Welcome to blaze \nHave a NICE day!!!")
+ return;
+ }
+undefined
+> hello('vijay')
+Hello vijay
+ Welcome to blaze
+Have a NICE day!!!
+undefined
+---
+[d]
+> .save D:\first.js
+Session saved to: D:\first.js
+> .exit
+[e]
+C:\Users\mitul.gupta>node
+Welcome to Node.js v16.16.0.
+Type ".help" for more information.
+> .load D:\first.js
+function hello(name){
+console.log("Hello",name,"\n Welcome to blaze \nHave a NICE day!!!")
+ return;
+  }
+  hello('vijay')
+Hello vijay
+ Welcome to blaze
+Have a NICE day!!!
+undefined
+[f]
+> 2+5
+7
+> console.log(_)
+7
+CTRL+L
+[g] 
